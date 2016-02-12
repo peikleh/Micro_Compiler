@@ -22,6 +22,9 @@ t_STRINGLITERAL = (r"\"[^\"]*\"")
 t_OPERATOR = (r":=|\+|-(?!-)|\*|/|=|!=|<(?!=)|>(?!=)|\(|\)|;|,|<=|>=")
 t_ignore_COMMENT = (r"--.*\n")
 t_ignore  = (" \t\n")
+def t_error(t):
+    print("Illegal character '%s'" % t.value[0])
+    t.lexer.skip(1)
 
 lexer = lex.lex()
 
@@ -29,7 +32,7 @@ lexer = lex.lex()
 
 with open(infile, 'r') as myfile:
     data = myfile.read()
-file = open('fibonacci.txt' , 'a')
+#file = open('fibonacci.txt' , 'a')
 
 
 lexer.input(data)
@@ -39,8 +42,10 @@ while True:
         break      # No more input
     #file.write('Token Type: ' + tok.type + '\n')
     #file.write('Value: ' + tok.value + '\n')
-  chm
-file.close()
+    print ('Token Type: ' + tok.type)
+    print ('Value: ' + tok.value)
+  
+#file.close()
 
 #print (filecmp.cmp('fibonacci.txt', 'loop2.txt'))
 #file.close()
