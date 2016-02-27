@@ -1,0 +1,31 @@
+Created by PLY version 3.8 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    COMMENT
+    INTLITERAL
+    KEYWORD
+    STRINGLITERAL
+    FLOATLITERAL
+
+Grammar
+
+Rule 0     S' -> assign_statement
+Rule 1     assign_statement -> IDENTIFIER OPERATOR statement
+
+Terminals, with rules where they appear
+
+COMMENT              : 
+FLOATLITERAL         : 
+IDENTIFIER           : 1
+INTLITERAL           : 
+KEYWORD              : 
+OPERATOR             : 1
+STRINGLITERAL        : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+assign_statement     : 0
+statement            : 1
+
