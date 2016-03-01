@@ -4,7 +4,7 @@ from t_lexer import tokens
 print (tokens)
 
 def p_program(p):
-    'program : PROGRAM id BEGIN END RETURN'
+    'program : PROGRAM id BEGIN END RETURN SEMI'
    
 def p_id(p):
 	'id : IDENTIFIER'
@@ -18,7 +18,7 @@ parser = yacc.yacc()
 
 while True:
    try:
-       s = "PROGRAM hello BEGIN END RETURN"
+       s = "PROGRAM hello BEGIN END RETURN;"
        print (s)
    except EOFError:
        break

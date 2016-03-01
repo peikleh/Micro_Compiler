@@ -46,8 +46,7 @@ tokens = tuple(keywords.values()) + operators +('IDENTIFIER',
           'INTLITERAL',
           'FLOATLITERAL',
           'STRINGLITERAL',
-          'COMMENT',     
-          'empty')
+          'COMMENT')
 print (tokens)
 
           
@@ -91,7 +90,7 @@ t_COMM = (r",")
 t_L_EQ = (r"<=")
 t_R_EQ = (r">=")
 
-T_empty = (r"")
+
 
 #t_IDENTIFIER =(r"[a-zA-Z]+[a-zA-Z0-9]*")
 t_INTLITERAL = (r"[0-9]+")
@@ -110,5 +109,11 @@ def t_IDENTIFIER(t):
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
     t.lexer.skip(1)
+
+def t_newline(t):
+    r'\n+'
+    t.lexer.lineno += len(t.value)
+
+
 
 lexer = lex.lex()

@@ -90,7 +90,7 @@ def p_write_stmt(p):
     'write_stmt : WRITE L_PAR id_list R_PAR SEMI'
 
 def p_return_stmt(p):
-    'return_stmt : RETURN expr'
+    'return_stmt : RETURN expr SEMI'
 
 def p_expr(p):
     'expr : expr_prefix factor'
@@ -155,7 +155,9 @@ def p_compop(p):
 
 def p_while_stmt(p):
     'while_stmt : WHILE L_PAR cond R_PAR decl stmt_list ENDWHILE'
-
+def p_empty(p):
+    'empty :'
+    pass
 
 
 
@@ -168,25 +170,33 @@ while True:
    try:
        s = """PROGRAM test
 BEGIN
-	STRING str := "test";
-	INT a,b,c,g,h,i,j,k,l,p,o,r,u,y;
-
-
-	FUNCTION INT main()
+	INT a,b,c,x,y,z,h,j,k;
+	FUNCTION VOID printout (INT a,INT b,INT c)
 	BEGIN
-
-	c:=a+b;
-	b:=g*j+i*o+p*l+(a)+h*j+k;
-	c:=(a*b+i)+p*p+h+j+k+i+y*u/r;
+		WRITE (a);
+		WRITE (b);
+		WRITE (c);
+	END
+  FUNCTION INT main()
+	BEGIN
+	--This line should cause parse error
+	IF (a + b)
+		
+		h:=0;
+	ELSE
+	
+		j:=1;
+	ENDIF
 	RETURN a+b;
 	END
 END
+
 
 """
        
    except EOFError:
        break
    if not s: continue
-   result = parser.parse(s)
+   result = parser.parse(s, tracking = True)
    print(result)
    break
