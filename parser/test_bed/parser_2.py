@@ -166,10 +166,27 @@ parser = yacc.yacc()
 
 while True:
    try:
-       s = raw_input('calc > ')
+       s = """PROGRAM test
+BEGIN
+	STRING str := "test";
+	INT a,b,c,g,h,i,j,k,l,p,o,r,u,y;
+
+
+	FUNCTION INT main()
+	BEGIN
+
+	c:=a+b;
+	b:=g*j+i*o+p*l+(a)+h*j+k;
+	c:=(a*b+i)+p*p+h+j+k+i+y*u/r;
+	RETURN a+b;
+	END
+END
+
+"""
        
    except EOFError:
        break
    if not s: continue
    result = parser.parse(s)
    print(result)
+   break

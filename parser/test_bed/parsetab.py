@@ -5,9 +5,9 @@ _tabversion = '3.8'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'BA22AEB4C8C729B159E93AC60E44D5AB'
+_lr_signature = '90DA419292EEA25C3909F57C65CB66ED'
     
-_lr_action_items = {'IDENTIFIER':([1,],[3,]),'PROGRAM':([0,],[1,]),'$end':([2,3,4,],[0,-2,-1,]),}
+_lr_action_items = {'ENDIF':([61,78,134,135,141,],[-27,-26,-63,138,-62,]),'BEGIN':([3,4,49,],[5,-2,51,]),'PROGRAM':([0,],[1,]),'RETURN':([4,8,22,23,54,56,57,59,63,64,65,67,71,74,81,84,95,96,97,98,100,101,118,119,121,122,126,129,133,138,139,],[-2,-6,-4,-5,58,-30,-34,-31,-28,-32,58,-33,-29,-39,-35,-40,-54,-47,-55,-43,-46,-56,-37,58,58,-38,-53,-48,-71,-61,58,]),'FUNCTION':([8,10,20,22,23,55,],[-6,19,19,-4,-5,-24,]),'$end':([2,24,],[0,-1,]),'IDENTIFIER':([1,4,6,7,8,9,14,22,23,27,30,31,32,42,54,56,57,59,63,64,65,67,71,74,76,81,82,83,84,85,95,96,97,98,100,101,114,115,116,118,119,121,122,126,129,133,138,139,],[4,-2,-11,4,-6,4,-10,-4,-5,4,-12,-13,4,4,4,-30,-34,-31,-28,-32,4,-33,-29,-39,4,-35,4,-45,-40,4,-54,-47,-55,-43,-46,-56,-59,-44,-60,-37,4,4,-38,-53,-48,-71,-61,4,]),'ENDWHILE':([61,78,127,],[-27,-26,133,]),'INTLITERAL':([83,85,114,115,116,],[-45,97,-59,-44,-60,]),'empty':([4,5,8,10,11,12,15,20,22,23,28,34,39,40,41,48,50,51,54,55,56,57,58,59,61,63,64,65,67,71,73,74,75,77,78,79,80,81,84,92,93,94,95,96,97,98,99,100,101,103,104,105,106,107,108,109,110,111,113,118,119,121,122,123,125,126,128,129,131,133,136,137,138,139,],[-2,8,-6,21,8,8,25,21,-4,-5,-9,25,-7,43,45,-19,45,8,61,-24,-30,-34,73,-31,-27,-28,-32,61,-33,-29,-42,-39,83,73,-26,73,73,-35,-40,-41,-58,-57,-54,-47,-55,-43,73,-46,-56,8,-67,-70,73,-68,-66,-65,-69,8,123,-37,61,61,-38,-42,130,-53,134,-48,73,-71,8,130,-61,61,]),'L_PAR':([4,37,60,66,68,70,83,85,95,114,115,116,],[-2,40,76,79,80,82,-45,99,113,-59,-44,-60,]),'MULT':([4,95,96,97,98,100,101,126,129,],[-2,-54,-47,-55,114,-46,-56,-53,-48,]),'STRING':([5,11,12,28,39,51,103,111,136,],[9,9,9,-9,-7,9,9,9,9,]),'COMM':([4,15,34,41,48,50,84,95,96,97,98,100,101,125,126,129,137,],[-2,27,27,46,-19,46,-40,-54,-47,-55,-43,-46,-56,131,-53,-48,131,]),'MINUS':([4,84,95,96,97,98,100,101,126,129,],[-2,93,-54,-47,-55,-43,-46,-56,-53,-48,]),'N_EQ':([4,84,89,95,96,97,98,100,101,126,129,],[-2,-40,107,-54,-47,-55,-43,-46,-56,-53,-48,]),'READ':([4,8,22,23,54,56,57,59,63,64,65,67,71,74,81,84,95,96,97,98,100,101,118,119,121,122,126,129,133,138,139,],[-2,-6,-4,-5,60,-30,-34,-31,-28,-32,60,-33,-29,-39,-35,-40,-54,-47,-55,-43,-46,-56,-37,60,60,-38,-53,-48,-71,-61,60,]),'EQ_EQ':([4,17,62,],[-2,29,77,]),'ELSE':([61,78,128,],[-27,-26,136,]),'FLOATLITERAL':([83,85,114,115,116,],[-45,101,-59,-44,-60,]),'SEMI':([4,16,25,26,35,36,38,69,84,87,95,96,97,98,100,101,102,112,126,129,],[-2,28,-16,-14,-8,39,-15,81,-40,-36,-54,-47,-55,-43,-46,-56,118,122,-53,-48,]),'WRITE':([4,8,22,23,54,56,57,59,63,64,65,67,71,74,81,84,95,96,97,98,100,101,118,119,121,122,126,129,133,138,139,],[-2,-6,-4,-5,70,-30,-34,-31,-28,-32,70,-33,-29,-39,-35,-40,-54,-47,-55,-43,-46,-56,-37,70,70,-38,-53,-48,-71,-61,70,]),'LESS':([4,84,89,95,96,97,98,100,101,126,129,],[-2,-40,109,-54,-47,-55,-43,-46,-56,-53,-48,]),'MORE':([4,84,89,95,96,97,98,100,101,126,129,],[-2,-40,108,-54,-47,-55,-43,-46,-56,-53,-48,]),'L_EQ':([4,84,89,95,96,97,98,100,101,126,129,],[-2,-40,110,-54,-47,-55,-43,-46,-56,-53,-48,]),'STRINGLITERAL':([29,],[35,]),'IF':([4,8,22,23,54,56,57,59,63,64,65,67,71,74,81,84,95,96,97,98,100,101,118,119,121,122,126,129,133,138,139,],[-2,-6,-4,-5,68,-30,-34,-31,-28,-32,68,-33,-29,-39,-35,-40,-54,-47,-55,-43,-46,-56,-37,68,68,-38,-53,-48,-71,-61,68,]),'EQ':([4,84,89,95,96,97,98,100,101,126,129,],[-2,-40,104,-54,-47,-55,-43,-46,-56,-53,-48,]),'DIV':([4,95,96,97,98,100,101,126,129,],[-2,-54,-47,-55,116,-46,-56,-53,-48,]),'INT':([5,11,12,19,28,39,40,46,51,103,111,136,],[6,6,6,6,-9,-7,6,6,6,6,6,6,]),'PLUS':([4,84,95,96,97,98,100,101,126,129,],[-2,94,-54,-47,-55,-43,-46,-56,-53,-48,]),'FLOAT':([5,11,12,19,28,39,40,46,51,103,111,136,],[14,14,14,14,-9,-7,14,14,14,14,14,14,]),'VOID':([19,],[31,]),'R_PAR':([4,25,26,38,43,44,45,47,52,84,86,88,90,91,95,96,97,98,100,101,117,120,123,124,126,129,130,132,140,],[-2,-16,-14,-15,-18,49,-21,-17,-20,-40,102,103,111,112,-54,-47,-55,-43,-46,-56,126,-64,-50,129,-53,-48,-52,-49,-51,]),'END':([13,18,21,33,53,61,72,78,],[24,-3,-23,-22,55,-27,-25,-26,]),'WHILE':([4,8,22,23,54,56,57,59,63,64,65,67,71,74,81,84,95,96,97,98,100,101,118,119,121,122,126,129,133,138,139,],[-2,-6,-4,-5,66,-30,-34,-31,-28,-32,66,-33,-29,-39,-35,-40,-54,-47,-55,-43,-46,-56,-37,66,66,-38,-53,-48,-71,-61,66,]),'R_EQ':([4,84,89,95,96,97,98,100,101,126,129,],[-2,-40,105,-54,-47,-55,-43,-46,-56,-53,-48,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'program':([0,],[2,]),'id':([1,],[4,]),}
+_lr_goto_items = {'expr_list':([113,],[124,]),'else_part':([128,],[135,]),'id':([1,7,9,27,32,42,54,65,76,82,85,119,121,139,],[3,15,17,34,37,48,62,62,15,15,95,62,62,62,]),'return_stmt':([54,65,119,121,139,],[57,57,57,57,57,]),'assign_stmt':([54,65,119,121,139,],[59,59,59,59,59,]),'func_decl':([10,20,],[20,20,]),'id_tail':([15,34,],[26,38,]),'cond':([79,80,],[88,90,]),'compop':([89,],[106,]),'string_decl':([5,11,12,51,103,111,136,],[11,11,11,11,11,11,11,]),'primary':([85,],[100,]),'while_stmt':([54,65,119,121,139,],[56,56,56,56,56,]),'base_stmt':([54,65,119,121,139,],[63,63,63,63,63,]),'str':([29,],[36,]),'var_type':([5,11,12,19,40,46,51,103,111,136,],[7,7,7,30,42,42,7,7,7,7,]),'read_stmt':([54,65,119,121,139,],[64,64,64,64,64,]),'program':([0,],[2,]),'postfix_expr':([85,],[98,]),'param_decl_tail':([41,50,],[47,52,]),'expr_prefix':([58,77,79,80,99,106,113,131,],[75,75,75,75,75,75,75,75,]),'func_declarations':([10,20,],[18,33,]),'mulop':([98,],[115,]),'id_list':([7,76,82,],[16,86,91,]),'param_decl':([40,46,],[41,50,]),'call_expr':([85,],[96,]),'func_body':([51,],[53,]),'expr_list_tail':([125,137,],[132,140,]),'factor_prefix':([75,],[85,]),'pgm_body':([5,],[13,]),'factor':([75,],[84,]),'if_stmt':([54,65,119,121,139,],[71,71,71,71,71,]),'stmt':([54,65,119,121,139,],[65,65,65,65,65,]),'expr':([58,77,79,80,99,106,113,131,],[74,87,89,89,117,120,125,137,]),'decl':([5,11,12,51,103,111,136,],[10,22,23,54,119,121,139,]),'write_stmt':([54,65,119,121,139,],[67,67,67,67,67,]),'param_decl_list':([40,],[44,]),'assign_expr':([54,65,119,121,139,],[69,69,69,69,69,]),'addop':([84,],[92,]),'any_type':([19,],[32,]),'var_decl':([5,11,12,51,103,111,136,],[12,12,12,12,12,12,12,]),'stmt_list':([54,65,119,121,139,],[72,78,127,128,141,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,6 +26,75 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> program","S'",1,None,None,None),
-  ('program -> PROGRAM id','program',2,'p_program','parser.py',7),
-  ('id -> IDENTIFIER','id',1,'p_id','parser.py',10),
+  ('program -> PROGRAM id BEGIN pgm_body END','program',5,'p_program','parser_2.py',7),
+  ('id -> IDENTIFIER','id',1,'p_id','parser_2.py',10),
+  ('pgm_body -> decl func_declarations','pgm_body',2,'p_pgm_body','parser_2.py',13),
+  ('decl -> string_decl decl','decl',2,'p_decl','parser_2.py',16),
+  ('decl -> var_decl decl','decl',2,'p_decl','parser_2.py',17),
+  ('decl -> empty','decl',1,'p_decl','parser_2.py',18),
+  ('string_decl -> STRING id EQ_EQ str SEMI','string_decl',5,'p_string_decl','parser_2.py',21),
+  ('str -> STRINGLITERAL','str',1,'p_str','parser_2.py',24),
+  ('var_decl -> var_type id_list SEMI','var_decl',3,'p_var_decl','parser_2.py',27),
+  ('var_type -> FLOAT','var_type',1,'p_var_type','parser_2.py',30),
+  ('var_type -> INT','var_type',1,'p_var_type','parser_2.py',31),
+  ('any_type -> var_type','any_type',1,'p_any_type','parser_2.py',34),
+  ('any_type -> VOID','any_type',1,'p_any_type','parser_2.py',35),
+  ('id_list -> id id_tail','id_list',2,'p_id_list','parser_2.py',38),
+  ('id_tail -> COMM id id_tail','id_tail',3,'p_id_tail','parser_2.py',41),
+  ('id_tail -> empty','id_tail',1,'p_id_tail','parser_2.py',42),
+  ('param_decl_list -> param_decl param_decl_tail','param_decl_list',2,'p_param_decl_list','parser_2.py',45),
+  ('param_decl_list -> empty','param_decl_list',1,'p_param_decl_list','parser_2.py',46),
+  ('param_decl -> var_type id','param_decl',2,'p_param_decl','parser_2.py',49),
+  ('param_decl_tail -> COMM param_decl param_decl_tail','param_decl_tail',3,'p_param_decl_tail','parser_2.py',52),
+  ('param_decl_tail -> empty','param_decl_tail',1,'p_param_decl_tail','parser_2.py',53),
+  ('func_declarations -> func_decl func_declarations','func_declarations',2,'p_func_declarations','parser_2.py',56),
+  ('func_declarations -> empty','func_declarations',1,'p_func_declarations','parser_2.py',57),
+  ('func_decl -> FUNCTION any_type id L_PAR param_decl_list R_PAR BEGIN func_body END','func_decl',9,'p_func_decl','parser_2.py',60),
+  ('func_body -> decl stmt_list','func_body',2,'p_func_body','parser_2.py',63),
+  ('stmt_list -> stmt stmt_list','stmt_list',2,'p_stmt_list','parser_2.py',66),
+  ('stmt_list -> empty','stmt_list',1,'p_stmt_list','parser_2.py',67),
+  ('stmt -> base_stmt','stmt',1,'p_stmt','parser_2.py',70),
+  ('stmt -> if_stmt','stmt',1,'p_stmt','parser_2.py',71),
+  ('stmt -> while_stmt','stmt',1,'p_stmt','parser_2.py',72),
+  ('base_stmt -> assign_stmt','base_stmt',1,'p_base_stmt','parser_2.py',75),
+  ('base_stmt -> read_stmt','base_stmt',1,'p_base_stmt','parser_2.py',76),
+  ('base_stmt -> write_stmt','base_stmt',1,'p_base_stmt','parser_2.py',77),
+  ('base_stmt -> return_stmt','base_stmt',1,'p_base_stmt','parser_2.py',78),
+  ('assign_stmt -> assign_expr SEMI','assign_stmt',2,'p_assign_stmt','parser_2.py',81),
+  ('assign_expr -> id EQ_EQ expr','assign_expr',3,'p_assign_expr','parser_2.py',84),
+  ('read_stmt -> READ L_PAR id_list R_PAR SEMI','read_stmt',5,'p_read_stmt','parser_2.py',87),
+  ('write_stmt -> WRITE L_PAR id_list R_PAR SEMI','write_stmt',5,'p_write_stmt','parser_2.py',90),
+  ('return_stmt -> RETURN expr','return_stmt',2,'p_return_stmt','parser_2.py',93),
+  ('expr -> expr_prefix factor','expr',2,'p_expr','parser_2.py',96),
+  ('expr_prefix -> expr_prefix factor addop','expr_prefix',3,'p_expr_prefix','parser_2.py',99),
+  ('expr_prefix -> empty','expr_prefix',1,'p_expr_prefix','parser_2.py',100),
+  ('factor -> factor_prefix postfix_expr','factor',2,'p_factor','parser_2.py',103),
+  ('factor_prefix -> factor_prefix postfix_expr mulop','factor_prefix',3,'p_factor_prefix','parser_2.py',106),
+  ('factor_prefix -> empty','factor_prefix',1,'p_factor_prefix','parser_2.py',107),
+  ('postfix_expr -> primary','postfix_expr',1,'p_postfix_expr','parser_2.py',110),
+  ('postfix_expr -> call_expr','postfix_expr',1,'p_postfix_expr','parser_2.py',111),
+  ('call_expr -> id L_PAR expr_list R_PAR','call_expr',4,'p_call_expr','parser_2.py',114),
+  ('expr_list -> expr expr_list_tail','expr_list',2,'p_expr_list','parser_2.py',117),
+  ('expr_list -> empty','expr_list',1,'p_expr_list','parser_2.py',118),
+  ('expr_list_tail -> COMM expr expr_list_tail','expr_list_tail',3,'p_expr_list_tail','parser_2.py',121),
+  ('expr_list_tail -> empty','expr_list_tail',1,'p_expr_list_tail','parser_2.py',122),
+  ('primary -> L_PAR expr R_PAR','primary',3,'p_primary','parser_2.py',125),
+  ('primary -> id','primary',1,'p_primary','parser_2.py',126),
+  ('primary -> INTLITERAL','primary',1,'p_primary','parser_2.py',127),
+  ('primary -> FLOATLITERAL','primary',1,'p_primary','parser_2.py',128),
+  ('addop -> PLUS','addop',1,'p_addop','parser_2.py',131),
+  ('addop -> MINUS','addop',1,'p_addop','parser_2.py',132),
+  ('mulop -> MULT','mulop',1,'p_mulop','parser_2.py',135),
+  ('mulop -> DIV','mulop',1,'p_mulop','parser_2.py',136),
+  ('if_stmt -> IF L_PAR cond R_PAR decl stmt_list else_part ENDIF','if_stmt',8,'p_if_stmt','parser_2.py',139),
+  ('else_part -> ELSE decl stmt_list','else_part',3,'p_else_part','parser_2.py',142),
+  ('else_part -> empty','else_part',1,'p_else_part','parser_2.py',143),
+  ('cond -> expr compop expr','cond',3,'p_cond','parser_2.py',146),
+  ('compop -> LESS','compop',1,'p_compop','parser_2.py',149),
+  ('compop -> MORE','compop',1,'p_compop','parser_2.py',150),
+  ('compop -> EQ','compop',1,'p_compop','parser_2.py',151),
+  ('compop -> N_EQ','compop',1,'p_compop','parser_2.py',152),
+  ('compop -> L_EQ','compop',1,'p_compop','parser_2.py',153),
+  ('compop -> R_EQ','compop',1,'p_compop','parser_2.py',154),
+  ('while_stmt -> WHILE L_PAR cond R_PAR decl stmt_list ENDWHILE','while_stmt',7,'p_while_stmt','parser_2.py',157),
 ]

@@ -5,26 +5,25 @@ import sys
 #infile = sys.argv[1]
 
 
-
 # List of token names.   This is always required
-keywords = ('PROGRAM',
-			'BEGIN',
-			'END',
-			'WHILE',
-			'FUNCTION',
-			'READ',
-			'WRITE',
-			'IF',
-			'ELSE',
-			'ENDIF',
-			'ENDWHILE',
-			'CONTINUE',
-			'BREAK',
-			'RETURN',
-			'INT',
-			'VOID',
-			'STRING',
-			'FLOAT')
+keywords = {'PROGRAM' : 'PROGRAM',
+			'BEGIN' : 'BEGIN',
+			'END' : 'END',
+			'WHILE' : 'WHILE',
+			'FUNCTION' : 'FUNCTION',
+			'READ' : 'READ',
+			'WRITE' : 'WRITE',
+			'IF' : 'IF',
+			'ELSE' : 'ELSE',
+			'ENDIF' : 'ENDIF',
+			'ENDWHILE' : 'ENDWHILE',
+			'CONTINUE' : 'CONTINUE',
+			'BREAK' : 'BREAK',
+			'RETURN' : 'RETURN',
+			'INT' : 'INT',
+			'VOID' : 'VOID',
+			'STRING' : 'STRING',
+			'FLOAT' : 'FLOAT'}
 
 operators = ('EQ_EQ',
 			'PLUS',
@@ -42,19 +41,20 @@ operators = ('EQ_EQ',
 			'L_EQ',
 			'R_EQ')
 
-tokens = keywords + operators +('IDENTIFIER',
+
+tokens = tuple(keywords.values()) + operators +('IDENTIFIER',
           'INTLITERAL',
           'FLOATLITERAL',
           'STRINGLITERAL',
           'COMMENT',     
-          'OPERATOR',
           'empty')
+print (tokens)
 
           
 #t_KEYWORD= (r"PROGRAM|BEGIN|END(?!WHILE|IF)|FUNCTION|READ|WRITE|IF|ELSE|ENDIF|WHILE|ENDWHILE|CONTINUE|BREAK|RETURN|INT|VOID|STRING|FLOAT")
 
 
-
+"""
 T_PROGRAM = (r"PROGRAM")
 T_BEGIN = (r"BEGIN")
 T_END = (r"END(?!WHILE|IF)")
@@ -73,32 +73,39 @@ T_INT = (r"INT")
 T_VOID = (r"VOID")
 T_STRING = (r"STRING")
 T_FLOAT = (r"FLOAT")
+"""
 
-T_EQ_EQ = (r":=")
-T_PLUS = (r"\+")
-T_MINUS = (r"-(?!-)")
-T_MULT = (r"\*")
-T_DIV = (r"/")
-T_EQ = (r"=")
-T_N_EQ = (r"!=")
-T_LESS = (r"<(?!=)")
-T_MORE = (r">(?!=)")
-T_L_PAR = (r"\(")
-T_R_PAR = (r"\)")
-T_SEMI = (r";")
-T_COMM = (r",")
-T_L_EQ = (r"<=")
-T_R_EQ = (r">=")
+t_EQ_EQ = (r":=")
+t_PLUS = (r"\+")
+t_MINUS = (r"-(?!-)")
+t_MULT = (r"\*")
+t_DIV = (r"/")
+t_EQ = (r"=")
+t_N_EQ = (r"!=")
+t_LESS = (r"<(?!=)")
+t_MORE = (r">(?!=)")
+t_L_PAR = (r"\(")
+t_R_PAR = (r"\)")
+t_SEMI = (r";")
+t_COMM = (r",")
+t_L_EQ = (r"<=")
+t_R_EQ = (r">=")
 
 T_empty = (r"")
 
-t_IDENTIFIER =(r"[a-zA-Z]+[a-zA-Z0-9]*")
+#t_IDENTIFIER =(r"[a-zA-Z]+[a-zA-Z0-9]*")
 t_INTLITERAL = (r"[0-9]+")
 t_FLOATLITERAL = (r"[0-9]*\.[0-9]+|\.[0-9]+")
 t_STRINGLITERAL = (r"\"[^\"]*\"")
 #t_OPERATOR = (r":=|\+|-(?!-)|\*|/|=|!=|<(?!=)|>(?!=)|\(|\)|;|,|<=|>=")
 t_ignore_COMMENT = (r"--.*\n")
 t_ignore  = (" \t | \n | ")
+
+def t_IDENTIFIER(t):
+    r'[a-zA-Z_][a-zA-Z0-9_]*'
+    if t.value in keywords:
+        t.type = keywords[ t.value ]
+    return t
 
 def t_error(t):
     print("Illegal character '%s'" % t.value[0])
