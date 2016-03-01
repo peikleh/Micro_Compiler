@@ -1,0 +1,137 @@
+Created by PLY version 3.8 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    INTLITERAL
+    RETURN
+    LESS
+    READ
+    VOID
+    STRINGLITERAL
+    WHILE
+    R_PAR
+    DIV
+    N_EQ
+    MINUS
+    MULT
+    COMMENT
+    BEGIN
+    SEMI
+    R_EQ
+    PLUS
+    EQ_EQ
+    empty
+    FUNCTION
+    END
+    STRING
+    L_EQ
+    ELSE
+    WRITE
+    COMM
+    ENDIF
+    OPERATOR
+    EQ
+    IF
+    ENDWHILE
+    INT
+    FLOAT
+    FLOATLITERAL
+    BREAK
+    L_PAR
+    CONTINUE
+    MORE
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> PROGRAM id
+Rule 2     id -> IDENTIFIER
+
+Terminals, with rules where they appear
+
+BEGIN                : 
+BREAK                : 
+COMM                 : 
+COMMENT              : 
+CONTINUE             : 
+DIV                  : 
+ELSE                 : 
+END                  : 
+ENDIF                : 
+ENDWHILE             : 
+EQ                   : 
+EQ_EQ                : 
+FLOAT                : 
+FLOATLITERAL         : 
+FUNCTION             : 
+IDENTIFIER           : 2
+IF                   : 
+INT                  : 
+INTLITERAL           : 
+LESS                 : 
+L_EQ                 : 
+L_PAR                : 
+MINUS                : 
+MORE                 : 
+MULT                 : 
+N_EQ                 : 
+OPERATOR             : 
+PLUS                 : 
+PROGRAM              : 1
+READ                 : 
+RETURN               : 
+R_EQ                 : 
+R_PAR                : 
+SEMI                 : 
+STRING               : 
+STRINGLITERAL        : 
+VOID                 : 
+WHILE                : 
+WRITE                : 
+empty                : 
+error                : 
+
+Nonterminals, with rules where they appear
+
+id                   : 1
+program              : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . PROGRAM id
+
+    PROGRAM         shift and go to state 1
+
+    program                        shift and go to state 2
+
+state 1
+
+    (1) program -> PROGRAM . id
+    (2) id -> . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 3
+
+    id                             shift and go to state 4
+
+state 2
+
+    (0) S' -> program .
+
+
+
+state 3
+
+    (2) id -> IDENTIFIER .
+
+    $end            reduce using rule 2 (id -> IDENTIFIER .)
+
+
+state 4
+
+    (1) program -> PROGRAM id .
+
+    $end            reduce using rule 1 (program -> PROGRAM id .)
+
