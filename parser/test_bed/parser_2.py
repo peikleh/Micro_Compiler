@@ -1,8 +1,14 @@
 
 import ply.yacc as yacc
 from t_lexer import tokens
-print (tokens)
+import sys
 
+
+infile = sys.argv[1]
+with open(infile, 'r') as myfile:
+    data = myfile.read()
+
+#Following functions are the grammar for the LITTLE language
 def p_program(p):
     'program : PROGRAM id BEGIN pgm_body END'
    
@@ -165,38 +171,22 @@ def p_empty(p):
 
 	
 parser = yacc.yacc()
-
+result = ''
 while True:
-   try:
-       s = """PROGRAM test
-BEGIN
-	INT a,b,c,x,y,z,h,j,k;
-	FUNCTION VOID printout (INT a,INT b,INT c)
-	BEGIN
-		WRITE (a);
-		WRITE (b);
-		WRITE (c);
-	END
-  FUNCTION INT main()
-	BEGIN
-	--This line should cause parse error
-	IF (a + b)
-		
-		h:=0;
-	ELSE
-	
-		j:=1;
-	ENDIF
-	RETURN a+b;
-	END
-END
 
-
-"""
+    try:
+        s = data
        
-   except EOFError:
-       break
-   if not s: continue
-   result = parser.parse(s, tracking = True)
-   print(result)
-   break
+    except EOFError:
+        break
+    if not s: continue
+    try:
+        parser.parse(s, tracking = True)
+        print "Accepted"
+    except:
+        print "Not accepted"
+
+
+
+    break
+

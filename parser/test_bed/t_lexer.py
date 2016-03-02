@@ -47,7 +47,7 @@ tokens = tuple(keywords.values()) + operators +('IDENTIFIER',
           'FLOATLITERAL',
           'STRINGLITERAL',
           'COMMENT')
-print (tokens)
+
 
           
 #t_KEYWORD= (r"PROGRAM|BEGIN|END(?!WHILE|IF)|FUNCTION|READ|WRITE|IF|ELSE|ENDIF|WHILE|ENDWHILE|CONTINUE|BREAK|RETURN|INT|VOID|STRING|FLOAT")
