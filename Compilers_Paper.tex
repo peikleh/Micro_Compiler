@@ -32,6 +32,24 @@ Implementing the scanner was pretty simple. The provided guide was used heavily 
 	
 	
 \subsection{Parser}
+The next step to creating a compiler is creating a parser. It was decide that using the yacc
+tool within PLY would be the best parser generator to use because Lex was used to generate a
+scanner. These two are made to be used together and the PLY yacc can directly use the output
+from PLY lex. The guide at http://www.dabeaz.com/ply/ply.html was heavily used to create the
+bare bones of the code. From there it was essentially copy and pasting the grammar rules defined
+for the LITTLE programming language into functions.
+
+One of the main difficulties that was encountered was the fact that the initial scanner that was
+made did not match the parser correctly. Initially, keywords or operators were matched as a
+KEYWORD or an OPERATOR. For the parser more specific token recognition was needed such
+as differentiating a comma from a semi colon. To fix this new rules were added for the operators
+and keywords. Another difficulty was the fact that the parser would assume a keyword was an
+identifier since the identifier rule in the scanner had higher precedence. To fix this a rule was
+added to the identifier rule that would only match an identifier if it wasn't in the keyword list.
+
+In addition there was a problem with mixed syntax from several examples which through some
+errors that were hard to find. Finally it was found that some rules in the scanner started with a
+capital T instead of a lower case t. Changing this somehow fixed it.
 \subsection{Symbol Table}
 \subsection{Semantic Routines}
 \subsection{Full-fledged Compiler}
