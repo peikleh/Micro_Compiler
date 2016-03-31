@@ -11,10 +11,11 @@ class SymbolTable():
         self._stack.append(glob)
         self._type = 'none'
         self._val_list = []
-        
-        
+        self._glob = True
+        self._val_hold = []
     def add_string(self, name, val):
-        self._stack[-1][name] = ('String', val)
+        self._val_hold.append((name, 'STRING', val))
+        #self._stack[-1][name] = ('String', val)
 
     def add_type(self, d_type):
         self._type = d_type
@@ -26,6 +27,7 @@ class SymbolTable():
         for val in reversed(self._val_list):
             if val != None:
                 self.add_to_cur_scope(val, self._type)
+        
         self._type = 'none'
         self._val_list = []
         
@@ -34,26 +36,41 @@ class SymbolTable():
         for scope in self._stack:
             if name in scope.keys():
                 in_scope = True
-                print("Variable already declared")
+                print("Variable already declared" + name)
         if in_scope == False:
-            self._stack[-1][name] = (d_type)
-            print ("name " + name +  ' type ' + d_type)
+            #self._stack[-1][name] = (d_type)
+            self._val_hold.append((name, d_type))
+            #print ("name " + name +  ' type ' + d_type)
 
     def add_scope(self, name):
         self._stack.append({})
-        print ("Symbol table " + name)
+        print ('\n' + name)
+        print (self._val_hold)
+        self._val_hold = []
+        #print ("Symbol table " + name)
 
+    def add_glob(self, name):
+        print ('\n' + name)
+        print (self._val_hold)
+        
+        self._val_hold = []
+        
+    def first_funct(self):
+        if self._glob == True:
+            self._glob = False
+            self.add_glob('Global')
+    
 
 
     
 
-infile = 'Step3/inputs/test13.micro'
+infile = 'Step3/inputs/test20.micro'
 with open(infile, 'r') as myfile:
     data = myfile.read()
 
 accepted = True
 table = SymbolTable()
-print ('Symbol table Global')
+#print ('Symbol table Global')
 #Following functions are the grammar for the LITTLE language
 def p_program(p):
     'program : PROGRAM IDENTIFIER BEGIN pgm_body END'
@@ -75,11 +92,12 @@ def p_decl(p):
 def p_string_decl(p):
     'string_decl : STRING IDENTIFIER EQ_EQ STRINGLITERAL SEMI'
  
-    table.add_string(p[2], p[4]) 
+    table.add_string(p[2], p[4])
 
 def p_var_decl(p):
     'var_decl : var_type id_list SEMI'
     table.add_decl()
+ 
     
 def p_var_type(p):
     '''var_type : FLOAT 
@@ -93,18 +111,19 @@ def p_any_type(p):
 def p_id_list(p):
     'id_list : IDENTIFIER id_tail'
     table.add_val(p[1])
+    
 def p_id_tail(p):
     '''id_tail : COMM IDENTIFIER id_tail 
     | empty'''
-    if len(p) == 4:
+    if len(p) >= 3:
             table.add_val(p[2])
 def p_param_decl_list(p):
     '''param_decl_list : param_decl param_decl_tail 
     | empty'''
-
+    table.first_funct()
 def p_param_decl(p):
     'param_decl : var_type IDENTIFIER'
-
+    
 def p_param_decl_tail(p):
     '''param_decl_tail : COMM param_decl param_decl_tail 
     | empty'''
@@ -116,7 +135,6 @@ def p_func_declarations(p):
 def p_func_decl(p):
     'func_decl : FUNCTION any_type IDENTIFIER L_PAR param_decl_list R_PAR BEGIN func_body END'
     table.add_scope(p[3])
-    
     
 def p_func_body(p):
     'func_body : decl stmt_list'
@@ -229,6 +247,8 @@ def p_error(p):
 
     
 parser = yacc.yacc()
+print ("Symbol table Global")
+        
 result = ''
 while True:
         try:
