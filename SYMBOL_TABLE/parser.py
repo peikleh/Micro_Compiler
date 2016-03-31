@@ -5,58 +5,64 @@ import lexer
 import sys
 
 class SymbolTable():
-	def __init__(self):
-		self._stack = []
-		glob = {}
-		self._stack.append(glob)
-		self._type = 'none'
-		self._val_list = []
-		
-	def add_string(self, name, val):
-		self._stack[-1][name] = ('String', val)
-		print(self._stack[-1])
+    def __init__(self):
+        self._stack = []
+        glob = {}
+        self._stack.append(glob)
+        self._type = 'none'
+        self._val_list = []
+        
+        
+    def add_string(self, name, val):
+        self._stack[-1][name] = ('String', val)
 
-	def add_type(self, d_type):
-		self._type = d_type
+    def add_type(self, d_type):
+        self._type = d_type
 
-	def add_val(self, val):
-		self._val_list.append(val)
+    def add_val(self, val):
+        self._val_list.append(val)
 
-	def add_decl(self):
-		for val in self._val_list:
-			if val != None:
-				self.add_to_cur_scope(val, self._type)
+    def add_decl(self):
+        for val in reversed(self._val_list):
+            if val != None:
+                self.add_to_cur_scope(val, self._type)
+        self._type = 'none'
+        self._val_list = []
+        
+    def add_to_cur_scope(self, name, d_type):
+        in_scope = False
+        for scope in self._stack:
+            if name in scope.keys():
+                in_scope = True
+                print("Variable already declared")
+        if in_scope == False:
+            self._stack[-1][name] = (d_type)
+            print ("name " + name +  ' type ' + d_type)
 
-	def add_to_cur_scope(self, name, d_type):
-		in_scope = False
-		for scope in self._stack:
-			if name in scope.keys():
-				in_scope = True
-				print("Variable already declared")
-		if in_scope == False:
-			self._stack[-1][name] = (d_type)
+    def add_scope(self, name):
+        self._stack.append({})
+        print ("Symbol table " + name)
 
 
 
+    
 
-	
-
-infile = sys.argv[1]
+infile = 'Step3/inputs/test13.micro'
 with open(infile, 'r') as myfile:
     data = myfile.read()
 
 accepted = True
 table = SymbolTable()
-
+print ('Symbol table Global')
 #Following functions are the grammar for the LITTLE language
 def p_program(p):
     'program : PROGRAM IDENTIFIER BEGIN pgm_body END'
-   
+        
 """def p_id(p):
-	'id : IDENTIFIER'
-	table.add_var(p[1])
-	#print 'id     ' + p[1]
-	print lexer.t_ID(p[1])"""
+    'id : IDENTIFIER'
+    table.add_var(p[1])
+    #print 'id     ' + p[1]
+    print lexer.t_ID(p[1])"""
 
 def p_pgm_body(p):
     'pgm_body : decl func_declarations'
@@ -69,14 +75,11 @@ def p_decl(p):
 def p_string_decl(p):
     'string_decl : STRING IDENTIFIER EQ_EQ STRINGLITERAL SEMI'
  
-    table.add_string(p[2], p[4])
-    #print 'String   ' 
-
+    table.add_string(p[2], p[4]) 
 
 def p_var_decl(p):
     'var_decl : var_type id_list SEMI'
     table.add_decl()
-    
     
 def p_var_type(p):
     '''var_type : FLOAT 
@@ -94,7 +97,7 @@ def p_id_tail(p):
     '''id_tail : COMM IDENTIFIER id_tail 
     | empty'''
     if len(p) == 4:
-		table.add_val(p[2])
+            table.add_val(p[2])
 def p_param_decl_list(p):
     '''param_decl_list : param_decl param_decl_tail 
     | empty'''
@@ -112,7 +115,9 @@ def p_func_declarations(p):
 
 def p_func_decl(p):
     'func_decl : FUNCTION any_type IDENTIFIER L_PAR param_decl_list R_PAR BEGIN func_body END'
-  
+    table.add_scope(p[3])
+    
+    
 def p_func_body(p):
     'func_body : decl stmt_list'
 
@@ -217,35 +222,33 @@ def p_empty(p):
 
 def p_error(p):
     if p:
-         global accepted 
-         accepted = False
-         parser.errok()
+            global accepted
+            accepted = False
+            parser.errok()
 
 
-	
+    
 parser = yacc.yacc()
 result = ''
 while True:
+        try:
+                s = data
 
-    try:
-        s = data
-       
-    except EOFError:
-        break
-    if not s: continue
-    
-    parser.parse(s, tracking = True)
+        except EOFError:
+                break
+        if not s: continue
+        parser.parse(s, tracking = True)
  
    # if (accepted == False):
-   # 	print ('Not accepted')
+   #    print ('Not accepted')
     #else:
-    #	print ('Accepted')
+    #   print ('Accepted')
 
-    break
+        break
 
 #print (table.print_table())
 
 
 
 
-	
+    
