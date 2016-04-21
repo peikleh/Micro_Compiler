@@ -3,6 +3,7 @@ import ply.yacc as yacc
 from lexer import tokens
 import sys
 from symbol_table import Symbol_Table
+from semantic_routine import Semantic_Routine
 
 
 infile = sys.argv[1]
@@ -10,21 +11,22 @@ with open(infile, 'r') as myfile:
     data = myfile.read()
 accepted = True
 table = Symbol_Table()
+routine = Semantic_Routine()
 
 #Following functions are the grammar for the LITTLE language
 def p_program(p):
     'program : PROGRAM id BEGIN pgm_body END'
-   
+
 def p_id(p):
     'id : IDENTIFIER'
     p[0] = p[1]
-    
+
 def p_pgm_body(p):
     'pgm_body : decl func_declarations'
 
 def p_decl(p):
-    '''decl : string_decl decl 
-    | var_decl decl 
+    '''decl : string_decl decl
+    | var_decl decl
     | empty'''
 
 def p_string_decl(p):
@@ -39,12 +41,12 @@ def p_var_decl(p):
     table.add_var(p[1], p[2])
 
 def p_var_type(p):
-    '''var_type : FLOAT 
+    '''var_type : FLOAT
     | INT'''
     p[0] = p[1]
 
 def p_any_type(p):
-    '''any_type : var_type 
+    '''any_type : var_type
     | VOID'''
 
 def p_id_list(p):
@@ -53,7 +55,7 @@ def p_id_list(p):
 
 
 def p_id_tail(p):
-    '''id_tail : COMM id id_tail 
+    '''id_tail : COMM id id_tail
     | empty'''
     if len(p) != 2:
         p[0] = [p[2]] + p[3]
@@ -61,7 +63,7 @@ def p_id_tail(p):
         p[0] = []
 
 def p_param_decl_list(p):
-    '''param_decl_list : param_decl param_decl_tail 
+    '''param_decl_list : param_decl param_decl_tail
     | empty'''
 
 def p_param_decl(p):
@@ -69,11 +71,11 @@ def p_param_decl(p):
     table.add_var(p[1], [p[2]])
 
 def p_param_decl_tail(p):
-    '''param_decl_tail : COMM param_decl param_decl_tail 
+    '''param_decl_tail : COMM param_decl param_decl_tail
     | empty'''
 
 def p_func_declarations(p):
-    '''func_declarations : func_decl func_declarations 
+    '''func_declarations : func_decl func_declarations
     | empty'''
 
 def p_func_decl(p):
@@ -83,14 +85,13 @@ def p_func_decl(p):
 #The following function was added so we could know where functions started
 def p_s_func(p):
     's_func : FUNCTION any_type id'
-    
     table.func_start(p[3])
 
 def p_func_body(p):
     'func_body : decl stmt_list'
 
 def p_stmt_list(p):
-    '''stmt_list : stmt stmt_list 
+    '''stmt_list : stmt stmt_list
     | empty'''
 
 def p_stmt(p):
@@ -99,9 +100,9 @@ def p_stmt(p):
     | while_stmt'''
 
 def p_base_stmt(p):
-    '''base_stmt : assign_stmt 
-    | read_stmt 
-    | write_stmt 
+    '''base_stmt : assign_stmt
+    | read_stmt
+    | write_stmt
     | return_stmt'''
 
 def p_assign_stmt(p):
@@ -109,6 +110,8 @@ def p_assign_stmt(p):
 
 def p_assign_expr(p):
     'assign_expr : id EQ_EQ expr'
+    p[0] = p[1] + p[2]
+    routine.add_var(p[0])
 
 def p_read_stmt(p):
     'read_stmt : READ L_PAR id_list R_PAR SEMI'
@@ -121,46 +124,66 @@ def p_return_stmt(p):
 
 def p_expr(p):
     'expr : expr_prefix factor'
+    if p[2] != None and p[1] != None:
+        p[0] = p[1] + p[2]
+    else:
+        p[0] = p[1]
 
 def p_expr_prefix(p):
-    '''expr_prefix : expr_prefix factor addop 
+    '''expr_prefix : expr_prefix factor addop
     | empty'''
+
+    if len(p) > 2:
+        p[0] = p[1] + [p[2]] + p[3]
+
 
 def p_factor(p):
     'factor : factor_prefix postfix_expr'
+    if p[1] != None:
+        p[0] = p[1] + p[2]
+    else:
+        p[0] = p[2]
 
 def p_factor_prefix(p):
-    '''factor_prefix : factor_prefix postfix_expr mulop 
+    '''factor_prefix : factor_prefix postfix_expr mulop
     | empty'''
+    if len(p) > 2:
+        p[0] = p[1] + [p[2]] + p[3]
 
 def p_postfix_expr(p):
-    '''postfix_expr : primary 
+    '''postfix_expr : primary
     | call_expr'''
+    p[0] = p[1]
 
 def p_call_expr(p):
     'call_expr : id L_PAR expr_list R_PAR'
 
 def p_expr_list(p):
-    '''expr_list : expr expr_list_tail 
+    '''expr_list : expr expr_list_tail
     | empty'''
 
 def p_expr_list_tail(p):
-    '''expr_list_tail : COMM expr expr_list_tail 
+    '''expr_list_tail : COMM expr expr_list_tail
     | empty'''
 
 def p_primary(p):
-    '''primary : L_PAR expr R_PAR 
-    | id 
-    | INTLITERAL 
+    '''primary : L_PAR expr R_PAR
+    | id
+    | INTLITERAL
     | FLOATLITERAL'''
+    if len(p) < 3:
+        p[0] = p[1]
+
 
 def p_addop(p):
     '''addop : PLUS
     | MINUS'''
+    p[0] = p[1]
 
 def p_mulop(p):
     ''' mulop : MULT
     | DIV'''
+    p[0] = p[1]
 
 def p_if_stmt(p):
     'if_stmt : s_if L_PAR cond R_PAR decl stmt_list else_part ENDIF'
@@ -172,8 +195,8 @@ def p_s_if(p):
     table.block_start()
 
 def p_else_part(p):
-    '''else_part : s_else decl stmt_list 
-    | empty''' 
+    '''else_part : s_else decl stmt_list
+    | empty'''
     table.block_end()
 
 #The following function was added so we could know where else statements started
@@ -186,10 +209,10 @@ def p_cond(p):
 
 def p_compop(p):
     ''' compop : LESS
-    | MORE 
-    | EQ 
-    | N_EQ 
-    | L_EQ 
+    | MORE
+    | EQ
+    | N_EQ
+    | L_EQ
     | R_EQ'''
 
 def p_while_stmt(p):
@@ -206,25 +229,25 @@ def p_empty(p):
 
 def p_error(p):
     if p:
-         global accepted 
+         global accepted
          accepted = False
          parser.errok()
 
 
-    
+
 parser = yacc.yacc()
 result = ''
 while True:
 
     try:
         s = data
-       
+
     except EOFError:
         break
     if not s: continue
-    
+
     parser.parse(s, tracking = True)
- 
+
     """if (accepted == False):
         print ('Not accepted')
     else:

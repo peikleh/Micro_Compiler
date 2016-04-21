@@ -1,0 +1,2190 @@
+Created by PLY version 3.8 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    COMMENT
+    BREAK
+    CONTINUE
+
+Grammar
+
+Rule 0     S' -> program
+Rule 1     program -> PROGRAM id BEGIN pgm_body END
+Rule 2     id -> IDENTIFIER
+Rule 3     pgm_body -> decl func_declarations
+Rule 4     decl -> string_decl decl
+Rule 5     decl -> var_decl decl
+Rule 6     decl -> empty
+Rule 7     string_decl -> STRING id EQ_EQ str SEMI
+Rule 8     str -> STRINGLITERAL
+Rule 9     var_decl -> var_type id_list SEMI
+Rule 10    var_type -> FLOAT
+Rule 11    var_type -> INT
+Rule 12    any_type -> var_type
+Rule 13    any_type -> VOID
+Rule 14    id_list -> id id_tail
+Rule 15    id_tail -> COMM id id_tail
+Rule 16    id_tail -> empty
+Rule 17    param_decl_list -> param_decl param_decl_tail
+Rule 18    param_decl_list -> empty
+Rule 19    param_decl -> var_type id
+Rule 20    param_decl_tail -> COMM param_decl param_decl_tail
+Rule 21    param_decl_tail -> empty
+Rule 22    func_declarations -> func_decl func_declarations
+Rule 23    func_declarations -> empty
+Rule 24    func_decl -> s_func L_PAR param_decl_list R_PAR BEGIN func_body END
+Rule 25    s_func -> FUNCTION any_type id
+Rule 26    func_body -> decl stmt_list
+Rule 27    stmt_list -> stmt stmt_list
+Rule 28    stmt_list -> empty
+Rule 29    stmt -> base_stmt
+Rule 30    stmt -> if_stmt
+Rule 31    stmt -> while_stmt
+Rule 32    base_stmt -> assign_stmt
+Rule 33    base_stmt -> read_stmt
+Rule 34    base_stmt -> write_stmt
+Rule 35    base_stmt -> return_stmt
+Rule 36    assign_stmt -> assign_expr SEMI
+Rule 37    assign_expr -> id EQ_EQ expr
+Rule 38    read_stmt -> READ L_PAR id_list R_PAR SEMI
+Rule 39    write_stmt -> WRITE L_PAR id_list R_PAR SEMI
+Rule 40    return_stmt -> RETURN expr SEMI
+Rule 41    expr -> expr_prefix factor
+Rule 42    expr_prefix -> expr_prefix factor addop
+Rule 43    expr_prefix -> empty
+Rule 44    factor -> factor_prefix postfix_expr
+Rule 45    factor_prefix -> factor_prefix postfix_expr mulop
+Rule 46    factor_prefix -> empty
+Rule 47    postfix_expr -> primary
+Rule 48    postfix_expr -> call_expr
+Rule 49    call_expr -> id L_PAR expr_list R_PAR
+Rule 50    expr_list -> expr expr_list_tail
+Rule 51    expr_list -> empty
+Rule 52    expr_list_tail -> COMM expr expr_list_tail
+Rule 53    expr_list_tail -> empty
+Rule 54    primary -> L_PAR expr R_PAR
+Rule 55    primary -> id
+Rule 56    primary -> INTLITERAL
+Rule 57    primary -> FLOATLITERAL
+Rule 58    addop -> PLUS
+Rule 59    addop -> MINUS
+Rule 60    mulop -> MULT
+Rule 61    mulop -> DIV
+Rule 62    if_stmt -> s_if L_PAR cond R_PAR decl stmt_list else_part ENDIF
+Rule 63    s_if -> IF
+Rule 64    else_part -> s_else decl stmt_list
+Rule 65    else_part -> empty
+Rule 66    s_else -> ELSE
+Rule 67    cond -> expr compop expr
+Rule 68    compop -> LESS
+Rule 69    compop -> MORE
+Rule 70    compop -> EQ
+Rule 71    compop -> N_EQ
+Rule 72    compop -> L_EQ
+Rule 73    compop -> R_EQ
+Rule 74    while_stmt -> s_while L_PAR cond R_PAR decl stmt_list ENDWHILE
+Rule 75    s_while -> WHILE
+Rule 76    empty -> <empty>
+
+Terminals, with rules where they appear
+
+BEGIN                : 1 24
+BREAK                : 
+COMM                 : 15 20 52
+COMMENT              : 
+CONTINUE             : 
+DIV                  : 61
+ELSE                 : 66
+END                  : 1 24
+ENDIF                : 62
+ENDWHILE             : 74
+EQ                   : 70
+EQ_EQ                : 7 37
+FLOAT                : 10
+FLOATLITERAL         : 57
+FUNCTION             : 25
+IDENTIFIER           : 2
+IF                   : 63
+INT                  : 11
+INTLITERAL           : 56
+LESS                 : 68
+L_EQ                 : 72
+L_PAR                : 24 38 39 49 54 62 74
+MINUS                : 59
+MORE                 : 69
+MULT                 : 60
+N_EQ                 : 71
+PLUS                 : 58
+PROGRAM              : 1
+READ                 : 38
+RETURN               : 40
+R_EQ                 : 73
+R_PAR                : 24 38 39 49 54 62 74
+SEMI                 : 7 9 36 38 39 40
+STRING               : 7
+STRINGLITERAL        : 8
+VOID                 : 13
+WHILE                : 75
+WRITE                : 39
+error                : 
+
+Nonterminals, with rules where they appear
+
+addop                : 42
+any_type             : 25
+assign_expr          : 36
+assign_stmt          : 32
+base_stmt            : 29
+call_expr            : 48
+compop               : 67
+cond                 : 62 74
+decl                 : 3 4 5 26 62 64 74
+else_part            : 62
+empty                : 6 16 18 21 23 28 43 46 51 53 65
+expr                 : 37 40 50 52 54 67 67
+expr_list            : 49
+expr_list_tail       : 50 52
+expr_prefix          : 41 42
+factor               : 41 42
+factor_prefix        : 44 45
+func_body            : 24
+func_decl            : 22
+func_declarations    : 3 22
+id                   : 1 7 14 15 19 25 37 49 55
+id_list              : 9 38 39
+id_tail              : 14 15
+if_stmt              : 30
+mulop                : 45
+param_decl           : 17 20
+param_decl_list      : 24
+param_decl_tail      : 17 20
+pgm_body             : 1
+postfix_expr         : 44 45
+primary              : 47
+program              : 0
+read_stmt            : 33
+return_stmt          : 35
+s_else               : 64
+s_func               : 24
+s_if                 : 62
+s_while              : 74
+stmt                 : 27
+stmt_list            : 26 27 62 64 74
+str                  : 7
+string_decl          : 4
+var_decl             : 5
+var_type             : 9 12 19
+while_stmt           : 31
+write_stmt           : 34
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . program
+    (1) program -> . PROGRAM id BEGIN pgm_body END
+
+    PROGRAM         shift and go to state 2
+
+    program                        shift and go to state 1
+
+state 1
+
+    (0) S' -> program .
+
+
+
+state 2
+
+    (1) program -> PROGRAM . id BEGIN pgm_body END
+    (2) id -> . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 3
+
+    id                             shift and go to state 4
+
+state 3
+
+    (2) id -> IDENTIFIER .
+
+    EQ_EQ           reduce using rule 2 (id -> IDENTIFIER .)
+    COMM            reduce using rule 2 (id -> IDENTIFIER .)
+    R_PAR           reduce using rule 2 (id -> IDENTIFIER .)
+    SEMI            reduce using rule 2 (id -> IDENTIFIER .)
+    L_PAR           reduce using rule 2 (id -> IDENTIFIER .)
+    BEGIN           reduce using rule 2 (id -> IDENTIFIER .)
+    MULT            reduce using rule 2 (id -> IDENTIFIER .)
+    DIV             reduce using rule 2 (id -> IDENTIFIER .)
+    PLUS            reduce using rule 2 (id -> IDENTIFIER .)
+    MINUS           reduce using rule 2 (id -> IDENTIFIER .)
+    LESS            reduce using rule 2 (id -> IDENTIFIER .)
+    MORE            reduce using rule 2 (id -> IDENTIFIER .)
+    EQ              reduce using rule 2 (id -> IDENTIFIER .)
+    N_EQ            reduce using rule 2 (id -> IDENTIFIER .)
+    L_EQ            reduce using rule 2 (id -> IDENTIFIER .)
+    R_EQ            reduce using rule 2 (id -> IDENTIFIER .)
+
+
+state 4
+
+    (1) program -> PROGRAM id . BEGIN pgm_body END
+
+    BEGIN           shift and go to state 5
+
+
+state 5
+
+    (1) program -> PROGRAM id BEGIN . pgm_body END
+    (3) pgm_body -> . decl func_declarations
+    (4) decl -> . string_decl decl
+    (5) decl -> . var_decl decl
+    (6) decl -> . empty
+    (7) string_decl -> . STRING id EQ_EQ str SEMI
+    (9) var_decl -> . var_type id_list SEMI
+    (76) empty -> .
+    (10) var_type -> . FLOAT
+    (11) var_type -> . INT
+
+    STRING          shift and go to state 7
+    FUNCTION        reduce using rule 76 (empty -> .)
+    END             reduce using rule 76 (empty -> .)
+    FLOAT           shift and go to state 9
+    INT             shift and go to state 8
+
+    decl                           shift and go to state 6
+    var_type                       shift and go to state 12
+    var_decl                       shift and go to state 10
+    string_decl                    shift and go to state 11
+    empty                          shift and go to state 13
+    pgm_body                       shift and go to state 14
+
+state 6
+
+    (3) pgm_body -> decl . func_declarations
+    (22) func_declarations -> . func_decl func_declarations
+    (23) func_declarations -> . empty
+    (24) func_decl -> . s_func L_PAR param_decl_list R_PAR BEGIN func_body END
+    (76) empty -> .
+    (25) s_func -> . FUNCTION any_type id
+
+    END             reduce using rule 76 (empty -> .)
+    FUNCTION        shift and go to state 15
+
+    func_decl                      shift and go to state 16
+    func_declarations              shift and go to state 17
+    s_func                         shift and go to state 18
+    empty                          shift and go to state 19
+
+state 7
+
+    (7) string_decl -> STRING . id EQ_EQ str SEMI
+    (2) id -> . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 3
+
+    id                             shift and go to state 20
+
+state 8
+
+    (11) var_type -> INT .
+
+    IDENTIFIER      reduce using rule 11 (var_type -> INT .)
+
+
+state 9
+
+    (10) var_type -> FLOAT .
+
+    IDENTIFIER      reduce using rule 10 (var_type -> FLOAT .)
+
+
+state 10
+
+    (5) decl -> var_decl . decl
+    (4) decl -> . string_decl decl
+    (5) decl -> . var_decl decl
+    (6) decl -> . empty
+    (7) string_decl -> . STRING id EQ_EQ str SEMI
+    (9) var_decl -> . var_type id_list SEMI
+    (76) empty -> .
+    (10) var_type -> . FLOAT
+    (11) var_type -> . INT
+
+    STRING          shift and go to state 7
+    FUNCTION        reduce using rule 76 (empty -> .)
+    END             reduce using rule 76 (empty -> .)
+    READ            reduce using rule 76 (empty -> .)
+    WRITE           reduce using rule 76 (empty -> .)
+    RETURN          reduce using rule 76 (empty -> .)
+    IF              reduce using rule 76 (empty -> .)
+    WHILE           reduce using rule 76 (empty -> .)
+    IDENTIFIER      reduce using rule 76 (empty -> .)
+    ELSE            reduce using rule 76 (empty -> .)
+    ENDIF           reduce using rule 76 (empty -> .)
+    ENDWHILE        reduce using rule 76 (empty -> .)
+    FLOAT           shift and go to state 9
+    INT             shift and go to state 8
+
+    decl                           shift and go to state 21
+    var_type                       shift and go to state 12
+    var_decl                       shift and go to state 10
+    string_decl                    shift and go to state 11
+    empty                          shift and go to state 13
+
+state 11
+
+    (4) decl -> string_decl . decl
+    (4) decl -> . string_decl decl
+    (5) decl -> . var_decl decl
+    (6) decl -> . empty
+    (7) string_decl -> . STRING id EQ_EQ str SEMI
+    (9) var_decl -> . var_type id_list SEMI
+    (76) empty -> .
+    (10) var_type -> . FLOAT
+    (11) var_type -> . INT
+
+    STRING          shift and go to state 7
+    FUNCTION        reduce using rule 76 (empty -> .)
+    END             reduce using rule 76 (empty -> .)
+    READ            reduce using rule 76 (empty -> .)
+    WRITE           reduce using rule 76 (empty -> .)
+    RETURN          reduce using rule 76 (empty -> .)
+    IF              reduce using rule 76 (empty -> .)
+    WHILE           reduce using rule 76 (empty -> .)
+    IDENTIFIER      reduce using rule 76 (empty -> .)
+    ELSE            reduce using rule 76 (empty -> .)
+    ENDIF           reduce using rule 76 (empty -> .)
+    ENDWHILE        reduce using rule 76 (empty -> .)
+    FLOAT           shift and go to state 9
+    INT             shift and go to state 8
+
+    decl                           shift and go to state 22
+    var_type                       shift and go to state 12
+    var_decl                       shift and go to state 10
+    string_decl                    shift and go to state 11
+    empty                          shift and go to state 13
+
+state 12
+
+    (9) var_decl -> var_type . id_list SEMI
+    (14) id_list -> . id id_tail
+    (2) id -> . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 3
+
+    id_list                        shift and go to state 23
+    id                             shift and go to state 24
+
+state 13
+
+    (6) decl -> empty .
+
+    FUNCTION        reduce using rule 6 (decl -> empty .)
+    END             reduce using rule 6 (decl -> empty .)
+    READ            reduce using rule 6 (decl -> empty .)
+    WRITE           reduce using rule 6 (decl -> empty .)
+    RETURN          reduce using rule 6 (decl -> empty .)
+    IF              reduce using rule 6 (decl -> empty .)
+    WHILE           reduce using rule 6 (decl -> empty .)
+    IDENTIFIER      reduce using rule 6 (decl -> empty .)
+    ELSE            reduce using rule 6 (decl -> empty .)
+    ENDIF           reduce using rule 6 (decl -> empty .)
+    ENDWHILE        reduce using rule 6 (decl -> empty .)
+
+
+state 14
+
+    (1) program -> PROGRAM id BEGIN pgm_body . END
+
+    END             shift and go to state 25
+
+
+state 15
+
+    (25) s_func -> FUNCTION . any_type id
+    (12) any_type -> . var_type
+    (13) any_type -> . VOID
+    (10) var_type -> . FLOAT
+    (11) var_type -> . INT
+
+    VOID            shift and go to state 27
+    FLOAT           shift and go to state 9
+    INT             shift and go to state 8
+
+    any_type                       shift and go to state 28
+    var_type                       shift and go to state 26
+
+state 16
+
+    (22) func_declarations -> func_decl . func_declarations
+    (22) func_declarations -> . func_decl func_declarations
+    (23) func_declarations -> . empty
+    (24) func_decl -> . s_func L_PAR param_decl_list R_PAR BEGIN func_body END
+    (76) empty -> .
+    (25) s_func -> . FUNCTION any_type id
+
+    END             reduce using rule 76 (empty -> .)
+    FUNCTION        shift and go to state 15
+
+    func_decl                      shift and go to state 16
+    func_declarations              shift and go to state 29
+    s_func                         shift and go to state 18
+    empty                          shift and go to state 19
+
+state 17
+
+    (3) pgm_body -> decl func_declarations .
+
+    END             reduce using rule 3 (pgm_body -> decl func_declarations .)
+
+
+state 18
+
+    (24) func_decl -> s_func . L_PAR param_decl_list R_PAR BEGIN func_body END
+
+    L_PAR           shift and go to state 30
+
+
+state 19
+
+    (23) func_declarations -> empty .
+
+    END             reduce using rule 23 (func_declarations -> empty .)
+
+
+state 20
+
+    (7) string_decl -> STRING id . EQ_EQ str SEMI
+
+    EQ_EQ           shift and go to state 31
+
+
+state 21
+
+    (5) decl -> var_decl decl .
+
+    FUNCTION        reduce using rule 5 (decl -> var_decl decl .)
+    END             reduce using rule 5 (decl -> var_decl decl .)
+    READ            reduce using rule 5 (decl -> var_decl decl .)
+    WRITE           reduce using rule 5 (decl -> var_decl decl .)
+    RETURN          reduce using rule 5 (decl -> var_decl decl .)
+    IF              reduce using rule 5 (decl -> var_decl decl .)
+    WHILE           reduce using rule 5 (decl -> var_decl decl .)
+    IDENTIFIER      reduce using rule 5 (decl -> var_decl decl .)
+    ELSE            reduce using rule 5 (decl -> var_decl decl .)
+    ENDIF           reduce using rule 5 (decl -> var_decl decl .)
+    ENDWHILE        reduce using rule 5 (decl -> var_decl decl .)
+
+
+state 22
+
+    (4) decl -> string_decl decl .
+
+    FUNCTION        reduce using rule 4 (decl -> string_decl decl .)
+    END             reduce using rule 4 (decl -> string_decl decl .)
+    READ            reduce using rule 4 (decl -> string_decl decl .)
+    WRITE           reduce using rule 4 (decl -> string_decl decl .)
+    RETURN          reduce using rule 4 (decl -> string_decl decl .)
+    IF              reduce using rule 4 (decl -> string_decl decl .)
+    WHILE           reduce using rule 4 (decl -> string_decl decl .)
+    IDENTIFIER      reduce using rule 4 (decl -> string_decl decl .)
+    ELSE            reduce using rule 4 (decl -> string_decl decl .)
+    ENDIF           reduce using rule 4 (decl -> string_decl decl .)
+    ENDWHILE        reduce using rule 4 (decl -> string_decl decl .)
+
+
+state 23
+
+    (9) var_decl -> var_type id_list . SEMI
+
+    SEMI            shift and go to state 32
+
+
+state 24
+
+    (14) id_list -> id . id_tail
+    (15) id_tail -> . COMM id id_tail
+    (16) id_tail -> . empty
+    (76) empty -> .
+
+    COMM            shift and go to state 33
+    SEMI            reduce using rule 76 (empty -> .)
+    R_PAR           reduce using rule 76 (empty -> .)
+
+    empty                          shift and go to state 34
+    id_tail                        shift and go to state 35
+
+state 25
+
+    (1) program -> PROGRAM id BEGIN pgm_body END .
+
+    $end            reduce using rule 1 (program -> PROGRAM id BEGIN pgm_body END .)
+
+
+state 26
+
+    (12) any_type -> var_type .
+
+    IDENTIFIER      reduce using rule 12 (any_type -> var_type .)
+
+
+state 27
+
+    (13) any_type -> VOID .
+
+    IDENTIFIER      reduce using rule 13 (any_type -> VOID .)
+
+
+state 28
+
+    (25) s_func -> FUNCTION any_type . id
+    (2) id -> . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 3
+
+    id                             shift and go to state 36
+
+state 29
+
+    (22) func_declarations -> func_decl func_declarations .
+
+    END             reduce using rule 22 (func_declarations -> func_decl func_declarations .)
+
+
+state 30
+
+    (24) func_decl -> s_func L_PAR . param_decl_list R_PAR BEGIN func_body END
+    (17) param_decl_list -> . param_decl param_decl_tail
+    (18) param_decl_list -> . empty
+    (19) param_decl -> . var_type id
+    (76) empty -> .
+    (10) var_type -> . FLOAT
+    (11) var_type -> . INT
+
+    R_PAR           reduce using rule 76 (empty -> .)
+    FLOAT           shift and go to state 9
+    INT             shift and go to state 8
+
+    var_type                       shift and go to state 37
+    param_decl_list                shift and go to state 38
+    param_decl                     shift and go to state 39
+    empty                          shift and go to state 40
+
+state 31
+
+    (7) string_decl -> STRING id EQ_EQ . str SEMI
+    (8) str -> . STRINGLITERAL
+
+    STRINGLITERAL   shift and go to state 41
+
+    str                            shift and go to state 42
+
+state 32
+
+    (9) var_decl -> var_type id_list SEMI .
+
+    STRING          reduce using rule 9 (var_decl -> var_type id_list SEMI .)
+    FLOAT           reduce using rule 9 (var_decl -> var_type id_list SEMI .)
+    INT             reduce using rule 9 (var_decl -> var_type id_list SEMI .)
+    READ            reduce using rule 9 (var_decl -> var_type id_list SEMI .)
+    WRITE           reduce using rule 9 (var_decl -> var_type id_list SEMI .)
+    RETURN          reduce using rule 9 (var_decl -> var_type id_list SEMI .)
+    IF              reduce using rule 9 (var_decl -> var_type id_list SEMI .)
+    WHILE           reduce using rule 9 (var_decl -> var_type id_list SEMI .)
+    IDENTIFIER      reduce using rule 9 (var_decl -> var_type id_list SEMI .)
+    ELSE            reduce using rule 9 (var_decl -> var_type id_list SEMI .)
+    ENDIF           reduce using rule 9 (var_decl -> var_type id_list SEMI .)
+    ENDWHILE        reduce using rule 9 (var_decl -> var_type id_list SEMI .)
+    FUNCTION        reduce using rule 9 (var_decl -> var_type id_list SEMI .)
+    END             reduce using rule 9 (var_decl -> var_type id_list SEMI .)
+
+
+state 33
+
+    (15) id_tail -> COMM . id id_tail
+    (2) id -> . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 3
+
+    id                             shift and go to state 43
+
+state 34
+
+    (16) id_tail -> empty .
+
+    SEMI            reduce using rule 16 (id_tail -> empty .)
+    R_PAR           reduce using rule 16 (id_tail -> empty .)
+
+
+state 35
+
+    (14) id_list -> id id_tail .
+
+    R_PAR           reduce using rule 14 (id_list -> id id_tail .)
+    SEMI            reduce using rule 14 (id_list -> id id_tail .)
+
+
+state 36
+
+    (25) s_func -> FUNCTION any_type id .
+
+    L_PAR           reduce using rule 25 (s_func -> FUNCTION any_type id .)
+
+
+state 37
+
+    (19) param_decl -> var_type . id
+    (2) id -> . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 3
+
+    id                             shift and go to state 44
+
+state 38
+
+    (24) func_decl -> s_func L_PAR param_decl_list . R_PAR BEGIN func_body END
+
+    R_PAR           shift and go to state 45
+
+
+state 39
+
+    (17) param_decl_list -> param_decl . param_decl_tail
+    (20) param_decl_tail -> . COMM param_decl param_decl_tail
+    (21) param_decl_tail -> . empty
+    (76) empty -> .
+
+    COMM            shift and go to state 47
+    R_PAR           reduce using rule 76 (empty -> .)
+
+    param_decl_tail                shift and go to state 46
+    empty                          shift and go to state 48
+
+state 40
+
+    (18) param_decl_list -> empty .
+
+    R_PAR           reduce using rule 18 (param_decl_list -> empty .)
+
+
+state 41
+
+    (8) str -> STRINGLITERAL .
+
+    SEMI            reduce using rule 8 (str -> STRINGLITERAL .)
+
+
+state 42
+
+    (7) string_decl -> STRING id EQ_EQ str . SEMI
+
+    SEMI            shift and go to state 49
+
+
+state 43
+
+    (15) id_tail -> COMM id . id_tail
+    (15) id_tail -> . COMM id id_tail
+    (16) id_tail -> . empty
+    (76) empty -> .
+
+    COMM            shift and go to state 33
+    SEMI            reduce using rule 76 (empty -> .)
+    R_PAR           reduce using rule 76 (empty -> .)
+
+    empty                          shift and go to state 34
+    id_tail                        shift and go to state 50
+
+state 44
+
+    (19) param_decl -> var_type id .
+
+    COMM            reduce using rule 19 (param_decl -> var_type id .)
+    R_PAR           reduce using rule 19 (param_decl -> var_type id .)
+
+
+state 45
+
+    (24) func_decl -> s_func L_PAR param_decl_list R_PAR . BEGIN func_body END
+
+    BEGIN           shift and go to state 51
+
+
+state 46
+
+    (17) param_decl_list -> param_decl param_decl_tail .
+
+    R_PAR           reduce using rule 17 (param_decl_list -> param_decl param_decl_tail .)
+
+
+state 47
+
+    (20) param_decl_tail -> COMM . param_decl param_decl_tail
+    (19) param_decl -> . var_type id
+    (10) var_type -> . FLOAT
+    (11) var_type -> . INT
+
+    FLOAT           shift and go to state 9
+    INT             shift and go to state 8
+
+    param_decl                     shift and go to state 52
+    var_type                       shift and go to state 37
+
+state 48
+
+    (21) param_decl_tail -> empty .
+
+    R_PAR           reduce using rule 21 (param_decl_tail -> empty .)
+
+
+state 49
+
+    (7) string_decl -> STRING id EQ_EQ str SEMI .
+
+    STRING          reduce using rule 7 (string_decl -> STRING id EQ_EQ str SEMI .)
+    FLOAT           reduce using rule 7 (string_decl -> STRING id EQ_EQ str SEMI .)
+    INT             reduce using rule 7 (string_decl -> STRING id EQ_EQ str SEMI .)
+    READ            reduce using rule 7 (string_decl -> STRING id EQ_EQ str SEMI .)
+    WRITE           reduce using rule 7 (string_decl -> STRING id EQ_EQ str SEMI .)
+    RETURN          reduce using rule 7 (string_decl -> STRING id EQ_EQ str SEMI .)
+    IF              reduce using rule 7 (string_decl -> STRING id EQ_EQ str SEMI .)
+    WHILE           reduce using rule 7 (string_decl -> STRING id EQ_EQ str SEMI .)
+    IDENTIFIER      reduce using rule 7 (string_decl -> STRING id EQ_EQ str SEMI .)
+    ENDIF           reduce using rule 7 (string_decl -> STRING id EQ_EQ str SEMI .)
+    ENDWHILE        reduce using rule 7 (string_decl -> STRING id EQ_EQ str SEMI .)
+    FUNCTION        reduce using rule 7 (string_decl -> STRING id EQ_EQ str SEMI .)
+    END             reduce using rule 7 (string_decl -> STRING id EQ_EQ str SEMI .)
+    ELSE            reduce using rule 7 (string_decl -> STRING id EQ_EQ str SEMI .)
+
+
+state 50
+
+    (15) id_tail -> COMM id id_tail .
+
+    SEMI            reduce using rule 15 (id_tail -> COMM id id_tail .)
+    R_PAR           reduce using rule 15 (id_tail -> COMM id id_tail .)
+
+
+state 51
+
+    (24) func_decl -> s_func L_PAR param_decl_list R_PAR BEGIN . func_body END
+    (26) func_body -> . decl stmt_list
+    (4) decl -> . string_decl decl
+    (5) decl -> . var_decl decl
+    (6) decl -> . empty
+    (7) string_decl -> . STRING id EQ_EQ str SEMI
+    (9) var_decl -> . var_type id_list SEMI
+    (76) empty -> .
+    (10) var_type -> . FLOAT
+    (11) var_type -> . INT
+
+    STRING          shift and go to state 7
+    READ            reduce using rule 76 (empty -> .)
+    WRITE           reduce using rule 76 (empty -> .)
+    RETURN          reduce using rule 76 (empty -> .)
+    IF              reduce using rule 76 (empty -> .)
+    WHILE           reduce using rule 76 (empty -> .)
+    IDENTIFIER      reduce using rule 76 (empty -> .)
+    END             reduce using rule 76 (empty -> .)
+    FLOAT           shift and go to state 9
+    INT             shift and go to state 8
+
+    decl                           shift and go to state 53
+    var_type                       shift and go to state 12
+    func_body                      shift and go to state 54
+    var_decl                       shift and go to state 10
+    string_decl                    shift and go to state 11
+    empty                          shift and go to state 13
+
+state 52
+
+    (20) param_decl_tail -> COMM param_decl . param_decl_tail
+    (20) param_decl_tail -> . COMM param_decl param_decl_tail
+    (21) param_decl_tail -> . empty
+    (76) empty -> .
+
+    COMM            shift and go to state 47
+    R_PAR           reduce using rule 76 (empty -> .)
+
+    param_decl_tail                shift and go to state 55
+    empty                          shift and go to state 48
+
+state 53
+
+    (26) func_body -> decl . stmt_list
+    (27) stmt_list -> . stmt stmt_list
+    (28) stmt_list -> . empty
+    (29) stmt -> . base_stmt
+    (30) stmt -> . if_stmt
+    (31) stmt -> . while_stmt
+    (76) empty -> .
+    (32) base_stmt -> . assign_stmt
+    (33) base_stmt -> . read_stmt
+    (34) base_stmt -> . write_stmt
+    (35) base_stmt -> . return_stmt
+    (62) if_stmt -> . s_if L_PAR cond R_PAR decl stmt_list else_part ENDIF
+    (74) while_stmt -> . s_while L_PAR cond R_PAR decl stmt_list ENDWHILE
+    (36) assign_stmt -> . assign_expr SEMI
+    (38) read_stmt -> . READ L_PAR id_list R_PAR SEMI
+    (39) write_stmt -> . WRITE L_PAR id_list R_PAR SEMI
+    (40) return_stmt -> . RETURN expr SEMI
+    (63) s_if -> . IF
+    (75) s_while -> . WHILE
+    (37) assign_expr -> . id EQ_EQ expr
+    (2) id -> . IDENTIFIER
+
+    END             reduce using rule 76 (empty -> .)
+    READ            shift and go to state 57
+    WRITE           shift and go to state 72
+    RETURN          shift and go to state 56
+    IF              shift and go to state 70
+    WHILE           shift and go to state 60
+    IDENTIFIER      shift and go to state 3
+
+    stmt_list                      shift and go to state 71
+    if_stmt                        shift and go to state 73
+    s_while                        shift and go to state 64
+    assign_expr                    shift and go to state 66
+    read_stmt                      shift and go to state 58
+    stmt                           shift and go to state 69
+    assign_stmt                    shift and go to state 65
+    base_stmt                      shift and go to state 59
+    while_stmt                     shift and go to state 74
+    s_if                           shift and go to state 61
+    return_stmt                    shift and go to state 62
+    write_stmt                     shift and go to state 68
+    id                             shift and go to state 63
+    empty                          shift and go to state 67
+
+state 54
+
+    (24) func_decl -> s_func L_PAR param_decl_list R_PAR BEGIN func_body . END
+
+    END             shift and go to state 75
+
+
+state 55
+
+    (20) param_decl_tail -> COMM param_decl param_decl_tail .
+
+    R_PAR           reduce using rule 20 (param_decl_tail -> COMM param_decl param_decl_tail .)
+
+
+state 56
+
+    (40) return_stmt -> RETURN . expr SEMI
+    (41) expr -> . expr_prefix factor
+    (42) expr_prefix -> . expr_prefix factor addop
+    (43) expr_prefix -> . empty
+    (76) empty -> .
+
+    L_PAR           reduce using rule 76 (empty -> .)
+    INTLITERAL      reduce using rule 76 (empty -> .)
+    FLOATLITERAL    reduce using rule 76 (empty -> .)
+    IDENTIFIER      reduce using rule 76 (empty -> .)
+
+    expr                           shift and go to state 77
+    empty                          shift and go to state 78
+    expr_prefix                    shift and go to state 76
+
+state 57
+
+    (38) read_stmt -> READ . L_PAR id_list R_PAR SEMI
+
+    L_PAR           shift and go to state 79
+
+
+state 58
+
+    (33) base_stmt -> read_stmt .
+
+    READ            reduce using rule 33 (base_stmt -> read_stmt .)
+    WRITE           reduce using rule 33 (base_stmt -> read_stmt .)
+    RETURN          reduce using rule 33 (base_stmt -> read_stmt .)
+    IF              reduce using rule 33 (base_stmt -> read_stmt .)
+    WHILE           reduce using rule 33 (base_stmt -> read_stmt .)
+    IDENTIFIER      reduce using rule 33 (base_stmt -> read_stmt .)
+    ENDIF           reduce using rule 33 (base_stmt -> read_stmt .)
+    ENDWHILE        reduce using rule 33 (base_stmt -> read_stmt .)
+    ELSE            reduce using rule 33 (base_stmt -> read_stmt .)
+    END             reduce using rule 33 (base_stmt -> read_stmt .)
+
+
+state 59
+
+    (29) stmt -> base_stmt .
+
+    READ            reduce using rule 29 (stmt -> base_stmt .)
+    WRITE           reduce using rule 29 (stmt -> base_stmt .)
+    RETURN          reduce using rule 29 (stmt -> base_stmt .)
+    IF              reduce using rule 29 (stmt -> base_stmt .)
+    WHILE           reduce using rule 29 (stmt -> base_stmt .)
+    IDENTIFIER      reduce using rule 29 (stmt -> base_stmt .)
+    END             reduce using rule 29 (stmt -> base_stmt .)
+    ELSE            reduce using rule 29 (stmt -> base_stmt .)
+    ENDIF           reduce using rule 29 (stmt -> base_stmt .)
+    ENDWHILE        reduce using rule 29 (stmt -> base_stmt .)
+
+
+state 60
+
+    (75) s_while -> WHILE .
+
+    L_PAR           reduce using rule 75 (s_while -> WHILE .)
+
+
+state 61
+
+    (62) if_stmt -> s_if . L_PAR cond R_PAR decl stmt_list else_part ENDIF
+
+    L_PAR           shift and go to state 80
+
+
+state 62
+
+    (35) base_stmt -> return_stmt .
+
+    READ            reduce using rule 35 (base_stmt -> return_stmt .)
+    WRITE           reduce using rule 35 (base_stmt -> return_stmt .)
+    RETURN          reduce using rule 35 (base_stmt -> return_stmt .)
+    IF              reduce using rule 35 (base_stmt -> return_stmt .)
+    WHILE           reduce using rule 35 (base_stmt -> return_stmt .)
+    IDENTIFIER      reduce using rule 35 (base_stmt -> return_stmt .)
+    ENDIF           reduce using rule 35 (base_stmt -> return_stmt .)
+    ENDWHILE        reduce using rule 35 (base_stmt -> return_stmt .)
+    ELSE            reduce using rule 35 (base_stmt -> return_stmt .)
+    END             reduce using rule 35 (base_stmt -> return_stmt .)
+
+
+state 63
+
+    (37) assign_expr -> id . EQ_EQ expr
+
+    EQ_EQ           shift and go to state 81
+
+
+state 64
+
+    (74) while_stmt -> s_while . L_PAR cond R_PAR decl stmt_list ENDWHILE
+
+    L_PAR           shift and go to state 82
+
+
+state 65
+
+    (32) base_stmt -> assign_stmt .
+
+    READ            reduce using rule 32 (base_stmt -> assign_stmt .)
+    WRITE           reduce using rule 32 (base_stmt -> assign_stmt .)
+    RETURN          reduce using rule 32 (base_stmt -> assign_stmt .)
+    IF              reduce using rule 32 (base_stmt -> assign_stmt .)
+    WHILE           reduce using rule 32 (base_stmt -> assign_stmt .)
+    IDENTIFIER      reduce using rule 32 (base_stmt -> assign_stmt .)
+    ENDIF           reduce using rule 32 (base_stmt -> assign_stmt .)
+    ENDWHILE        reduce using rule 32 (base_stmt -> assign_stmt .)
+    ELSE            reduce using rule 32 (base_stmt -> assign_stmt .)
+    END             reduce using rule 32 (base_stmt -> assign_stmt .)
+
+
+state 66
+
+    (36) assign_stmt -> assign_expr . SEMI
+
+    SEMI            shift and go to state 83
+
+
+state 67
+
+    (28) stmt_list -> empty .
+
+    END             reduce using rule 28 (stmt_list -> empty .)
+    ENDWHILE        reduce using rule 28 (stmt_list -> empty .)
+    ELSE            reduce using rule 28 (stmt_list -> empty .)
+    ENDIF           reduce using rule 28 (stmt_list -> empty .)
+
+
+state 68
+
+    (34) base_stmt -> write_stmt .
+
+    READ            reduce using rule 34 (base_stmt -> write_stmt .)
+    WRITE           reduce using rule 34 (base_stmt -> write_stmt .)
+    RETURN          reduce using rule 34 (base_stmt -> write_stmt .)
+    IF              reduce using rule 34 (base_stmt -> write_stmt .)
+    WHILE           reduce using rule 34 (base_stmt -> write_stmt .)
+    IDENTIFIER      reduce using rule 34 (base_stmt -> write_stmt .)
+    ENDIF           reduce using rule 34 (base_stmt -> write_stmt .)
+    ENDWHILE        reduce using rule 34 (base_stmt -> write_stmt .)
+    ELSE            reduce using rule 34 (base_stmt -> write_stmt .)
+    END             reduce using rule 34 (base_stmt -> write_stmt .)
+
+
+state 69
+
+    (27) stmt_list -> stmt . stmt_list
+    (27) stmt_list -> . stmt stmt_list
+    (28) stmt_list -> . empty
+    (29) stmt -> . base_stmt
+    (30) stmt -> . if_stmt
+    (31) stmt -> . while_stmt
+    (76) empty -> .
+    (32) base_stmt -> . assign_stmt
+    (33) base_stmt -> . read_stmt
+    (34) base_stmt -> . write_stmt
+    (35) base_stmt -> . return_stmt
+    (62) if_stmt -> . s_if L_PAR cond R_PAR decl stmt_list else_part ENDIF
+    (74) while_stmt -> . s_while L_PAR cond R_PAR decl stmt_list ENDWHILE
+    (36) assign_stmt -> . assign_expr SEMI
+    (38) read_stmt -> . READ L_PAR id_list R_PAR SEMI
+    (39) write_stmt -> . WRITE L_PAR id_list R_PAR SEMI
+    (40) return_stmt -> . RETURN expr SEMI
+    (63) s_if -> . IF
+    (75) s_while -> . WHILE
+    (37) assign_expr -> . id EQ_EQ expr
+    (2) id -> . IDENTIFIER
+
+    END             reduce using rule 76 (empty -> .)
+    ELSE            reduce using rule 76 (empty -> .)
+    ENDIF           reduce using rule 76 (empty -> .)
+    ENDWHILE        reduce using rule 76 (empty -> .)
+    READ            shift and go to state 57
+    WRITE           shift and go to state 72
+    RETURN          shift and go to state 56
+    IF              shift and go to state 70
+    WHILE           shift and go to state 60
+    IDENTIFIER      shift and go to state 3
+
+    stmt_list                      shift and go to state 84
+    write_stmt                     shift and go to state 68
+    if_stmt                        shift and go to state 73
+    s_while                        shift and go to state 64
+    assign_expr                    shift and go to state 66
+    read_stmt                      shift and go to state 58
+    stmt                           shift and go to state 69
+    assign_stmt                    shift and go to state 65
+    base_stmt                      shift and go to state 59
+    while_stmt                     shift and go to state 74
+    s_if                           shift and go to state 61
+    return_stmt                    shift and go to state 62
+    id                             shift and go to state 63
+    empty                          shift and go to state 67
+
+state 70
+
+    (63) s_if -> IF .
+
+    L_PAR           reduce using rule 63 (s_if -> IF .)
+
+
+state 71
+
+    (26) func_body -> decl stmt_list .
+
+    END             reduce using rule 26 (func_body -> decl stmt_list .)
+
+
+state 72
+
+    (39) write_stmt -> WRITE . L_PAR id_list R_PAR SEMI
+
+    L_PAR           shift and go to state 85
+
+
+state 73
+
+    (30) stmt -> if_stmt .
+
+    READ            reduce using rule 30 (stmt -> if_stmt .)
+    WRITE           reduce using rule 30 (stmt -> if_stmt .)
+    RETURN          reduce using rule 30 (stmt -> if_stmt .)
+    IF              reduce using rule 30 (stmt -> if_stmt .)
+    WHILE           reduce using rule 30 (stmt -> if_stmt .)
+    IDENTIFIER      reduce using rule 30 (stmt -> if_stmt .)
+    END             reduce using rule 30 (stmt -> if_stmt .)
+    ELSE            reduce using rule 30 (stmt -> if_stmt .)
+    ENDIF           reduce using rule 30 (stmt -> if_stmt .)
+    ENDWHILE        reduce using rule 30 (stmt -> if_stmt .)
+
+
+state 74
+
+    (31) stmt -> while_stmt .
+
+    READ            reduce using rule 31 (stmt -> while_stmt .)
+    WRITE           reduce using rule 31 (stmt -> while_stmt .)
+    RETURN          reduce using rule 31 (stmt -> while_stmt .)
+    IF              reduce using rule 31 (stmt -> while_stmt .)
+    WHILE           reduce using rule 31 (stmt -> while_stmt .)
+    IDENTIFIER      reduce using rule 31 (stmt -> while_stmt .)
+    END             reduce using rule 31 (stmt -> while_stmt .)
+    ELSE            reduce using rule 31 (stmt -> while_stmt .)
+    ENDIF           reduce using rule 31 (stmt -> while_stmt .)
+    ENDWHILE        reduce using rule 31 (stmt -> while_stmt .)
+
+
+state 75
+
+    (24) func_decl -> s_func L_PAR param_decl_list R_PAR BEGIN func_body END .
+
+    FUNCTION        reduce using rule 24 (func_decl -> s_func L_PAR param_decl_list R_PAR BEGIN func_body END .)
+    END             reduce using rule 24 (func_decl -> s_func L_PAR param_decl_list R_PAR BEGIN func_body END .)
+
+
+state 76
+
+    (41) expr -> expr_prefix . factor
+    (42) expr_prefix -> expr_prefix . factor addop
+    (44) factor -> . factor_prefix postfix_expr
+    (45) factor_prefix -> . factor_prefix postfix_expr mulop
+    (46) factor_prefix -> . empty
+    (76) empty -> .
+
+    L_PAR           reduce using rule 76 (empty -> .)
+    INTLITERAL      reduce using rule 76 (empty -> .)
+    FLOATLITERAL    reduce using rule 76 (empty -> .)
+    IDENTIFIER      reduce using rule 76 (empty -> .)
+
+    factor_prefix                  shift and go to state 86
+    factor                         shift and go to state 87
+    empty                          shift and go to state 88
+
+state 77
+
+    (40) return_stmt -> RETURN expr . SEMI
+
+    SEMI            shift and go to state 89
+
+
+state 78
+
+    (43) expr_prefix -> empty .
+
+    L_PAR           reduce using rule 43 (expr_prefix -> empty .)
+    INTLITERAL      reduce using rule 43 (expr_prefix -> empty .)
+    FLOATLITERAL    reduce using rule 43 (expr_prefix -> empty .)
+    IDENTIFIER      reduce using rule 43 (expr_prefix -> empty .)
+
+
+state 79
+
+    (38) read_stmt -> READ L_PAR . id_list R_PAR SEMI
+    (14) id_list -> . id id_tail
+    (2) id -> . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 3
+
+    id_list                        shift and go to state 90
+    id                             shift and go to state 24
+
+state 80
+
+    (62) if_stmt -> s_if L_PAR . cond R_PAR decl stmt_list else_part ENDIF
+    (67) cond -> . expr compop expr
+    (41) expr -> . expr_prefix factor
+    (42) expr_prefix -> . expr_prefix factor addop
+    (43) expr_prefix -> . empty
+    (76) empty -> .
+
+    L_PAR           reduce using rule 76 (empty -> .)
+    INTLITERAL      reduce using rule 76 (empty -> .)
+    FLOATLITERAL    reduce using rule 76 (empty -> .)
+    IDENTIFIER      reduce using rule 76 (empty -> .)
+
+    expr_prefix                    shift and go to state 76
+    expr                           shift and go to state 91
+    cond                           shift and go to state 92
+    empty                          shift and go to state 78
+
+state 81
+
+    (37) assign_expr -> id EQ_EQ . expr
+    (41) expr -> . expr_prefix factor
+    (42) expr_prefix -> . expr_prefix factor addop
+    (43) expr_prefix -> . empty
+    (76) empty -> .
+
+    L_PAR           reduce using rule 76 (empty -> .)
+    INTLITERAL      reduce using rule 76 (empty -> .)
+    FLOATLITERAL    reduce using rule 76 (empty -> .)
+    IDENTIFIER      reduce using rule 76 (empty -> .)
+
+    expr_prefix                    shift and go to state 76
+    expr                           shift and go to state 93
+    empty                          shift and go to state 78
+
+state 82
+
+    (74) while_stmt -> s_while L_PAR . cond R_PAR decl stmt_list ENDWHILE
+    (67) cond -> . expr compop expr
+    (41) expr -> . expr_prefix factor
+    (42) expr_prefix -> . expr_prefix factor addop
+    (43) expr_prefix -> . empty
+    (76) empty -> .
+
+    L_PAR           reduce using rule 76 (empty -> .)
+    INTLITERAL      reduce using rule 76 (empty -> .)
+    FLOATLITERAL    reduce using rule 76 (empty -> .)
+    IDENTIFIER      reduce using rule 76 (empty -> .)
+
+    expr_prefix                    shift and go to state 76
+    expr                           shift and go to state 91
+    cond                           shift and go to state 94
+    empty                          shift and go to state 78
+
+state 83
+
+    (36) assign_stmt -> assign_expr SEMI .
+
+    READ            reduce using rule 36 (assign_stmt -> assign_expr SEMI .)
+    WRITE           reduce using rule 36 (assign_stmt -> assign_expr SEMI .)
+    RETURN          reduce using rule 36 (assign_stmt -> assign_expr SEMI .)
+    IF              reduce using rule 36 (assign_stmt -> assign_expr SEMI .)
+    WHILE           reduce using rule 36 (assign_stmt -> assign_expr SEMI .)
+    IDENTIFIER      reduce using rule 36 (assign_stmt -> assign_expr SEMI .)
+    ENDWHILE        reduce using rule 36 (assign_stmt -> assign_expr SEMI .)
+    END             reduce using rule 36 (assign_stmt -> assign_expr SEMI .)
+    ENDIF           reduce using rule 36 (assign_stmt -> assign_expr SEMI .)
+    ELSE            reduce using rule 36 (assign_stmt -> assign_expr SEMI .)
+
+
+state 84
+
+    (27) stmt_list -> stmt stmt_list .
+
+    END             reduce using rule 27 (stmt_list -> stmt stmt_list .)
+    ENDWHILE        reduce using rule 27 (stmt_list -> stmt stmt_list .)
+    ELSE            reduce using rule 27 (stmt_list -> stmt stmt_list .)
+    ENDIF           reduce using rule 27 (stmt_list -> stmt stmt_list .)
+
+
+state 85
+
+    (39) write_stmt -> WRITE L_PAR . id_list R_PAR SEMI
+    (14) id_list -> . id id_tail
+    (2) id -> . IDENTIFIER
+
+    IDENTIFIER      shift and go to state 3
+
+    id_list                        shift and go to state 95
+    id                             shift and go to state 24
+
+state 86
+
+    (44) factor -> factor_prefix . postfix_expr
+    (45) factor_prefix -> factor_prefix . postfix_expr mulop
+    (47) postfix_expr -> . primary
+    (48) postfix_expr -> . call_expr
+    (54) primary -> . L_PAR expr R_PAR
+    (55) primary -> . id
+    (56) primary -> . INTLITERAL
+    (57) primary -> . FLOATLITERAL
+    (49) call_expr -> . id L_PAR expr_list R_PAR
+    (2) id -> . IDENTIFIER
+
+    L_PAR           shift and go to state 100
+    INTLITERAL      shift and go to state 96
+    FLOATLITERAL    shift and go to state 101
+    IDENTIFIER      shift and go to state 3
+
+    postfix_expr                   shift and go to state 97
+    call_expr                      shift and go to state 98
+    primary                        shift and go to state 99
+    id                             shift and go to state 102
+
+state 87
+
+    (41) expr -> expr_prefix factor .
+    (42) expr_prefix -> expr_prefix factor . addop
+    (58) addop -> . PLUS
+    (59) addop -> . MINUS
+
+    R_PAR           reduce using rule 41 (expr -> expr_prefix factor .)
+    LESS            reduce using rule 41 (expr -> expr_prefix factor .)
+    MORE            reduce using rule 41 (expr -> expr_prefix factor .)
+    EQ              reduce using rule 41 (expr -> expr_prefix factor .)
+    N_EQ            reduce using rule 41 (expr -> expr_prefix factor .)
+    L_EQ            reduce using rule 41 (expr -> expr_prefix factor .)
+    R_EQ            reduce using rule 41 (expr -> expr_prefix factor .)
+    SEMI            reduce using rule 41 (expr -> expr_prefix factor .)
+    COMM            reduce using rule 41 (expr -> expr_prefix factor .)
+    PLUS            shift and go to state 104
+    MINUS           shift and go to state 105
+
+    addop                          shift and go to state 103
+
+state 88
+
+    (46) factor_prefix -> empty .
+
+    L_PAR           reduce using rule 46 (factor_prefix -> empty .)
+    INTLITERAL      reduce using rule 46 (factor_prefix -> empty .)
+    FLOATLITERAL    reduce using rule 46 (factor_prefix -> empty .)
+    IDENTIFIER      reduce using rule 46 (factor_prefix -> empty .)
+
+
+state 89
+
+    (40) return_stmt -> RETURN expr SEMI .
+
+    READ            reduce using rule 40 (return_stmt -> RETURN expr SEMI .)
+    WRITE           reduce using rule 40 (return_stmt -> RETURN expr SEMI .)
+    RETURN          reduce using rule 40 (return_stmt -> RETURN expr SEMI .)
+    IF              reduce using rule 40 (return_stmt -> RETURN expr SEMI .)
+    WHILE           reduce using rule 40 (return_stmt -> RETURN expr SEMI .)
+    IDENTIFIER      reduce using rule 40 (return_stmt -> RETURN expr SEMI .)
+    ELSE            reduce using rule 40 (return_stmt -> RETURN expr SEMI .)
+    ENDIF           reduce using rule 40 (return_stmt -> RETURN expr SEMI .)
+    ENDWHILE        reduce using rule 40 (return_stmt -> RETURN expr SEMI .)
+    END             reduce using rule 40 (return_stmt -> RETURN expr SEMI .)
+
+
+state 90
+
+    (38) read_stmt -> READ L_PAR id_list . R_PAR SEMI
+
+    R_PAR           shift and go to state 106
+
+
+state 91
+
+    (67) cond -> expr . compop expr
+    (68) compop -> . LESS
+    (69) compop -> . MORE
+    (70) compop -> . EQ
+    (71) compop -> . N_EQ
+    (72) compop -> . L_EQ
+    (73) compop -> . R_EQ
+
+    LESS            shift and go to state 107
+    MORE            shift and go to state 113
+    EQ              shift and go to state 112
+    N_EQ            shift and go to state 111
+    L_EQ            shift and go to state 110
+    R_EQ            shift and go to state 109
+
+    compop                         shift and go to state 108
+
+state 92
+
+    (62) if_stmt -> s_if L_PAR cond . R_PAR decl stmt_list else_part ENDIF
+
+    R_PAR           shift and go to state 114
+
+
+state 93
+
+    (37) assign_expr -> id EQ_EQ expr .
+
+    SEMI            reduce using rule 37 (assign_expr -> id EQ_EQ expr .)
+
+
+state 94
+
+    (74) while_stmt -> s_while L_PAR cond . R_PAR decl stmt_list ENDWHILE
+
+    R_PAR           shift and go to state 115
+
+
+state 95
+
+    (39) write_stmt -> WRITE L_PAR id_list . R_PAR SEMI
+
+    R_PAR           shift and go to state 116
+
+
+state 96
+
+    (56) primary -> INTLITERAL .
+
+    MULT            reduce using rule 56 (primary -> INTLITERAL .)
+    DIV             reduce using rule 56 (primary -> INTLITERAL .)
+    PLUS            reduce using rule 56 (primary -> INTLITERAL .)
+    MINUS           reduce using rule 56 (primary -> INTLITERAL .)
+    SEMI            reduce using rule 56 (primary -> INTLITERAL .)
+    LESS            reduce using rule 56 (primary -> INTLITERAL .)
+    MORE            reduce using rule 56 (primary -> INTLITERAL .)
+    EQ              reduce using rule 56 (primary -> INTLITERAL .)
+    N_EQ            reduce using rule 56 (primary -> INTLITERAL .)
+    L_EQ            reduce using rule 56 (primary -> INTLITERAL .)
+    R_EQ            reduce using rule 56 (primary -> INTLITERAL .)
+    R_PAR           reduce using rule 56 (primary -> INTLITERAL .)
+    COMM            reduce using rule 56 (primary -> INTLITERAL .)
+
+
+state 97
+
+    (44) factor -> factor_prefix postfix_expr .
+    (45) factor_prefix -> factor_prefix postfix_expr . mulop
+    (60) mulop -> . MULT
+    (61) mulop -> . DIV
+
+    PLUS            reduce using rule 44 (factor -> factor_prefix postfix_expr .)
+    MINUS           reduce using rule 44 (factor -> factor_prefix postfix_expr .)
+    SEMI            reduce using rule 44 (factor -> factor_prefix postfix_expr .)
+    LESS            reduce using rule 44 (factor -> factor_prefix postfix_expr .)
+    MORE            reduce using rule 44 (factor -> factor_prefix postfix_expr .)
+    EQ              reduce using rule 44 (factor -> factor_prefix postfix_expr .)
+    N_EQ            reduce using rule 44 (factor -> factor_prefix postfix_expr .)
+    L_EQ            reduce using rule 44 (factor -> factor_prefix postfix_expr .)
+    R_EQ            reduce using rule 44 (factor -> factor_prefix postfix_expr .)
+    R_PAR           reduce using rule 44 (factor -> factor_prefix postfix_expr .)
+    COMM            reduce using rule 44 (factor -> factor_prefix postfix_expr .)
+    MULT            shift and go to state 117
+    DIV             shift and go to state 118
+
+    mulop                          shift and go to state 119
+
+state 98
+
+    (48) postfix_expr -> call_expr .
+
+    MULT            reduce using rule 48 (postfix_expr -> call_expr .)
+    DIV             reduce using rule 48 (postfix_expr -> call_expr .)
+    PLUS            reduce using rule 48 (postfix_expr -> call_expr .)
+    MINUS           reduce using rule 48 (postfix_expr -> call_expr .)
+    SEMI            reduce using rule 48 (postfix_expr -> call_expr .)
+    LESS            reduce using rule 48 (postfix_expr -> call_expr .)
+    MORE            reduce using rule 48 (postfix_expr -> call_expr .)
+    EQ              reduce using rule 48 (postfix_expr -> call_expr .)
+    N_EQ            reduce using rule 48 (postfix_expr -> call_expr .)
+    L_EQ            reduce using rule 48 (postfix_expr -> call_expr .)
+    R_EQ            reduce using rule 48 (postfix_expr -> call_expr .)
+    R_PAR           reduce using rule 48 (postfix_expr -> call_expr .)
+    COMM            reduce using rule 48 (postfix_expr -> call_expr .)
+
+
+state 99
+
+    (47) postfix_expr -> primary .
+
+    MULT            reduce using rule 47 (postfix_expr -> primary .)
+    DIV             reduce using rule 47 (postfix_expr -> primary .)
+    PLUS            reduce using rule 47 (postfix_expr -> primary .)
+    MINUS           reduce using rule 47 (postfix_expr -> primary .)
+    SEMI            reduce using rule 47 (postfix_expr -> primary .)
+    LESS            reduce using rule 47 (postfix_expr -> primary .)
+    MORE            reduce using rule 47 (postfix_expr -> primary .)
+    EQ              reduce using rule 47 (postfix_expr -> primary .)
+    N_EQ            reduce using rule 47 (postfix_expr -> primary .)
+    L_EQ            reduce using rule 47 (postfix_expr -> primary .)
+    R_EQ            reduce using rule 47 (postfix_expr -> primary .)
+    R_PAR           reduce using rule 47 (postfix_expr -> primary .)
+    COMM            reduce using rule 47 (postfix_expr -> primary .)
+
+
+state 100
+
+    (54) primary -> L_PAR . expr R_PAR
+    (41) expr -> . expr_prefix factor
+    (42) expr_prefix -> . expr_prefix factor addop
+    (43) expr_prefix -> . empty
+    (76) empty -> .
+
+    L_PAR           reduce using rule 76 (empty -> .)
+    INTLITERAL      reduce using rule 76 (empty -> .)
+    FLOATLITERAL    reduce using rule 76 (empty -> .)
+    IDENTIFIER      reduce using rule 76 (empty -> .)
+
+    expr                           shift and go to state 120
+    empty                          shift and go to state 78
+    expr_prefix                    shift and go to state 76
+
+state 101
+
+    (57) primary -> FLOATLITERAL .
+
+    MULT            reduce using rule 57 (primary -> FLOATLITERAL .)
+    DIV             reduce using rule 57 (primary -> FLOATLITERAL .)
+    PLUS            reduce using rule 57 (primary -> FLOATLITERAL .)
+    MINUS           reduce using rule 57 (primary -> FLOATLITERAL .)
+    SEMI            reduce using rule 57 (primary -> FLOATLITERAL .)
+    LESS            reduce using rule 57 (primary -> FLOATLITERAL .)
+    MORE            reduce using rule 57 (primary -> FLOATLITERAL .)
+    EQ              reduce using rule 57 (primary -> FLOATLITERAL .)
+    N_EQ            reduce using rule 57 (primary -> FLOATLITERAL .)
+    L_EQ            reduce using rule 57 (primary -> FLOATLITERAL .)
+    R_EQ            reduce using rule 57 (primary -> FLOATLITERAL .)
+    R_PAR           reduce using rule 57 (primary -> FLOATLITERAL .)
+    COMM            reduce using rule 57 (primary -> FLOATLITERAL .)
+
+
+state 102
+
+    (55) primary -> id .
+    (49) call_expr -> id . L_PAR expr_list R_PAR
+
+    MULT            reduce using rule 55 (primary -> id .)
+    DIV             reduce using rule 55 (primary -> id .)
+    PLUS            reduce using rule 55 (primary -> id .)
+    MINUS           reduce using rule 55 (primary -> id .)
+    SEMI            reduce using rule 55 (primary -> id .)
+    LESS            reduce using rule 55 (primary -> id .)
+    MORE            reduce using rule 55 (primary -> id .)
+    EQ              reduce using rule 55 (primary -> id .)
+    N_EQ            reduce using rule 55 (primary -> id .)
+    L_EQ            reduce using rule 55 (primary -> id .)
+    R_EQ            reduce using rule 55 (primary -> id .)
+    R_PAR           reduce using rule 55 (primary -> id .)
+    COMM            reduce using rule 55 (primary -> id .)
+    L_PAR           shift and go to state 121
+
+
+state 103
+
+    (42) expr_prefix -> expr_prefix factor addop .
+
+    L_PAR           reduce using rule 42 (expr_prefix -> expr_prefix factor addop .)
+    INTLITERAL      reduce using rule 42 (expr_prefix -> expr_prefix factor addop .)
+    FLOATLITERAL    reduce using rule 42 (expr_prefix -> expr_prefix factor addop .)
+    IDENTIFIER      reduce using rule 42 (expr_prefix -> expr_prefix factor addop .)
+
+
+state 104
+
+    (58) addop -> PLUS .
+
+    L_PAR           reduce using rule 58 (addop -> PLUS .)
+    INTLITERAL      reduce using rule 58 (addop -> PLUS .)
+    FLOATLITERAL    reduce using rule 58 (addop -> PLUS .)
+    IDENTIFIER      reduce using rule 58 (addop -> PLUS .)
+
+
+state 105
+
+    (59) addop -> MINUS .
+
+    L_PAR           reduce using rule 59 (addop -> MINUS .)
+    INTLITERAL      reduce using rule 59 (addop -> MINUS .)
+    FLOATLITERAL    reduce using rule 59 (addop -> MINUS .)
+    IDENTIFIER      reduce using rule 59 (addop -> MINUS .)
+
+
+state 106
+
+    (38) read_stmt -> READ L_PAR id_list R_PAR . SEMI
+
+    SEMI            shift and go to state 122
+
+
+state 107
+
+    (68) compop -> LESS .
+
+    L_PAR           reduce using rule 68 (compop -> LESS .)
+    INTLITERAL      reduce using rule 68 (compop -> LESS .)
+    FLOATLITERAL    reduce using rule 68 (compop -> LESS .)
+    IDENTIFIER      reduce using rule 68 (compop -> LESS .)
+
+
+state 108
+
+    (67) cond -> expr compop . expr
+    (41) expr -> . expr_prefix factor
+    (42) expr_prefix -> . expr_prefix factor addop
+    (43) expr_prefix -> . empty
+    (76) empty -> .
+
+    L_PAR           reduce using rule 76 (empty -> .)
+    INTLITERAL      reduce using rule 76 (empty -> .)
+    FLOATLITERAL    reduce using rule 76 (empty -> .)
+    IDENTIFIER      reduce using rule 76 (empty -> .)
+
+    expr_prefix                    shift and go to state 76
+    expr                           shift and go to state 123
+    empty                          shift and go to state 78
+
+state 109
+
+    (73) compop -> R_EQ .
+
+    L_PAR           reduce using rule 73 (compop -> R_EQ .)
+    INTLITERAL      reduce using rule 73 (compop -> R_EQ .)
+    FLOATLITERAL    reduce using rule 73 (compop -> R_EQ .)
+    IDENTIFIER      reduce using rule 73 (compop -> R_EQ .)
+
+
+state 110
+
+    (72) compop -> L_EQ .
+
+    L_PAR           reduce using rule 72 (compop -> L_EQ .)
+    INTLITERAL      reduce using rule 72 (compop -> L_EQ .)
+    FLOATLITERAL    reduce using rule 72 (compop -> L_EQ .)
+    IDENTIFIER      reduce using rule 72 (compop -> L_EQ .)
+
+
+state 111
+
+    (71) compop -> N_EQ .
+
+    L_PAR           reduce using rule 71 (compop -> N_EQ .)
+    INTLITERAL      reduce using rule 71 (compop -> N_EQ .)
+    FLOATLITERAL    reduce using rule 71 (compop -> N_EQ .)
+    IDENTIFIER      reduce using rule 71 (compop -> N_EQ .)
+
+
+state 112
+
+    (70) compop -> EQ .
+
+    L_PAR           reduce using rule 70 (compop -> EQ .)
+    INTLITERAL      reduce using rule 70 (compop -> EQ .)
+    FLOATLITERAL    reduce using rule 70 (compop -> EQ .)
+    IDENTIFIER      reduce using rule 70 (compop -> EQ .)
+
+
+state 113
+
+    (69) compop -> MORE .
+
+    L_PAR           reduce using rule 69 (compop -> MORE .)
+    INTLITERAL      reduce using rule 69 (compop -> MORE .)
+    FLOATLITERAL    reduce using rule 69 (compop -> MORE .)
+    IDENTIFIER      reduce using rule 69 (compop -> MORE .)
+
+
+state 114
+
+    (62) if_stmt -> s_if L_PAR cond R_PAR . decl stmt_list else_part ENDIF
+    (4) decl -> . string_decl decl
+    (5) decl -> . var_decl decl
+    (6) decl -> . empty
+    (7) string_decl -> . STRING id EQ_EQ str SEMI
+    (9) var_decl -> . var_type id_list SEMI
+    (76) empty -> .
+    (10) var_type -> . FLOAT
+    (11) var_type -> . INT
+
+    STRING          shift and go to state 7
+    READ            reduce using rule 76 (empty -> .)
+    WRITE           reduce using rule 76 (empty -> .)
+    RETURN          reduce using rule 76 (empty -> .)
+    IF              reduce using rule 76 (empty -> .)
+    WHILE           reduce using rule 76 (empty -> .)
+    IDENTIFIER      reduce using rule 76 (empty -> .)
+    ELSE            reduce using rule 76 (empty -> .)
+    ENDIF           reduce using rule 76 (empty -> .)
+    FLOAT           shift and go to state 9
+    INT             shift and go to state 8
+
+    decl                           shift and go to state 124
+    var_type                       shift and go to state 12
+    var_decl                       shift and go to state 10
+    string_decl                    shift and go to state 11
+    empty                          shift and go to state 13
+
+state 115
+
+    (74) while_stmt -> s_while L_PAR cond R_PAR . decl stmt_list ENDWHILE
+    (4) decl -> . string_decl decl
+    (5) decl -> . var_decl decl
+    (6) decl -> . empty
+    (7) string_decl -> . STRING id EQ_EQ str SEMI
+    (9) var_decl -> . var_type id_list SEMI
+    (76) empty -> .
+    (10) var_type -> . FLOAT
+    (11) var_type -> . INT
+
+    STRING          shift and go to state 7
+    READ            reduce using rule 76 (empty -> .)
+    WRITE           reduce using rule 76 (empty -> .)
+    RETURN          reduce using rule 76 (empty -> .)
+    IF              reduce using rule 76 (empty -> .)
+    WHILE           reduce using rule 76 (empty -> .)
+    IDENTIFIER      reduce using rule 76 (empty -> .)
+    ENDWHILE        reduce using rule 76 (empty -> .)
+    FLOAT           shift and go to state 9
+    INT             shift and go to state 8
+
+    decl                           shift and go to state 125
+    var_type                       shift and go to state 12
+    var_decl                       shift and go to state 10
+    string_decl                    shift and go to state 11
+    empty                          shift and go to state 13
+
+state 116
+
+    (39) write_stmt -> WRITE L_PAR id_list R_PAR . SEMI
+
+    SEMI            shift and go to state 126
+
+
+state 117
+
+    (60) mulop -> MULT .
+
+    L_PAR           reduce using rule 60 (mulop -> MULT .)
+    INTLITERAL      reduce using rule 60 (mulop -> MULT .)
+    FLOATLITERAL    reduce using rule 60 (mulop -> MULT .)
+    IDENTIFIER      reduce using rule 60 (mulop -> MULT .)
+
+
+state 118
+
+    (61) mulop -> DIV .
+
+    L_PAR           reduce using rule 61 (mulop -> DIV .)
+    INTLITERAL      reduce using rule 61 (mulop -> DIV .)
+    FLOATLITERAL    reduce using rule 61 (mulop -> DIV .)
+    IDENTIFIER      reduce using rule 61 (mulop -> DIV .)
+
+
+state 119
+
+    (45) factor_prefix -> factor_prefix postfix_expr mulop .
+
+    L_PAR           reduce using rule 45 (factor_prefix -> factor_prefix postfix_expr mulop .)
+    INTLITERAL      reduce using rule 45 (factor_prefix -> factor_prefix postfix_expr mulop .)
+    FLOATLITERAL    reduce using rule 45 (factor_prefix -> factor_prefix postfix_expr mulop .)
+    IDENTIFIER      reduce using rule 45 (factor_prefix -> factor_prefix postfix_expr mulop .)
+
+
+state 120
+
+    (54) primary -> L_PAR expr . R_PAR
+
+    R_PAR           shift and go to state 127
+
+
+state 121
+
+    (49) call_expr -> id L_PAR . expr_list R_PAR
+    (50) expr_list -> . expr expr_list_tail
+    (51) expr_list -> . empty
+    (41) expr -> . expr_prefix factor
+    (76) empty -> .
+    (42) expr_prefix -> . expr_prefix factor addop
+    (43) expr_prefix -> . empty
+
+    R_PAR           reduce using rule 76 (empty -> .)
+    L_PAR           reduce using rule 76 (empty -> .)
+    INTLITERAL      reduce using rule 76 (empty -> .)
+    FLOATLITERAL    reduce using rule 76 (empty -> .)
+    IDENTIFIER      reduce using rule 76 (empty -> .)
+
+    expr_prefix                    shift and go to state 76
+    expr_list                      shift and go to state 128
+    expr                           shift and go to state 129
+    empty                          shift and go to state 130
+
+state 122
+
+    (38) read_stmt -> READ L_PAR id_list R_PAR SEMI .
+
+    READ            reduce using rule 38 (read_stmt -> READ L_PAR id_list R_PAR SEMI .)
+    WRITE           reduce using rule 38 (read_stmt -> READ L_PAR id_list R_PAR SEMI .)
+    RETURN          reduce using rule 38 (read_stmt -> READ L_PAR id_list R_PAR SEMI .)
+    IF              reduce using rule 38 (read_stmt -> READ L_PAR id_list R_PAR SEMI .)
+    WHILE           reduce using rule 38 (read_stmt -> READ L_PAR id_list R_PAR SEMI .)
+    IDENTIFIER      reduce using rule 38 (read_stmt -> READ L_PAR id_list R_PAR SEMI .)
+    ELSE            reduce using rule 38 (read_stmt -> READ L_PAR id_list R_PAR SEMI .)
+    ENDIF           reduce using rule 38 (read_stmt -> READ L_PAR id_list R_PAR SEMI .)
+    END             reduce using rule 38 (read_stmt -> READ L_PAR id_list R_PAR SEMI .)
+    ENDWHILE        reduce using rule 38 (read_stmt -> READ L_PAR id_list R_PAR SEMI .)
+
+
+state 123
+
+    (67) cond -> expr compop expr .
+
+    R_PAR           reduce using rule 67 (cond -> expr compop expr .)
+
+
+state 124
+
+    (62) if_stmt -> s_if L_PAR cond R_PAR decl . stmt_list else_part ENDIF
+    (27) stmt_list -> . stmt stmt_list
+    (28) stmt_list -> . empty
+    (29) stmt -> . base_stmt
+    (30) stmt -> . if_stmt
+    (31) stmt -> . while_stmt
+    (76) empty -> .
+    (32) base_stmt -> . assign_stmt
+    (33) base_stmt -> . read_stmt
+    (34) base_stmt -> . write_stmt
+    (35) base_stmt -> . return_stmt
+    (62) if_stmt -> . s_if L_PAR cond R_PAR decl stmt_list else_part ENDIF
+    (74) while_stmt -> . s_while L_PAR cond R_PAR decl stmt_list ENDWHILE
+    (36) assign_stmt -> . assign_expr SEMI
+    (38) read_stmt -> . READ L_PAR id_list R_PAR SEMI
+    (39) write_stmt -> . WRITE L_PAR id_list R_PAR SEMI
+    (40) return_stmt -> . RETURN expr SEMI
+    (63) s_if -> . IF
+    (75) s_while -> . WHILE
+    (37) assign_expr -> . id EQ_EQ expr
+    (2) id -> . IDENTIFIER
+
+    ELSE            reduce using rule 76 (empty -> .)
+    ENDIF           reduce using rule 76 (empty -> .)
+    READ            shift and go to state 57
+    WRITE           shift and go to state 72
+    RETURN          shift and go to state 56
+    IF              shift and go to state 70
+    WHILE           shift and go to state 60
+    IDENTIFIER      shift and go to state 3
+
+    stmt_list                      shift and go to state 131
+    if_stmt                        shift and go to state 73
+    s_while                        shift and go to state 64
+    assign_expr                    shift and go to state 66
+    read_stmt                      shift and go to state 58
+    stmt                           shift and go to state 69
+    assign_stmt                    shift and go to state 65
+    base_stmt                      shift and go to state 59
+    while_stmt                     shift and go to state 74
+    s_if                           shift and go to state 61
+    return_stmt                    shift and go to state 62
+    write_stmt                     shift and go to state 68
+    id                             shift and go to state 63
+    empty                          shift and go to state 67
+
+state 125
+
+    (74) while_stmt -> s_while L_PAR cond R_PAR decl . stmt_list ENDWHILE
+    (27) stmt_list -> . stmt stmt_list
+    (28) stmt_list -> . empty
+    (29) stmt -> . base_stmt
+    (30) stmt -> . if_stmt
+    (31) stmt -> . while_stmt
+    (76) empty -> .
+    (32) base_stmt -> . assign_stmt
+    (33) base_stmt -> . read_stmt
+    (34) base_stmt -> . write_stmt
+    (35) base_stmt -> . return_stmt
+    (62) if_stmt -> . s_if L_PAR cond R_PAR decl stmt_list else_part ENDIF
+    (74) while_stmt -> . s_while L_PAR cond R_PAR decl stmt_list ENDWHILE
+    (36) assign_stmt -> . assign_expr SEMI
+    (38) read_stmt -> . READ L_PAR id_list R_PAR SEMI
+    (39) write_stmt -> . WRITE L_PAR id_list R_PAR SEMI
+    (40) return_stmt -> . RETURN expr SEMI
+    (63) s_if -> . IF
+    (75) s_while -> . WHILE
+    (37) assign_expr -> . id EQ_EQ expr
+    (2) id -> . IDENTIFIER
+
+    ENDWHILE        reduce using rule 76 (empty -> .)
+    READ            shift and go to state 57
+    WRITE           shift and go to state 72
+    RETURN          shift and go to state 56
+    IF              shift and go to state 70
+    WHILE           shift and go to state 60
+    IDENTIFIER      shift and go to state 3
+
+    stmt_list                      shift and go to state 132
+    if_stmt                        shift and go to state 73
+    s_while                        shift and go to state 64
+    assign_expr                    shift and go to state 66
+    read_stmt                      shift and go to state 58
+    stmt                           shift and go to state 69
+    assign_stmt                    shift and go to state 65
+    base_stmt                      shift and go to state 59
+    while_stmt                     shift and go to state 74
+    s_if                           shift and go to state 61
+    return_stmt                    shift and go to state 62
+    write_stmt                     shift and go to state 68
+    id                             shift and go to state 63
+    empty                          shift and go to state 67
+
+state 126
+
+    (39) write_stmt -> WRITE L_PAR id_list R_PAR SEMI .
+
+    READ            reduce using rule 39 (write_stmt -> WRITE L_PAR id_list R_PAR SEMI .)
+    WRITE           reduce using rule 39 (write_stmt -> WRITE L_PAR id_list R_PAR SEMI .)
+    RETURN          reduce using rule 39 (write_stmt -> WRITE L_PAR id_list R_PAR SEMI .)
+    IF              reduce using rule 39 (write_stmt -> WRITE L_PAR id_list R_PAR SEMI .)
+    WHILE           reduce using rule 39 (write_stmt -> WRITE L_PAR id_list R_PAR SEMI .)
+    IDENTIFIER      reduce using rule 39 (write_stmt -> WRITE L_PAR id_list R_PAR SEMI .)
+    ENDIF           reduce using rule 39 (write_stmt -> WRITE L_PAR id_list R_PAR SEMI .)
+    ENDWHILE        reduce using rule 39 (write_stmt -> WRITE L_PAR id_list R_PAR SEMI .)
+    END             reduce using rule 39 (write_stmt -> WRITE L_PAR id_list R_PAR SEMI .)
+    ELSE            reduce using rule 39 (write_stmt -> WRITE L_PAR id_list R_PAR SEMI .)
+
+
+state 127
+
+    (54) primary -> L_PAR expr R_PAR .
+
+    MULT            reduce using rule 54 (primary -> L_PAR expr R_PAR .)
+    DIV             reduce using rule 54 (primary -> L_PAR expr R_PAR .)
+    PLUS            reduce using rule 54 (primary -> L_PAR expr R_PAR .)
+    MINUS           reduce using rule 54 (primary -> L_PAR expr R_PAR .)
+    SEMI            reduce using rule 54 (primary -> L_PAR expr R_PAR .)
+    LESS            reduce using rule 54 (primary -> L_PAR expr R_PAR .)
+    MORE            reduce using rule 54 (primary -> L_PAR expr R_PAR .)
+    EQ              reduce using rule 54 (primary -> L_PAR expr R_PAR .)
+    N_EQ            reduce using rule 54 (primary -> L_PAR expr R_PAR .)
+    L_EQ            reduce using rule 54 (primary -> L_PAR expr R_PAR .)
+    R_EQ            reduce using rule 54 (primary -> L_PAR expr R_PAR .)
+    R_PAR           reduce using rule 54 (primary -> L_PAR expr R_PAR .)
+    COMM            reduce using rule 54 (primary -> L_PAR expr R_PAR .)
+
+
+state 128
+
+    (49) call_expr -> id L_PAR expr_list . R_PAR
+
+    R_PAR           shift and go to state 133
+
+
+state 129
+
+    (50) expr_list -> expr . expr_list_tail
+    (52) expr_list_tail -> . COMM expr expr_list_tail
+    (53) expr_list_tail -> . empty
+    (76) empty -> .
+
+    COMM            shift and go to state 134
+    R_PAR           reduce using rule 76 (empty -> .)
+
+    empty                          shift and go to state 135
+    expr_list_tail                 shift and go to state 136
+
+state 130
+
+    (51) expr_list -> empty .
+    (43) expr_prefix -> empty .
+
+    R_PAR           reduce using rule 51 (expr_list -> empty .)
+    L_PAR           reduce using rule 43 (expr_prefix -> empty .)
+    INTLITERAL      reduce using rule 43 (expr_prefix -> empty .)
+    FLOATLITERAL    reduce using rule 43 (expr_prefix -> empty .)
+    IDENTIFIER      reduce using rule 43 (expr_prefix -> empty .)
+
+
+state 131
+
+    (62) if_stmt -> s_if L_PAR cond R_PAR decl stmt_list . else_part ENDIF
+    (64) else_part -> . s_else decl stmt_list
+    (65) else_part -> . empty
+    (66) s_else -> . ELSE
+    (76) empty -> .
+
+    ELSE            shift and go to state 137
+    ENDIF           reduce using rule 76 (empty -> .)
+
+    else_part                      shift and go to state 138
+    s_else                         shift and go to state 139
+    empty                          shift and go to state 140
+
+state 132
+
+    (74) while_stmt -> s_while L_PAR cond R_PAR decl stmt_list . ENDWHILE
+
+    ENDWHILE        shift and go to state 141
+
+
+state 133
+
+    (49) call_expr -> id L_PAR expr_list R_PAR .
+
+    MULT            reduce using rule 49 (call_expr -> id L_PAR expr_list R_PAR .)
+    DIV             reduce using rule 49 (call_expr -> id L_PAR expr_list R_PAR .)
+    PLUS            reduce using rule 49 (call_expr -> id L_PAR expr_list R_PAR .)
+    MINUS           reduce using rule 49 (call_expr -> id L_PAR expr_list R_PAR .)
+    SEMI            reduce using rule 49 (call_expr -> id L_PAR expr_list R_PAR .)
+    LESS            reduce using rule 49 (call_expr -> id L_PAR expr_list R_PAR .)
+    MORE            reduce using rule 49 (call_expr -> id L_PAR expr_list R_PAR .)
+    EQ              reduce using rule 49 (call_expr -> id L_PAR expr_list R_PAR .)
+    N_EQ            reduce using rule 49 (call_expr -> id L_PAR expr_list R_PAR .)
+    L_EQ            reduce using rule 49 (call_expr -> id L_PAR expr_list R_PAR .)
+    R_EQ            reduce using rule 49 (call_expr -> id L_PAR expr_list R_PAR .)
+    R_PAR           reduce using rule 49 (call_expr -> id L_PAR expr_list R_PAR .)
+    COMM            reduce using rule 49 (call_expr -> id L_PAR expr_list R_PAR .)
+
+
+state 134
+
+    (52) expr_list_tail -> COMM . expr expr_list_tail
+    (41) expr -> . expr_prefix factor
+    (42) expr_prefix -> . expr_prefix factor addop
+    (43) expr_prefix -> . empty
+    (76) empty -> .
+
+    L_PAR           reduce using rule 76 (empty -> .)
+    INTLITERAL      reduce using rule 76 (empty -> .)
+    FLOATLITERAL    reduce using rule 76 (empty -> .)
+    IDENTIFIER      reduce using rule 76 (empty -> .)
+
+    expr_prefix                    shift and go to state 76
+    expr                           shift and go to state 142
+    empty                          shift and go to state 78
+
+state 135
+
+    (53) expr_list_tail -> empty .
+
+    R_PAR           reduce using rule 53 (expr_list_tail -> empty .)
+
+
+state 136
+
+    (50) expr_list -> expr expr_list_tail .
+
+    R_PAR           reduce using rule 50 (expr_list -> expr expr_list_tail .)
+
+
+state 137
+
+    (66) s_else -> ELSE .
+
+    STRING          reduce using rule 66 (s_else -> ELSE .)
+    FLOAT           reduce using rule 66 (s_else -> ELSE .)
+    INT             reduce using rule 66 (s_else -> ELSE .)
+    READ            reduce using rule 66 (s_else -> ELSE .)
+    WRITE           reduce using rule 66 (s_else -> ELSE .)
+    RETURN          reduce using rule 66 (s_else -> ELSE .)
+    IF              reduce using rule 66 (s_else -> ELSE .)
+    WHILE           reduce using rule 66 (s_else -> ELSE .)
+    IDENTIFIER      reduce using rule 66 (s_else -> ELSE .)
+    ENDIF           reduce using rule 66 (s_else -> ELSE .)
+
+
+state 138
+
+    (62) if_stmt -> s_if L_PAR cond R_PAR decl stmt_list else_part . ENDIF
+
+    ENDIF           shift and go to state 143
+
+
+state 139
+
+    (64) else_part -> s_else . decl stmt_list
+    (4) decl -> . string_decl decl
+    (5) decl -> . var_decl decl
+    (6) decl -> . empty
+    (7) string_decl -> . STRING id EQ_EQ str SEMI
+    (9) var_decl -> . var_type id_list SEMI
+    (76) empty -> .
+    (10) var_type -> . FLOAT
+    (11) var_type -> . INT
+
+    STRING          shift and go to state 7
+    READ            reduce using rule 76 (empty -> .)
+    WRITE           reduce using rule 76 (empty -> .)
+    RETURN          reduce using rule 76 (empty -> .)
+    IF              reduce using rule 76 (empty -> .)
+    WHILE           reduce using rule 76 (empty -> .)
+    IDENTIFIER      reduce using rule 76 (empty -> .)
+    ENDIF           reduce using rule 76 (empty -> .)
+    FLOAT           shift and go to state 9
+    INT             shift and go to state 8
+
+    decl                           shift and go to state 144
+    var_type                       shift and go to state 12
+    var_decl                       shift and go to state 10
+    string_decl                    shift and go to state 11
+    empty                          shift and go to state 13
+
+state 140
+
+    (65) else_part -> empty .
+
+    ENDIF           reduce using rule 65 (else_part -> empty .)
+
+
+state 141
+
+    (74) while_stmt -> s_while L_PAR cond R_PAR decl stmt_list ENDWHILE .
+
+    READ            reduce using rule 74 (while_stmt -> s_while L_PAR cond R_PAR decl stmt_list ENDWHILE .)
+    WRITE           reduce using rule 74 (while_stmt -> s_while L_PAR cond R_PAR decl stmt_list ENDWHILE .)
+    RETURN          reduce using rule 74 (while_stmt -> s_while L_PAR cond R_PAR decl stmt_list ENDWHILE .)
+    IF              reduce using rule 74 (while_stmt -> s_while L_PAR cond R_PAR decl stmt_list ENDWHILE .)
+    WHILE           reduce using rule 74 (while_stmt -> s_while L_PAR cond R_PAR decl stmt_list ENDWHILE .)
+    IDENTIFIER      reduce using rule 74 (while_stmt -> s_while L_PAR cond R_PAR decl stmt_list ENDWHILE .)
+    END             reduce using rule 74 (while_stmt -> s_while L_PAR cond R_PAR decl stmt_list ENDWHILE .)
+    ELSE            reduce using rule 74 (while_stmt -> s_while L_PAR cond R_PAR decl stmt_list ENDWHILE .)
+    ENDIF           reduce using rule 74 (while_stmt -> s_while L_PAR cond R_PAR decl stmt_list ENDWHILE .)
+    ENDWHILE        reduce using rule 74 (while_stmt -> s_while L_PAR cond R_PAR decl stmt_list ENDWHILE .)
+
+
+state 142
+
+    (52) expr_list_tail -> COMM expr . expr_list_tail
+    (52) expr_list_tail -> . COMM expr expr_list_tail
+    (53) expr_list_tail -> . empty
+    (76) empty -> .
+
+    COMM            shift and go to state 134
+    R_PAR           reduce using rule 76 (empty -> .)
+
+    empty                          shift and go to state 135
+    expr_list_tail                 shift and go to state 145
+
+state 143
+
+    (62) if_stmt -> s_if L_PAR cond R_PAR decl stmt_list else_part ENDIF .
+
+    READ            reduce using rule 62 (if_stmt -> s_if L_PAR cond R_PAR decl stmt_list else_part ENDIF .)
+    WRITE           reduce using rule 62 (if_stmt -> s_if L_PAR cond R_PAR decl stmt_list else_part ENDIF .)
+    RETURN          reduce using rule 62 (if_stmt -> s_if L_PAR cond R_PAR decl stmt_list else_part ENDIF .)
+    IF              reduce using rule 62 (if_stmt -> s_if L_PAR cond R_PAR decl stmt_list else_part ENDIF .)
+    WHILE           reduce using rule 62 (if_stmt -> s_if L_PAR cond R_PAR decl stmt_list else_part ENDIF .)
+    IDENTIFIER      reduce using rule 62 (if_stmt -> s_if L_PAR cond R_PAR decl stmt_list else_part ENDIF .)
+    ELSE            reduce using rule 62 (if_stmt -> s_if L_PAR cond R_PAR decl stmt_list else_part ENDIF .)
+    ENDIF           reduce using rule 62 (if_stmt -> s_if L_PAR cond R_PAR decl stmt_list else_part ENDIF .)
+    ENDWHILE        reduce using rule 62 (if_stmt -> s_if L_PAR cond R_PAR decl stmt_list else_part ENDIF .)
+    END             reduce using rule 62 (if_stmt -> s_if L_PAR cond R_PAR decl stmt_list else_part ENDIF .)
+
+
+state 144
+
+    (64) else_part -> s_else decl . stmt_list
+    (27) stmt_list -> . stmt stmt_list
+    (28) stmt_list -> . empty
+    (29) stmt -> . base_stmt
+    (30) stmt -> . if_stmt
+    (31) stmt -> . while_stmt
+    (76) empty -> .
+    (32) base_stmt -> . assign_stmt
+    (33) base_stmt -> . read_stmt
+    (34) base_stmt -> . write_stmt
+    (35) base_stmt -> . return_stmt
+    (62) if_stmt -> . s_if L_PAR cond R_PAR decl stmt_list else_part ENDIF
+    (74) while_stmt -> . s_while L_PAR cond R_PAR decl stmt_list ENDWHILE
+    (36) assign_stmt -> . assign_expr SEMI
+    (38) read_stmt -> . READ L_PAR id_list R_PAR SEMI
+    (39) write_stmt -> . WRITE L_PAR id_list R_PAR SEMI
+    (40) return_stmt -> . RETURN expr SEMI
+    (63) s_if -> . IF
+    (75) s_while -> . WHILE
+    (37) assign_expr -> . id EQ_EQ expr
+    (2) id -> . IDENTIFIER
+
+    ENDIF           reduce using rule 76 (empty -> .)
+    READ            shift and go to state 57
+    WRITE           shift and go to state 72
+    RETURN          shift and go to state 56
+    IF              shift and go to state 70
+    WHILE           shift and go to state 60
+    IDENTIFIER      shift and go to state 3
+
+    stmt_list                      shift and go to state 146
+    if_stmt                        shift and go to state 73
+    write_stmt                     shift and go to state 68
+    s_while                        shift and go to state 64
+    assign_expr                    shift and go to state 66
+    read_stmt                      shift and go to state 58
+    stmt                           shift and go to state 69
+    assign_stmt                    shift and go to state 65
+    base_stmt                      shift and go to state 59
+    while_stmt                     shift and go to state 74
+    s_if                           shift and go to state 61
+    return_stmt                    shift and go to state 62
+    id                             shift and go to state 63
+    empty                          shift and go to state 67
+
+state 145
+
+    (52) expr_list_tail -> COMM expr expr_list_tail .
+
+    R_PAR           reduce using rule 52 (expr_list_tail -> COMM expr expr_list_tail .)
+
+
+state 146
+
+    (64) else_part -> s_else decl stmt_list .
+
+    ENDIF           reduce using rule 64 (else_part -> s_else decl stmt_list .)
+
