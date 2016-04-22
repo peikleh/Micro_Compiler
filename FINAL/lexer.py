@@ -49,7 +49,7 @@ tokens = tuple(keywords.values()) + operators +('IDENTIFIER',
           'COMMENT')
 
 
-          
+
 #t_KEYWORD= (r"PROGRAM|BEGIN|END(?!WHILE|IF)|FUNCTION|READ|WRITE|IF|ELSE|ENDIF|WHILE|ENDWHILE|CONTINUE|BREAK|RETURN|INT|VOID|STRING|FLOAT")
 
 
