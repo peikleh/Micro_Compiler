@@ -110,8 +110,8 @@ def p_assign_stmt(p):
 
 def p_assign_expr(p):
     'assign_expr : id EQ_EQ expr'
-    p[0] = p[1] + p[2] + p[3]
-    #print (p[0])
+    p[0] = p[3] + routine.add_assign_expr(p[1])
+    print (p[0])
 
 
 def p_read_stmt(p):
@@ -127,10 +127,9 @@ def p_expr(p):
     'expr : expr_prefix factor'
     if p[2] != None and p[1] != None:
         p[0] = p[1] + p[2]
-
-    else:
+        p[0] = routine.add_expr(p[1], p[2])
+    elif p[1] == None:
         p[0] = p[2]
-
 
 def p_expr_prefix(p):
     '''expr_prefix : expr_prefix factor addop
