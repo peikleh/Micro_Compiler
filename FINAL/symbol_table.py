@@ -33,7 +33,7 @@ class Symbol_Table():
         if self._failed[0] == False:
             print ("Symbol table GLOBAL")
             for lists in self._output:
-                print lists
+                print (lists)
         else:
             print ('DECLARATION ERROR ' + self._failed[1])
 
@@ -50,5 +50,3 @@ class Symbol_Table():
                 else:
                     self._output.append('name ' + name + ' type ' + v_type)
                     self._stack[-1][name] = [v_type]
-                
-

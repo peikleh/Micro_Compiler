@@ -110,7 +110,8 @@ def p_assign_stmt(p):
 
 def p_assign_expr(p):
     'assign_expr : id EQ_EQ expr'
-    p[0] = p[1] + p[2]
+    p[0] = p[1] + p[2] + p[3]
+    #print (p[0])
     routine.add_var(p[0])
 
 def p_read_stmt(p):
@@ -126,29 +127,44 @@ def p_expr(p):
     'expr : expr_prefix factor'
     if p[2] != None and p[1] != None:
         p[0] = p[1] + p[2]
+
     else:
-        p[0] = p[1]
+        p[0] = p[2]
+
 
 def p_expr_prefix(p):
     '''expr_prefix : expr_prefix factor addop
     | empty'''
 
     if len(p) > 2:
-        p[0] = p[1] + [p[2]] + p[3]
+        if p[1] != None:
+            p[0] = p[1] + p[2] + p[3]
+
+        else:
+            p[0] = p[2] + p[3]
 
 
 def p_factor(p):
     'factor : factor_prefix postfix_expr'
-    if p[1] != None:
+    if p[1] != None and p[2] != None:
         p[0] = p[1] + p[2]
-    else:
+        print (p[0])
+    elif p[1] == None:
         p[0] = p[2]
+        print (p[0])
+    elif p[2] == None:
+        print (p[0])
+        p[0] = p[1]
+
 
 def p_factor_prefix(p):
     '''factor_prefix : factor_prefix postfix_expr mulop
     | empty'''
     if len(p) > 2:
-        p[0] = p[1] + [p[2]] + p[3]
+        if p[1] != None:
+            p[0] = p[1] + p[2] + p[3]
+        else:
+            p[0] = p[2] + p[3]
 
 def p_postfix_expr(p):
     '''postfix_expr : primary
@@ -257,4 +273,4 @@ while True:
 
     break
 
-table.print_output()
+#table.print_output()

@@ -7,4 +7,4 @@ class Semantic_Routine():
         self._output = []
 
     def add_var (self, input):
-        print input
+        pass
