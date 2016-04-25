@@ -8,21 +8,34 @@ class Semantic_Routine():
         self._temp = 0
 
     def add_primary (self, var_in):
-        self._temp += 1
+
         if var_in[0].isdigit():
+            self._temp += 1
             if "." in var_in:
-                instr = "STOREF " + var_in + " $T" + str(self._temp) + "\n"
+                instr = [["STOREF ", var_in + self._temp]]
                 return instr
             else:
-                instr = "STOREI " + var_in + " $T" + str(self._temp) + "\n"
+                instr = [["STOREF ", var_in , self._temp]]
                 return instr
         else:
             #print(var_in)
-            return(var_in)
+            return([[var_in]])
 
     def add_assign_expr(self, var_name):
-        instr = "STOREI "  + " $T" + str(self._temp) + " " + var_name
+        instr = ["STOREI " , self._temp, var_name]
         return instr
+
+    def add_expr_prefix(self, l_side, r_side):
+        if l_side[-1] == '+':
+            if len(l_side[-2]) > 1:
+                if len(r_side[-2]) > 1:
+                    return [l_side + r_side] + [['ADDI ', l_side[-1], r_side[2]]]
+                else:
+                    pass
+
+        elif l_sid[-1] == '-':
+                pass
+
 
     def add_expr(self, l_side, r_side):
         instr = ""

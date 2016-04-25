@@ -1,0 +1,15 @@
+PROGRAM test
+BEGIN
+
+	INT i,a,num;
+	
+	FUNCTION VOID main()
+	BEGIN
+		num := 7;
+		i := 2;	
+		a := 42;
+		a := 5 + 5 + 9 + 10
+		
+		
+	END
+END
