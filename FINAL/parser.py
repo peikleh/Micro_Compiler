@@ -107,12 +107,11 @@ def p_base_stmt(p):
 
 def p_assign_stmt(p):
     'assign_stmt : assign_expr SEMI'
-
+    p[0] = p[1]
 def p_assign_expr(p):
     'assign_expr : id EQ_EQ expr'
     p[0] = p[3] + routine.add_assign_expr(p[1])
-    #print (p[0])
-
+    print p[0]
 
 def p_read_stmt(p):
     'read_stmt : READ L_PAR id_list R_PAR SEMI'
@@ -126,9 +125,7 @@ def p_return_stmt(p):
 def p_expr(p):
     'expr : expr_prefix factor'
     if p[2] != None and p[1] != None:
-        p[0] = p[1] + p[2]
-
-        p[0] = routine.add_expr(p[1], p[2])
+        p[0] = routine.add_mul_op(p[1], p[2])
 
     elif p[1] == None:
         p[0] = p[2]
@@ -140,8 +137,9 @@ def p_expr_prefix(p):
     if len(p) > 2:
         if p[1] != None:
             p[0] = p[1] + p[2] + [p[3]]
-            
-            print(routine.add_expr_prefix(p[1], p[2]))
+            #print (p[0])
+            p[0] = routine.add_mul_op(p[1], p[2]) + [p[3]]
+            #print p[0]
         else:
             p[0] = p[2] + [p[3]]
             #print p[0]
@@ -149,24 +147,22 @@ def p_expr_prefix(p):
 def p_factor(p):
     'factor : factor_prefix postfix_expr'
     if p[1] != None and p[2] != None:
-        p[0] = p[1] + p[2]
-        #print (p[0])
+        p[0] = routine.add_mul_op(p[1], p[2])
     elif p[1] == None:
         p[0] = p[2]
-        #print (p[0])
-    elif p[2] == None:
-        p[0] = p[1]
-        #print (p[0])
+
+
 
 def p_factor_prefix(p):
     '''factor_prefix : factor_prefix postfix_expr mulop
     | empty'''
     if len(p) > 2:
         if p[1] != None:
-            p[0] = p[1] + p[2] + p[3]
+            #print p[1] + p[2] + [p[3]]
+            p[0] = routine.add_mul_op(p[1], p[2]) + [p[3]]
 
         else:
-            p[0] = p[2] + p[3]
+            p[0] = p[2] + [p[3]]
 
 
 def p_postfix_expr(p):
