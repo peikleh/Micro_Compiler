@@ -9,6 +9,9 @@ BEGIN
 		i := 2;	
 		a := 42;
 		a := 6 + 5 * 7;
+	IF (i<5)
+		a := i + a;
+	ENDIF
 		
 	END
 END

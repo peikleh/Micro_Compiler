@@ -12,7 +12,7 @@ BEGIN
 		IF (i<5)
 			num := num +a;
 			IF ( i < 3)
-				num := num + a + a + a;
+				num := num + a;
 			ENDIF
 		ELSE
 			num := num - a;

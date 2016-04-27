@@ -1,0 +1,9 @@
+Some information about the IR code:
+	JUMPS: (INSTR, OP1, OP2, LABLE)
+		JGT : >
+		JLT : <
+		JGE : >=
+		JLE : <=
+		JEQ : ==
+		JNE : !=
+

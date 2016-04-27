@@ -89,21 +89,36 @@ def p_s_func(p):
 
 def p_func_body(p):
     'func_body : decl stmt_list'
+    if p[2] != None:
+        p[0] = p[2]
+        for x in p[0]:
+            print x
+
 
 def p_stmt_list(p):
     '''stmt_list : stmt stmt_list
     | empty'''
+    if len(p) > 2:
+        if p[2] != None:
+            p[0] = p[1] + p[2]
+        else:
+            p[0] = p[1]
+
+    else:
+        p[0] = p[1]
 
 def p_stmt(p):
     '''stmt : base_stmt
     | if_stmt
     | while_stmt'''
+    p[0] = p[1]
 
 def p_base_stmt(p):
     '''base_stmt : assign_stmt
     | read_stmt
     | write_stmt
     | return_stmt'''
+    p[0] = p[1]
 
 def p_assign_stmt(p):
     'assign_stmt : assign_expr SEMI'
@@ -111,7 +126,7 @@ def p_assign_stmt(p):
 def p_assign_expr(p):
     'assign_expr : id EQ_EQ expr'
     p[0] = p[3] + routine.add_assign_expr(p[1])
-    print p[0]
+
 
 def p_read_stmt(p):
     'read_stmt : READ L_PAR id_list R_PAR SEMI'
@@ -204,7 +219,13 @@ def p_mulop(p):
 
 def p_if_stmt(p):
     'if_stmt : s_if L_PAR cond R_PAR decl stmt_list else_part ENDIF'
+    if p[7] == None:
+        p[0] = p[3] + p[6] + [["LABEL ", p[3][-1][-1]]]
+    else:
+        p[0] = p[3] + p[6] + [p[7][0]] +  [["LABEL ", p[3][-1][-1]]] + p[7][1] + [p[7][2]]
+
     table.block_end()
+
 
 #The following function was added so we could know where if statements started
 def p_s_if(p):
@@ -214,7 +235,11 @@ def p_s_if(p):
 def p_else_part(p):
     '''else_part : s_else decl stmt_list
     | empty'''
-    table.block_end()
+    if len(p) > 2:
+        reg = routine.add_else()
+        p[0] = [reg[0]] + [p[3]] + [["LABLE ", reg[0][1]]]
+        table.block_end()
+
 
 #The following function was added so we could know where else statements started
 def p_s_else(p):
@@ -223,6 +248,7 @@ def p_s_else(p):
 
 def p_cond(p):
     'cond : expr compop expr'
+    p[0] = routine.add_cond(p[1], p[2], p[3])
 
 def p_compop(p):
     ''' compop : LESS
@@ -231,6 +257,7 @@ def p_compop(p):
     | N_EQ
     | L_EQ
     | R_EQ'''
+    p[0] = p[1]
 
 def p_while_stmt(p):
     'while_stmt : s_while L_PAR cond R_PAR decl stmt_list ENDWHILE'

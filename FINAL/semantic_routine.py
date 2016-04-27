@@ -6,6 +6,7 @@ class Semantic_Routine():
     def __init__(self):
         self._output = []
         self._r_num = 0
+        self._label = 0
 
     def add_primary (self, var_in):
         if var_in[0].isdigit():
@@ -21,7 +22,7 @@ class Semantic_Routine():
             return([[var_in]])
 
     def add_assign_expr(self, var_name):
-        instr = ["STOREI " , self._r_num, var_name]
+        instr = [["STOREI " , self._r_num, var_name]]
         return instr
 
     def add_mul_op(self, l_side, r_side):
@@ -33,6 +34,7 @@ class Semantic_Routine():
             ret = self.make_op(l_side, r_side)
             instr = [["ADDI ", ret[1], ret[2], self._r_num]]
             return ret[0] + instr
+
         elif l_side[-1] == '-':
             ret = self.make_op(l_side, r_side)
             instr = [["SUBI ", ret[1], ret[2], self._r_num]]
@@ -56,7 +58,7 @@ class Semantic_Routine():
             l_reg = l_side[-2][-1]
             del l_side[-1]
         else:
-            l_reg = l_side[-2]
+            l_reg = l_side[-2][0]
             del l_side[-1]
             del l_side[-1]
 
@@ -64,9 +66,37 @@ class Semantic_Routine():
             r_reg = r_side[-1][-1]
             l_side = l_side + r_side
         else:
-            r_reg = r_side[-1]
+            r_reg = r_side[-1][0]
 
         return (l_side, l_reg, r_reg)
 
+    def add_cond(self, l_side, compop, r_side):
+        get_reg = self.make_op(l_side + [compop], r_side)
+        l_reg = get_reg[1]
+        r_reg = get_reg[2]
+        self._label += 1
+        instr = ''
 
-        return instr
+        if compop == '<':
+            instr = [["JGE ", l_reg, r_reg, self._label]]
+
+        elif compop == '>':
+            instr = [["JLE", l_reg, r_reg, self._label]]
+
+        elif compop == '=':
+            instr = [["JNE ", l_reg, r_reg, self._label]]
+
+        elif compop == '!=':
+            instr = [["JEQ", l_reg, r_reg, self._label]]
+
+        elif compop == '<=':
+            instr = [["JGT ", l_reg, r_reg, self._label]]
+
+        elif compop == '>=':
+            instr = [["JLT ", l_reg, r_reg, self._label]]
+
+        return get_reg[0] + instr
+
+    def add_else(self):
+        self._label += 1
+        return [["JUMP ", self._label]]
