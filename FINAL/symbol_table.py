@@ -47,6 +47,10 @@ class Symbol_Table():
                 if is_str == True:
                     self._output.append('name ' + name + ' type STRING ' + 'value ' + str_value)
                     self._stack[-1][name] = ['STRING', str_value]
+                    
                 else:
                     self._output.append('name ' + name + ' type ' + v_type)
                     self._stack[-1][name] = [v_type]
+
+    def search(self, ide):
+        return self._stack[0][ide]

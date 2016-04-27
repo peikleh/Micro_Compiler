@@ -2,16 +2,12 @@ PROGRAM test
 BEGIN
 
 	INT i,a,num;
+	FLOAT b, c;
 	
 	FUNCTION VOID main()
 	BEGIN
 		num := 7;
-		i := 2;	
-		a := 42;
-		a := 6 + 5 * 7;
-	IF (i<5)
-		a := i + a;
-	ENDIF
-		
+		b := c;
+	
 	END
 END

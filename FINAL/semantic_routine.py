@@ -7,22 +7,27 @@ class Semantic_Routine():
         self._output = []
         self._r_num = 0
         self._label = 0
+        self._type_list = ["ADDI ", "SUBI ", "MULI ", "DIVI ", "STOREI " ]
 
     def add_primary (self, var_in):
         if var_in[0].isdigit():
             self._r_num += 1
             if "." in var_in:
-                instr = [["STOREF ", var_in + self._r_num]]
+                instr = [["STOREI ", var_in , self._r_num]]
                 return instr
             else:
-                instr = [["STOREF ", var_in , self._r_num]]
+                instr = [["STOREI ", var_in , self._r_num]]
                 return instr
         else:
             #print(var_in)
             return([[var_in]])
 
-    def add_assign_expr(self, var_name):
-        instr = [["STOREI " , self._r_num, var_name]]
+    def add_assign_expr(self, expr, var_name):
+        instr = [["STOREI " , expr[-1][-1], var_name]]
+        if len(expr[-1]) < 2:
+            del expr[-1]
+        instr = expr + instr
+
         return instr
 
     def add_mul_op(self, l_side, r_side):
@@ -100,3 +105,27 @@ class Semantic_Routine():
     def add_else(self):
         self._label += 1
         return [["JUMP ", self._label]]
+
+    def get_label(self):
+        self._label += 1
+        return [['LABEL ', self._label]]
+
+    def write_list(self, id_list):
+        instr_list =[]
+        for i in id_list:
+            instr_list += [["WRITE ", i]]
+        return instr_list
+
+    def read_list(self, id_list):
+        instr_list =[]
+        for i in id_list:
+            instr_list += [["READ ", i]]
+        return instr_list
+
+    def change_type(self, code, d_type):
+        if d_type[0] == 'FLOAT':
+            for lists in code:
+                if lists[0] in self._type_list:
+                    st = lists[0][:-2]
+                    lists[0] = st + "F "
+        return code

@@ -4,7 +4,6 @@ import filecmp
 import sys
 #infile = sys.argv[1]
 
-
 # List of token names.   This is always required
 keywords = {'PROGRAM' : 'PROGRAM',
 			'BEGIN' : 'BEGIN',
@@ -90,13 +89,9 @@ t_COMM = (r",")
 t_L_EQ = (r"<=")
 t_R_EQ = (r">=")
 
-
-
-#t_IDENTIFIER =(r"[a-zA-Z]+[a-zA-Z0-9]*")
 t_INTLITERAL = (r"[0-9]+")
 t_FLOATLITERAL = (r"[0-9]*\.[0-9]+|\.[0-9]+")
 t_STRINGLITERAL = (r"\"[^\"]*\"")
-#t_OPERATOR = (r":=|\+|-(?!-)|\*|/|=|!=|<(?!=)|>(?!=)|\(|\)|;|,|<=|>=")
 t_ignore_COMMENT = (r"--.*\n")
 t_ignore  = (" \t | \n | ")
 
