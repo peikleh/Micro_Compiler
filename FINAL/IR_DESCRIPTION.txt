@@ -6,4 +6,26 @@ Some information about the IR code:
 		JLE : <=
 		JEQ : ==
 		JNE : !=
+What My code looks like for test if.
+['STOREF ', '7', 1]
+['STOREI ', 1, 'num']
+['STOREF ', '2', 2]
+['STOREI ', 2, 'i']
+['STOREF ', '42', 3]
+['STOREI ', 3, 'a']
+['STOREF ', '5', 4]
+['JGE ', 'i', 4, 1]
+['ADDI ', 'num', 'a', 5]
+['STOREI ', 5, 'num']
+['STOREF ', '3', 6]
+['JGE ', 'i', 6, 2]
+['ADDI ', 'num', 'a', 7]
+['STOREI ', 7, 'num']
+['LABEL ', 2]
+['JUMP ', 3]
+['LABEL ', 1]
+['SUBI ', 'num', 'a', 8]
+['STOREI ', 8, 'num']
+['LABLE ', 3]
+
 
