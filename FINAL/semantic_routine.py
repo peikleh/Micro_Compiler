@@ -133,14 +133,19 @@ class IR_To_Tiny():
     """Converts IR code to tiny code"""
     def __init__(self, IR):
         self.IR = IR
+        self.i_list = []
+        self._type_list = ["ADDI ", "SUBI ", "MULI ", "DIVI ", "ADDF ",\
+         "SUBF ", "MULF ", "DIVF " ]
         self.cur_reg = 1
         self.reg_offset = -1
         for lists in IR:
-            #print (lists)
             if lists[0] == "STOREF " or lists[0] == "STOREI ":
                 lists = self.to_move(lists)
-            if lists[0] == "ADDI " or lists[0] == "ADDF ":
+            elif lists[0] in self._type_list:
                 self.to_add(lists)
+        for lists in self.i_list:
+            print lists
+
 
     def to_move(self, instr):
         if self.is_id(instr[1]) and self.is_id(instr[2]):
@@ -148,14 +153,40 @@ class IR_To_Tiny():
             instr2 = "move r" + str(self.cur_reg + self.reg_offset + 1) + " " \
              + instr[2]
             self.reg_offset += 1
-            print (instr1)
-            print (instr2)
+            self.i_list.append(instr1)
+            self.i_list.append(instr2)
+
         else:
             instr = "move " + self.is_reg(instr[1]) + " " + self.is_reg(instr[2])
-            print (instr)
+            self.i_list.append(instr)
+
 
     def to_add(self, instr):
-        pass
+        instr1 = ''
+        instr2 = ''
+        if not self.is_id(instr[1]):
+            instr1 = "move " + "r" + str(instr[1]+self.reg_offset) + " r" + str(instr[3] + self.reg_offset)
+        else:
+            instr1 = "move " + str(instr[1]) + " r" + str(instr[3] + self.reg_offset)
+        if not self.is_id(instr[2]):
+            instr2 = self.op_to_ir(instr[0]) + "r" + str(instr[2] + self.reg_offset) + " r" + str(instr[3] + self.reg_offset)
+
+        else:
+            instr2 = self.op_to_ir(instr[0]) + str(instr[2]) + " r" + str(instr[3] + self.reg_offset)
+
+        self.is_reg(instr[3])
+        self.i_list.append(instr1)
+        self.i_list.append(instr2)
+
+    def op_to_ir(self, op):
+        if op[-2] == 'I':
+            return op.lower()
+        else:
+            op = op[:-2]
+            op = op +"R "
+            print op
+            return op.lower()
+
     def is_reg(self, p_reg):
         if isinstance(p_reg, int):
             if p_reg > self.cur_reg:

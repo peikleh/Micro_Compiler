@@ -2,12 +2,15 @@ PROGRAM test
 BEGIN
 
 	INT i,a,num;
-	FLOAT b, c;
 	
 	FUNCTION VOID main()
 	BEGIN
 		num := 7;
-		b := c;
-	
+		i := 2;	
+		a := 42;
+		a := a+i;
+		i := 5;
+		i:= i/num;
+		WRITE(num);
 	END
 END
