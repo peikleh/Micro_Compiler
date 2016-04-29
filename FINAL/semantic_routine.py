@@ -129,3 +129,42 @@ class Semantic_Routine():
                     st = lists[0][:-2]
                     lists[0] = st + "F "
         return code
+class IR_To_Tiny():
+    """Converts IR code to tiny code"""
+    def __init__(self, IR):
+        self.IR = IR
+        self.cur_reg = 1
+        self.reg_offset = -1
+        for lists in IR:
+            #print (lists)
+            if lists[0] == "STOREF " or lists[0] == "STOREI ":
+                lists = self.to_move(lists)
+            if lists[0] == "ADDI " or lists[0] == "ADDF ":
+                self.to_add(lists)
+
+    def to_move(self, instr):
+        if self.is_id(instr[1]) and self.is_id(instr[2]):
+            instr1 ="move " + instr[1] + " r" + str(self.cur_reg + self.reg_offset + 1)
+            instr2 = "move r" + str(self.cur_reg + self.reg_offset + 1) + " " \
+             + instr[2]
+            self.reg_offset += 1
+            print (instr1)
+            print (instr2)
+        else:
+            instr = "move " + self.is_reg(instr[1]) + " " + self.is_reg(instr[2])
+            print (instr)
+
+    def to_add(self, instr):
+        pass
+    def is_reg(self, p_reg):
+        if isinstance(p_reg, int):
+            if p_reg > self.cur_reg:
+                self.cur_reg = p_reg
+            return "r" + str(p_reg + self.reg_offset)
+        else:
+            return p_reg
+    def is_id(self, p_id):
+        if isinstance(p_id, str):
+            if p_id[0].isalpha():
+                return True
+        return False

@@ -4,7 +4,7 @@ from lexer import tokens
 import sys
 from symbol_table import Symbol_Table
 from semantic_routine import Semantic_Routine
-
+from semantic_routine import IR_To_Tiny
 
 infile = sys.argv[1]
 with open(infile, 'r') as myfile:
@@ -91,8 +91,7 @@ def p_func_body(p):
     'func_body : decl stmt_list'
     if p[2] != None:
         p[0] = p[2]
-        for x in p[0]:
-            print x
+        IR_To_Tiny(p[0])
 
 
 def p_stmt_list(p):
@@ -128,9 +127,8 @@ def p_assign_expr(p):
     'assign_expr : id EQ_EQ expr'
     d_type = table.search(p[1])
     p[0] = routine.add_assign_expr(p[3], p[1])
-    #print p[0]
     p[0] = routine.change_type(p[0], d_type)
-    #print p[0]
+
 
 
 def p_read_stmt(p):
@@ -154,7 +152,6 @@ def p_expr(p):
 def p_expr_prefix(p):
     '''expr_prefix : expr_prefix factor addop
     | empty'''
-
     if len(p) > 2:
         if p[1] != None:
             p[0] = p[1] + p[2] + [p[3]]
@@ -168,8 +165,6 @@ def p_factor(p):
         p[0] = routine.add_mul_op(p[1], p[2])
     elif p[1] == None:
         p[0] = p[2]
-
-
 
 def p_factor_prefix(p):
     '''factor_prefix : factor_prefix postfix_expr mulop
@@ -207,8 +202,6 @@ def p_primary(p):
     else:
         p[0] = p[2]
 
-
-
 def p_addop(p):
     '''addop : PLUS
     | MINUS'''
@@ -228,7 +221,6 @@ def p_if_stmt(p):
 
     table.block_end()
 
-
 #The following function was added so we could know where if statements started
 def p_s_if(p):
     's_if : IF'
@@ -241,7 +233,6 @@ def p_else_part(p):
         reg = routine.add_else()
         p[0] = [reg[0]] + [p[3]] + [["LABLE ", reg[0][1]]]
         table.block_end()
-
 
 #The following function was added so we could know where else statements started
 def p_s_else(p):
@@ -271,6 +262,7 @@ def p_while_stmt(p):
         p[0] = label + p[3] + [['JUMP ', label[0][-1]]] + [["LABEL ", p[3][-1][-1]]]
 
     table.block_end()
+
 def p_s_while(p):
     's_while : WHILE'
     table.block_start()
@@ -279,19 +271,15 @@ def p_empty(p):
     'empty :'
     pass
 
-
 def p_error(p):
     if p:
          global accepted
          accepted = False
          parser.errok()
 
-
-
 parser = yacc.yacc()
 result = ''
 while True:
-
     try:
         s = data
 
