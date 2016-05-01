@@ -214,6 +214,7 @@ def p_mulop(p):
 
 def p_if_stmt(p):
     'if_stmt : s_if L_PAR cond R_PAR decl stmt_list else_part ENDIF'
+
     if p[7] == None:
         p[0] = p[3] + p[6] + [["LABEL ", p[3][-1][-1]]]
     else:
@@ -231,7 +232,7 @@ def p_else_part(p):
     | empty'''
     if len(p) > 2:
         reg = routine.add_else()
-        p[0] = [reg[0]] + [p[3]] + [["LABLE ", reg[0][1]]]
+        p[0] = [reg[0]] + [p[3]] + [["LABEL ", reg[0][1]]]
         table.block_end()
 
 #The following function was added so we could know where else statements started
@@ -241,7 +242,9 @@ def p_s_else(p):
 
 def p_cond(p):
     'cond : expr compop expr'
-    p[0] = routine.add_cond(p[1], p[2], p[3])
+    print p[1][-1][-1]
+    d_type = table.search(p[1][-1][-1])
+    p[0] = routine.add_cond(p[1], p[2], p[3], d_type)
 
 def p_compop(p):
     ''' compop : LESS
