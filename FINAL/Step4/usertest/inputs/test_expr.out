@@ -1,0 +1,276 @@
+;['IR_CODE']
+;['STOREI ', '1', 1]
+;['STOREI ', 1, 'a']
+;['STOREI ', '2', 2]
+;['STOREI ', 2, 'b']
+;['STOREI ', '10', 3]
+;['STOREI ', 3, 'c']
+;['STOREI ', '20', 4]
+;['STOREI ', 4, 'd']
+;['WRITE ', 'a']
+;['WRITE ', 'newline']
+;['WRITE ', 'b']
+;['WRITE ', 'newline']
+;['WRITE ', 'c']
+;['WRITE ', 'newline']
+;['WRITE ', 'd']
+;['WRITE ', 'newline']
+;['ADDI ', 'a', 'b', 5]
+;['STOREI ', 5, 'a']
+;['WRITE ', 'a']
+;['WRITE ', 'newline']
+;['MULI ', 'a', 'c', 6]
+;['STOREI ', 6, 'b']
+;['WRITE ', 'b']
+;['WRITE ', 'newline']
+;['STOREI ', '0', 7]
+;['SUBI ', 7, 'a', 8]
+;['ADDI ', 8, 'b', 9]
+;['STOREI ', 9, 'c']
+;['WRITE ', 'c']
+;['WRITE ', 'newline']
+;['STOREI ', '0', 10]
+;['SUBI ', 10, 'd', 11]
+;['STOREI ', 11, 'd']
+;['WRITE ', 'd']
+;['WRITE ', 'newline']
+;['ADDI ', 'a', 'b', 12]
+;['ADDI ', 'd', 'c', 13]
+;['MULI ', 12, 13, 14]
+;['ADDI ', 'a', 'b', 15]
+;['ADDI ', 15, 'c', 16]
+;['ADDI ', 16, 'd', 17]
+;['DIVI ', 17, 'a', 18]
+;['SUBI ', 14, 18, 19]
+;['STOREI ', 19, 'a']
+;['WRITE ', 'a']
+;['WRITE ', 'newline']
+;['STOREI ', '10', 20]
+;['ADDI ', 'a', 20, 21]
+;['STOREI ', 21, 'a']
+;['WRITE ', 'a']
+;['WRITE ', 'newline']
+;['ADDI ', 'b', 'a', 22]
+;['STOREI ', '10', 23]
+;['ADDI ', 22, 23, 24]
+;['STOREI ', 24, 'b']
+;['WRITE ', 'b']
+;['WRITE ', 'newline']
+;['STOREI ', '0', 25]
+;['STOREI ', '10', 26]
+;['SUBI ', 25, 26, 27]
+;['STOREI ', 27, 'c']
+;['WRITE ', 'c']
+;['WRITE ', 'newline']
+;['STOREF ', '1.0', 28]
+;['STOREF ', 28, 'x']
+;['STOREF ', '2.0', 29]
+;['STOREF ', 29, 'y']
+;['STOREF ', '3.14159', 30]
+;['STOREF ', 30, 'z']
+;['WRITE ', 'x']
+;['WRITE ', 'newline']
+;['WRITE ', 'z']
+;['WRITE ', 'newline']
+;['WRITE ', 'y']
+;['WRITE ', 'newline']
+;['STOREF ', '2.0', 31]
+;['DIVF ', 'z', 31, 32]
+;['STOREF ', 32, 'x']
+;['DIVF ', 'z', 'y', 33]
+;['STOREF ', 33, 'y']
+;['WRITE ', 'x']
+;['WRITE ', 'newline']
+;['WRITE ', 'y']
+;['WRITE ', 'newline']
+;['ADDF ', 'x', 'y', 34]
+;['ADDF ', 34, 'z', 35]
+;['DIVF ', 35, 'z', 36]
+;['STOREF ', 36, 't']
+;['WRITE ', 't']
+;['WRITE ', 'newline']
+;['MULF ', 't', 't', 37]
+;['STOREF ', 37, 't']
+;['WRITE ', 't']
+;['WRITE ', 'newline']
+;['ADDF ', 't', 'z', 38]
+;['ADDF ', 38, 't', 39]
+;['STOREF ', '2.0', 40]
+;['DIVF ', 't', 40, 41]
+;['ADDF ', 39, 41, 42]
+;['STOREF ', '4.0', 43]
+;['DIVF ', 'z', 43, 44]
+;['ADDF ', 42, 44, 45]
+;['STOREF ', '5.0', 46]
+;['DIVF ', 'z', 46, 47]
+;['ADDF ', 45, 47, 48]
+;['STOREF ', '6.0', 49]
+;['DIVF ', 'z', 49, 50]
+;['ADDF ', 48, 50, 51]
+;['STOREF ', '7.0', 52]
+;['DIVF ', 'z', 52, 53]
+;['ADDF ', 51, 53, 54]
+;['STOREF ', 54, 't']
+;['WRITE ', 't']
+;['WRITE ', 'newline']
+;['RETURN']
+var a
+var c
+var b
+var d
+str newline "\n"
+var t
+var y
+var x
+var z
+label main
+move 1 r0
+move r0 a
+move 2 r1
+move r1 b
+move 10 r2
+move r2 c
+move 20 r3
+move r3 d
+sys writei a
+sys writes newline
+sys writei b
+sys writes newline
+sys writei c
+sys writes newline
+sys writei d
+sys writes newline
+move a r4
+addi b r4
+move r4 a
+sys writei a
+sys writes newline
+move a r5
+muli c r5
+move r5 b
+sys writei b
+sys writes newline
+move 0 r6
+move r6 r7
+subi a r7
+move r7 r8
+addi b r8
+move r8 c
+sys writei c
+sys writes newline
+move 0 r9
+move r9 r10
+subi d r10
+move r10 d
+sys writei d
+sys writes newline
+move a r11
+addi b r11
+move d r12
+addi c r12
+move r11 r13
+muli r12 r13
+move a r14
+addi b r14
+move r14 r15
+addi c r15
+move r15 r16
+addi d r16
+move r16 r17
+divi a r17
+move r13 r18
+subi r17 r18
+move r18 a
+sys writei a
+sys writes newline
+move 10 r19
+move a r20
+addi r19 r20
+move r20 a
+sys writei a
+sys writes newline
+move b r21
+addi a r21
+move 10 r22
+move r21 r23
+addi r22 r23
+move r23 b
+sys writei b
+sys writes newline
+move 0 r24
+move 10 r25
+move r24 r26
+subi r25 r26
+move r26 c
+sys writei c
+sys writes newline
+move 1.0 r27
+move r27 x
+move 2.0 r28
+move r28 y
+move 3.14159 r29
+move r29 z
+sys writer x
+sys writes newline
+sys writer z
+sys writes newline
+sys writer y
+sys writes newline
+move 2.0 r30
+move z r31
+divr r30 r31
+move r31 x
+move z r32
+divr y r32
+move r32 y
+sys writer x
+sys writes newline
+sys writer y
+sys writes newline
+move x r33
+addr y r33
+move r33 r34
+addr z r34
+move r34 r35
+divr z r35
+move r35 t
+sys writer t
+sys writes newline
+move t r36
+mulr t r36
+move r36 t
+sys writer t
+sys writes newline
+move t r37
+addr z r37
+move r37 r38
+addr t r38
+move 2.0 r39
+move t r40
+divr r39 r40
+move r38 r41
+addr r40 r41
+move 4.0 r42
+move z r43
+divr r42 r43
+move r41 r44
+addr r43 r44
+move 5.0 r45
+move z r46
+divr r45 r46
+move r44 r47
+addr r46 r47
+move 6.0 r48
+move z r49
+divr r48 r49
+move r47 r50
+addr r49 r50
+move 7.0 r51
+move z r52
+divr r51 r52
+move r50 r53
+addr r52 r53
+move r53 t
+sys writer t
+sys writes newline
+sys halt

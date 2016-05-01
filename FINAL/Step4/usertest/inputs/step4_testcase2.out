@@ -1,0 +1,113 @@
+;['IR_CODE']
+;['STOREI ', '1', 1]
+;['STOREI ', 1, 'a']
+;['STOREI ', '1', 2]
+;['STOREI ', 2, 'b']
+;['LABEL ', 6]
+;['STOREI ', '80', 3]
+;['JGTI ', 'a', 3, 1]
+;['STOREI ', '1', 4]
+;['JNEI ', 'b', 4, 2]
+;['STOREI ', '1', 5]
+;['MULI ', 5, 'a', 6]
+;['STOREI ', 6, 'g']
+;['WRITE ', 'g']
+;['WRITE ', 'newline']
+;['LABEL ', 2]
+;['STOREI ', '2', 7]
+;['JNEI ', 'b', 7, 3]
+;['STOREI ', '2', 8]
+;['MULI ', 8, 'a', 9]
+;['STOREI ', 9, 'p']
+;['WRITE ', 'p']
+;['WRITE ', 'newline']
+;['LABEL ', 3]
+;['STOREI ', '3', 10]
+;['JNEI ', 'b', 10, 4]
+;['STOREI ', '3', 11]
+;['MULI ', 11, 'a', 12]
+;['STOREI ', 12, 'k']
+;['WRITE ', 'k']
+;['WRITE ', 'newline']
+;['JUMP ', 5]
+;['LABEL ', 4]
+;['STOREI ', '4', 13]
+;['MULI ', 13, 'a', 14]
+;['STOREI ', 14, 'u']
+;['WRITE ', 'u']
+;['WRITE ', 'newline']
+;['LABEL ', 5]
+;['STOREI ', '1', 15]
+;['ADDI ', 'b', 15, 16]
+;['STOREI ', 16, 'b']
+;['STOREI ', '20', 17]
+;['ADDI ', 'a', 17, 18]
+;['STOREI ', 18, 'a']
+;['JUMP ', 6]
+;['LABEL ', 1]
+;['RETURN']
+var a
+var b
+var g
+var k
+str newline "\n"
+var p
+var u
+label main
+move 1 r0
+move r0 a
+move 1 r1
+move r1 b
+label label6
+move 80 r2
+cmpi a r2
+jgt label1
+move 1 r3
+cmpi b r3
+jne label2
+move 1 r4
+move r4 r5
+muli a r5
+move r5 g
+sys writei g
+sys writes newline
+label label2
+move 2 r6
+cmpi b r6
+jne label3
+move 2 r7
+move r7 r8
+muli a r8
+move r8 p
+sys writei p
+sys writes newline
+label label3
+move 3 r9
+cmpi b r9
+jne label4
+move 3 r10
+move r10 r11
+muli a r11
+move r11 k
+sys writei k
+sys writes newline
+jmp label5
+label label4
+move 4 r12
+move r12 r13
+muli a r13
+move r13 u
+sys writei u
+sys writes newline
+label label5
+move 1 r14
+move b r15
+addi r14 r15
+move r15 b
+move 20 r16
+move a r17
+addi r16 r17
+move r17 a
+jmp label6
+label label1
+sys halt

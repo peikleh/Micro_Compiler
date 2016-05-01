@@ -1,0 +1,35 @@
+;['IR_CODE']
+;['STOREI ', '7', 1]
+;['STOREI ', 1, 'num']
+;['STOREI ', '2', 2]
+;['STOREI ', 2, 'i']
+;['STOREI ', '42', 3]
+;['STOREI ', 3, 'a']
+;['ADDI ', 'a', 'i', 4]
+;['STOREI ', 4, 'a']
+;['STOREI ', '5', 5]
+;['STOREI ', 5, 'i']
+;['DIVI ', 'i', 'num', 6]
+;['STOREI ', 6, 'i']
+;['WRITE ', 'num']
+;['RETURN']
+var i
+var a
+var num
+label main
+move 7 r0
+move r0 num
+move 2 r1
+move r1 i
+move 42 r2
+move r2 a
+move a r3
+addi i r3
+move r3 a
+move 5 r4
+move r4 i
+move i r5
+divi num r5
+move r5 i
+sys writei num
+sys halt
