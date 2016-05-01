@@ -1,0 +1,74 @@
+;['IR_CODE']
+;['STOREI ', '0', 1]
+;['STOREI ', 1, 'i']
+;['STOREI ', '0', 2]
+;['STOREI ', 2, 'a']
+;['STOREI ', '0', 3]
+;['STOREI ', 3, 'b']
+;['LABEL ', 4]
+;['STOREI ', '10', 4]
+;['JEQI ', 'i', 4, 1]
+;['READ ', 'p']
+;['STOREI ', '10', 5]
+;['JLEI ', 'p', 5, 2]
+;['STOREI ', '1', 6]
+;['ADDI ', 'a', 6, 7]
+;['STOREI ', 7, 'a']
+;['JUMP ', 3]
+;['LABEL ', 2]
+;['STOREI ', '1', 8]
+;['ADDI ', 'b', 8, 9]
+;['STOREI ', 9, 'b']
+;['LABEL ', 3]
+;['STOREI ', '1', 10]
+;['ADDI ', 'i', 10, 11]
+;['STOREI ', 11, 'i']
+;['JUMP ', 4]
+;['LABEL ', 1]
+;['WRITE ', 'a']
+;['WRITE ', 'newline']
+;['WRITE ', 'b']
+;['WRITE ', 'newline']
+;['RETURN']
+var a
+var i
+var b
+str newline "\n"
+var p
+label main
+move 0 r0
+move r0 i
+move 0 r1
+move r1 a
+move 0 r2
+move r2 b
+label label4
+move 10 r3
+cmpi i r3
+jeq label1
+sys readi p
+move 10 r4
+cmpi p r4
+jle label2
+move 1 r5
+move a r6
+addi r5 r6
+move r6 a
+jmp label3
+label label2
+move 1 r7
+move b r8
+addi r7 r8
+move r8 b
+label label3
+move 1 r9
+move i r10
+addi r9 r10
+move r10 i
+jmp label4
+label label1
+sys writei a
+sys writes newline
+sys writei b
+sys writes newline
+sys halt

@@ -91,7 +91,8 @@ def p_func_body(p):
     'func_body : decl stmt_list'
     if p[2] != None:
         p[0] = p[2]
-        IR_To_Tiny(p[0])
+        p[0] = [['IR_CODE']] + p[0] + [["RETURN"]]
+        IR_To_Tiny(p[0],table.get_table())
 
 
 def p_stmt_list(p):
@@ -242,7 +243,6 @@ def p_s_else(p):
 
 def p_cond(p):
     'cond : expr compop expr'
-    print p[1][-1][-1]
     d_type = table.search(p[1][-1][-1])
     p[0] = routine.add_cond(p[1], p[2], p[3], d_type)
 
@@ -258,7 +258,6 @@ def p_compop(p):
 def p_while_stmt(p):
     'while_stmt : s_while L_PAR cond R_PAR decl stmt_list ENDWHILE'
     label = routine.get_label()
-    #print p[6]
     if p[6] != None:
         p[0] = label + p[3] + p[6] + [['JUMP ', label[0][-1]]] + [["LABEL ", p[3][-1][-1]]]
     else:

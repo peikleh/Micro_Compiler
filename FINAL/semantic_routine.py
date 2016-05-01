@@ -20,7 +20,6 @@ class Semantic_Routine():
                 instr = [["STOREI ", var_in , self._r_num]]
                 return instr
         else:
-            #print(var_in)
             return([[var_in]])
 
     def add_assign_expr(self, expr, var_name):
@@ -135,19 +134,25 @@ class Semantic_Routine():
         return code
 class IR_To_Tiny():
     """Converts IR code to tiny code"""
-    def __init__(self, IR):
+    def __init__(self, IR, sym_table):
         self.IR = IR
         self.cur_reg = 1
         self.reg_offset = -1
-
+        self.sym_table = sym_table
         self.i_list = []
         self._type_list = ["ADDI ", "SUBI ", "MULI ", "DIVI ", "ADDF ",\
          "SUBF ", "MULF ", "DIVF " ]
         self._jump_list = ["JGEI ", "JNEI ", "JEQI ", "JGTI ", "JLTI ", "JLEI ",\
         "JGEF ", "JNEF ", "JEQF ", "JGTF ", "JLTF ", "JLEF "]
 
+        for key,val in sym_table[0].items():
+            if val[0] == "STRING":
+                self.i_list.append("str " + key + " " + val[1])
+            else:
+                self.i_list.append("var " + key)
+        self.i_list.append("label main")
         for lists in IR:
-            print lists
+            print (";" +  str(lists))
             if lists[0] == "STOREF " or lists[0] == "STOREI ":
                 lists = self.to_move(lists)
             elif lists[0] in self._type_list:
@@ -158,9 +163,16 @@ class IR_To_Tiny():
                 self.to_label(lists)
             elif lists[0] == "JUMP ":
                 self.to_jmp(lists)
+            elif lists[0] == "WRITE ":
+                self.to_write(lists)
+            elif lists[0] == "READ ":
+                self.to_read(lists)
+            elif lists[0] == "RETURN":
+                self.to_return(lists)
+
 
         for lists in self.i_list:
-            print lists
+            print (lists)
 
 
     def to_move(self, instr):
@@ -215,10 +227,36 @@ class IR_To_Tiny():
         instr1 = "jmp " + "label" + str(instr[1])
         self.i_list.append(instr1)
 
+    def to_write(self, instr):
+        d_type = self.get_type(instr[1])[0]
+        if d_type == "STRING":
+            instr = "sys writes " + instr[1]
+        elif d_type == "INT":
+            instr = "sys writei " + instr[1]
+        elif d_type =="FLOAT":
+            instr ="sys writer " + instr[1]
+        self.i_list.append(instr)
+
+    def to_read(self, instr):
+        d_type = self.get_type(instr[1])[0]
+        if d_type == "INT":
+            instr = "sys readi " + instr[1]
+        elif d_type =="FLOAT":
+            instr ="sys readr " + isntr[1]
+        self.i_list.append(instr)
+
+    def to_return(self, instr):
+        self.i_list.append("sys halt")
+
+
+    def get_type(self, ident):
+        return self.sym_table[0][ident]
+
+
     def add_reg(self, instr):
-        if self.is_id(instr[1]) and self.is_id(instr[2]):
-            m_instr = "move " + instr[1] + " r" + str(self.cur_reg + self.reg_offset + 1)
-            instr = [instr[0], self.cur_reg + self.reg_offset + 1, instr[2], instr[3]]
+        if self.is_id(instr[2]):
+            m_instr = "move " + instr[2] + " r" + str(self.cur_reg + self.reg_offset + 1)
+            instr = [instr[0],  instr[2], self.cur_reg + self.reg_offset + 1, instr[3]]
             self.reg_offset += 1
             self.i_list.append(m_instr)
             return instr
