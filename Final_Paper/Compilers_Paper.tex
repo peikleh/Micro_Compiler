@@ -1,0 +1,243 @@
+
+\documentclass[12pt, oneside]{article}   	% use "amsart" instead of "article" for AMSLaTeX format
+\usepackage{geometry}                		% See geometry.pdf to learn the layout options. There are lots.
+\geometry{letterpaper}                   		% ... or a4paper or a5paper or ... 
+%\geometry{landscape}                		% Activate for rotated page geometry
+%\usepackage[parfill]{parskip}    		% Activate to begin paragraphs with an empty line rather than an indent
+\usepackage{graphicx}				% Use pdf, png, jpg, or eps§ with pdflatex; use eps in DVI mode
+								% TeX will automatically convert eps --> pdf in pdflatex		
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+
+%SetFonts
+
+%SetFonts
+
+
+\title{Crafting a Compiler}
+\author{Nevin Leh\\Aaron Newhall\\Tim Weghen}
+%\date{}							% Activate to display a given date or no date
+
+\begin{document}
+\begin{titlepage}
+	\maketitle
+\end{titlepage}
+\setcounter{page}{2}
+\tableofcontents
+\section{Introduction}
+The purpose of this project is to create a compiler. This is essentially a translation of a human readable language into a computer 
+readable language. This is being done to explore the realm of computing at the most basic level and to illustrate the process of 
+creating a compiler from start to finish.
+
+When completing a degree in nearly any field it is necessary to complete a
+course known as a capstone course. In this course, especially in fields such as
+engineering, undergraduates get in groups and work on a project that lasts an
+entire semester. The idea of these projects is basically a culmination of as many
+of the main topics a student has learned in route to completing their degree as
+possible. In computer science there are not many ideal projects that could be
+chosen to highlight everything a CS student learns during their studies. However,
+the one that was chosen for Montana State University computer science students
+was to get into groups and create a Compiler. This project serves as a great
+opportunity to not only show the department what their graduates are learning,
+but it also serves to show the graduates themselves what they are capable of.
+This idea of can roughly be thought of as a motivation for the project and class as
+a whole
+
+The object of this project was to create a compiler that was based on a
+language created by the instructor. In this case the language given was called
+“Tiny”. This language was a fairly simple language created so that creating a
+compiler that worked for it would take the right amount of time. If the language
+were too complicated the project would have been much too difficult to complete
+in the given amount of time. The students were given the language and small test
+programs, the compiler would then be designed to take in these programs in their
+raw form, exactly as a programmer would have written them, break them down
+into an intermediate language, then finally output a form broken down into a basic
+machine language so the computer could actually perform the intended function
+of the given code. Through lots of hard work and time spent, our group has
+succeeded in creating a functioning compiler for the language Tiny that was
+given to us.
+
+This project was separated into four main steps each step building upon
+the last in order to get us closer to the ultimate goal, these steps included:
+Scanner, Parser, Symbol Table, and Semantic Routines. Each of these steps
+was accompanied by not only hours and hours of class time learning the theories
+and application behind each, but also mandatory labs created by the instructor to
+give us hands on experience with the ideas behind the given step. This Report
+will serve as a walk through of the entire process of creating a functioning
+compiler. First, compilers in general will be explained including a brief history of
+compilers with some basic information. This information will detail what exactly a
+compiler does, meaning what is its purpose, along with a more technical look into
+the different parts and where they fit in and what they actually do. Also, included
+will be some information on real world example of compilers.
+
+Next, the report will go into great detail of the process that our individual
+group went through during each step of the project. In each section the process
+of the given step is discussed including the method we used and how we
+implemented the given step, as well as the many difficulties we encountered
+along the way and how we got passed them. Also, the compiler as a whole will
+be looked at including the process as a whole including tools used and how we
+combined all the parts to create the final product. The final section of the report
+will be a conclusion that details how the final product could be improved upon
+given more time and resources. These improvements will be presented as a plan
+and will cover topics such as optimization, including run-time memory
+management as well as code optimizations. However, In order to fully understand
+this project, as well as how it could be improved upon, and what exactly the
+purpose of this capstone project is, one must learn what exactly a compiler is.
+\section{Background}
+Long before the modern era of programming languages programming was
+much different. Instead of writing elaborate programs using development
+environments with built in tools and libraries programmers had to
+write code in languages such as assembly which is essentially machine code.
+This style coding was much less efficient than writing programs in a high-level
+language, which could be reused on different systems. However, early compilers
+didn't always function better than hand written assembly and way many times
+hindered by the lack of system memory.
+
+The term compiler actually existed years before a complete compiler was
+even created, though it wasn’t widely used, allegedly given the name by well
+known computer scientist Grace Hopper while working on the A-O System
+language. The “compiler” she was using was far from what comes to mind when
+talking about compilers in the modern era. During the 50’s there were many other
+scientists toying with the idea of compilers, but it wasn’t until 1957 that the first
+complete compiler was born, created at IBM by the FORTRAN team lead by
+John Backus. Work on compilers throughout the ‘60s paved the way for many of
+ideas essential to our modern compilers. Early compilers were written mostly in
+assembly, but by the 70’s compilers for languages such as C or Pascal were
+written in their own languages. In the current era there are almost too many
+different compilers to count. Each programming language has several, and more
+and more are being created all the time.
+
+So, what is a compiler? In a very general sense, a compiler is a computer
+program that translates a computer program written in a given language, called a
+source language, into an equivalent program of a different language, this
+language is usually referred to as the target or output language. Though this may
+seem like a pointless act, it actually serves a purpose. A compiler typically takes
+a program written in a high level programming language (such as Java, C++,
+Python, etc) and breaks it down into a form know as object code or machine code
+that can be easily executed by a computer of virtual machine. Though compiling
+from a high level language to a low level language isn’t always the case, it is
+most often the case. There are also compilers made to change one high level
+language into another high-level language or even a low level language to a high
+level. Though there may be many different kinds of compilers, one thing is for
+sure, any programs written in a high-level programming language must be
+translated to object code before it can be executed all programs using such a
+language use a compiler.
+
+Most modern compilers are laid out in a similar way, meaning they have
+the same basic parts and function in a similar way. Due to system restrictions
+early compilers were divided in to multiple passes, each pass being a “run”
+through the source code, gradually building up the internal data in the compiler.
+Modern compilers like the one being created for this assignment work in two
+stages, a front-end and a back-end. The front-end translates the code into an
+intermediate representation, and the back-end produces the output language.
+This project split up the process into four main steps: the Scanner, Parser,
+Symbol Table, and Semantic Routines. Each of these steps play a pivotal role in
+the compiler and without and one of them the process would not be possible. The
+first step of the process when a written program comes in contact with the
+compiler is the scanner, sometimes referred to a tokenizer or lexical analysis.
+The Scanners is responsible for break up the input stream of the source code
+into individual tokens or terminals, identifying the token type, and passing tokens
+one at a time to the next in the process. These tokens are defined by the creator
+of the compiler and can include items such as keywords, identifiers, or symbol
+names.
+
+The next step in the process is called the parser. The parser contains
+many of the rules of the given language, and it is in this step that many syntax
+errors are caught. The parser focuses on the structure of the program identifying
+the order of the tokens using a structure called a parse tree or abstract syntax
+tree. The parser combined with the scanner make up the front-end portion of the
+compiler. The third step of the process has to do with what is referred to as the
+symbol table. The symbol table is an important step in the process because it is
+actually a data structure created and altered by the compiler in order to store
+information about the occurrences of items such as variable names and their
+declarations as well as scope. The symbol table stores the names of all the
+entities in a structured form to be used in the last step of the compiler.
+The final step of the compiler can be referred to as the Semantic
+routines. It is during this step that the main function of the compiler is completed.
+During this step the compiler uses the symbol table generated by the front-end of
+the compiler and generates an intermediate representation of the high-level
+language program that went in. The compiler then translates that IR code into its
+last step of compilation, which is the low level machine code ready to be
+executed by the computer or virtual machine.
+\section{Methods and Discussion}
+\subsection{Scanner}
+Creating a scanner is the first step of creating a compiler. The scanner can be compared to 
+the dictionary in ordinary language. It simple finds all the legal words and symbols(called tokens) 
+that make up a program and rejects a program that contains invalid tokens.
+
+\subsubsection{Implementation}
+The lexer tool provided by the PLY package for python was used to create the scanner. This tool was chosen for it's simplicity and ease of use in creating a scanner. It is very similar to the lex program provided with most unix/linux systems and has a relatively easy setup compared to other scanner generators such as ANTLR.
+Initially ANTLR was the chosen scanner, but the very specific dependencies proved to be too complicated and a switch to PLY was decided upon. 
+
+Implementing the scanner with the help of PLY is a pretty trivial process. The guide
+provided by the creators of PLY proved to be invaluable and very effective at
+introducing the basics of creating a scanner. First, all of the token types have to be defined at the start of the scanner as a
+list. These token types are used to define different types of valid tokens. These token types are necessary because the parser in the next step needs to be able to match tokens to patterns within the grammar. For the micro  grammar the token types IDENTIFIER, FLOATLITERAL, STRINGLITERAL, COMMENT, KEYWORD, and OPERATOR were defined.
+
+The second step was to define regular expressions that match tokens to their token types. Regular expressions are used to define patterns within strings and have numerous uses. Each token type has a regular expression that defines the strings that need to match with that token type. The scanner then takes a Micro program as input and constantly takes
+the first matching token and saves that token value along with its type in a list. If a part of the string doesn't get matched with a token type there is an error and the scanner stops and lets the user know that an invalid token has been
+matched. If the list doesn't have any errors it will be passed to the parser to have the grammar of the program analyzed. 
+
+The following code shows a very simple implementation of scanner that has one token type KEYWORD that matches the strings "START" and "END .
+\begin{lstlisting}
+	tokens = ('KEYWORD')
+	t_KEYWORD = (r"BEGIN|END")
+\end{lstlisting}
+The syntax of defining tokens is very important as the PLY package uses the syntax to make a program that takes the program as input and returns a list of tokens and token types.
+
+For the most part the rest of the leg work for creating the list of tokens is handled internally be the lexer.py file provided by PLY. One exception to this is that the scanner needs to ignore certain characters and lines such as spaces, tabs, and comments. To do this another token rule must be defined that starts with t\_ignore. The scanner will then match these like a regular token but omit them from the final token list provided to the parser. This ensures that an unintended error doesn't happen.
+
+\subsubsection{Difficulties}
+For the most part implementing the scanner went off without a hitch. However, there were several aspects of creating the regular expressions and the order in which these regular expressions were executed that created some difficulties. For example, "ENDWHILE" will be matched by the rule 
+that defines "END". To get around this a lookahead was used so "END" would only match if it wasn't followed by "WHILE". Another way to do this would be to put "ENDWHILE" before "WHILE" in the regular expression but it was decided that the lookahead was more robust and easier to read. The following lines of code  shows a regular expression that will match "END" but not "ENDWHILE".
+\begin{lstlisting}
+	(r"END(?!WHILE)")
+\end{lstlisting}
+
+Another tricky part was finding a way of excluding the comments from the output file. It was finally determined that a prefix of t\_error was needed to ignore the comments within the parser. This took a while as it was not realized that PLY would accept multiple t\_error rules and it had already been used to ignore whitespace.
+ 
+This scanner had to be modified multiple times to make it work better with the parser. The changes that were applied
+will be discussed in full there but in general our scanner was not specific enough and needed more token types to effectively check that the program had correct grammar.
+	
+	
+\subsection{Parser}
+The next step to creating a compiler is creating a parser. It was decide that using the yacc
+tool within PLY would be the best parser generator to use because Lex was used to generate a
+scanner. These two are made to be used together and the PLY yacc can directly use the output
+from PLY lex. The guide at http://www.dabeaz.com/ply/ply.html was heavily used to create the
+bare bones of the code. From there it was essentially copy and pasting the grammar rules defined
+for the LITTLE programming language into functions.
+
+One of the main difficulties that was encountered was the fact that the initial scanner that was
+made did not match the parser correctly. Initially, keywords or operators were matched as a
+KEYWORD or an OPERATOR. For the parser more specific token recognition was needed such
+as differentiating a comma from a semi colon. To fix this new rules were added for the operators
+and keywords. Another difficulty was the fact that the parser would assume a keyword was an
+identifier since the identifier rule in the scanner had higher precedence. To fix this a rule was
+added to the identifier rule that would only match an identifier if it wasn't in the keyword list.
+
+In addition there was a problem with mixed syntax from several examples which through some
+errors that were hard to find. Finally it was found that some rules in the scanner started with a
+capital T instead of a lower case t. Changing this somehow fixed it.
+\subsection{Symbol Table}
+One thing that needs to be done while creating a compiler is making a symbol table. You have to do this manually
+
+Problems: Didn't know how to perilate information up through
+
+Had to add some rules to find start and end of blocks and functions
+
+\subsection{Semantic Routines}
+\subsection{Full-fledged Compiler}
+
+\section{Conclusion and Future Work}
+
+%\subsection{}
+
+
+
+\end{document}  

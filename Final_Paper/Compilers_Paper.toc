@@ -1,0 +1,11 @@
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}
+\contentsline {section}{\numberline {2}Background}{4}{section.2}
+\contentsline {section}{\numberline {3}Methods and Discussion}{5}{section.3}
+\contentsline {subsection}{\numberline {3.1}Scanner}{5}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Implementation}{6}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}Difficulties}{7}{subsubsection.3.1.2}
+\contentsline {subsection}{\numberline {3.2}Parser}{7}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Symbol Table}{8}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Semantic Routines}{8}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Full-fledged Compiler}{8}{subsection.3.5}
+\contentsline {section}{\numberline {4}Conclusion and Future Work}{8}{section.4}
