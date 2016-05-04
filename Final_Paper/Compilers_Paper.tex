@@ -48,10 +48,8 @@ but it also serves to show the graduates themselves what they are capable of.
 This idea of can roughly be thought of as a motivation for the project and class as
 a whole
 
-The object of this project was to create a compiler that was based on a
-language created by the instructor. In this case the language given was called
-“Tiny”. This language was a fairly simple language created so that creating a
-compiler that worked for it would take the right amount of time. If the language
+The object of this project was to create a compiler that converted a simple language called Micro into an assembly language called Tiny. These languages are fairly simple languages created so that creating a
+compiler that worked for them would take the right amount of time. If the language
 were too complicated the project would have been much too difficult to complete
 in the given amount of time. The students were given the language and small test
 programs, the compiler would then be designed to take in these programs in their
@@ -110,7 +108,7 @@ ideas essential to our modern compilers. Early compilers were written mostly in
 assembly, but by the 70’s compilers for languages such as C or Pascal were
 written in their own languages. In the current era there are almost too many
 different compilers to count. Each programming language has several, and more
-and more are being created all the time.
+and more are being created all the time.\cite{history}
 
 So, what is a compiler? In a very general sense, a compiler is a computer
 program that translates a computer program written in a given language, called a
@@ -150,11 +148,11 @@ rules of the given language, and it is in this step that many syntax
 errors are caught. These rules are usually referred to as a grammar. The parser focuses on the structure of the program identifying
 the order of the tokens using a structure called a parse tree or abstract syntax
 tree. The parser combined with the scanner make up the front-end portion of the
-compiler.
+compiler.\cite{history}
 
 \begin{figure}[h!]
 	\centerline{\includegraphics[width=.4\linewidth]{pics/p_tree}}
-	\caption{Parse tree for an English sentence}
+	\caption{Parse tree for an English sentence\cite{pic}}
 \end{figure}
 
  The third step of the process has to do with what is referred to as the
@@ -187,7 +185,7 @@ Initially ANTLR was the chosen scanner, but the very specific dependencies prove
 \subsubsection{Implementation}
 Implementing the scanner with the help of PLY is a pretty trivial process. The guide
 provided by the creators of PLY proved to be invaluable and very effective at
-introducing the basics of creating a scanner. First, all of the token types have to be defined at the start of the scanner as a
+introducing the basics of creating a scanner.\cite{PLY} First, all of the token types have to be defined at the start of the scanner as a
 list. These token types are used to define different types of valid tokens. These token types are necessary because the parser in the next step needs to be able to assemble the tokens into a parse tree. For the micro  grammar the token types IDENTIFIER, FLOATLITERAL, STRINGLITERAL, COMMENT, KEYWORD, and OPERATOR were defined.
 
 The second step was to define regular expressions that match tokens to their token types. Regular expressions are used to define patterns within strings and have numerous uses. Each token type has a regular expression that defines the strings that need to match with that token type. The scanner then takes a Micro program as input and constantly takes
@@ -298,7 +296,7 @@ def p_s_if(p):
 \subsubsection{Implementation}
 The semantic routines part of the compiler consists of two steps. The first is to convert the source code into an intermediate representation(IR) of assembly using the parsers information. The purpose of this IR is to make converting the code easier and to make the compiler more modular. This way the IR can be converted into a number of different platform specific assembly instructions.
 
-The process of extracting the IR from the parser is similar to what was done in the symbol table. This time assemble instructions need to passed up through the grammar.  The semantic routines was designed as a separate python class that consists of several methods that take information from the parser and use it to create IR instructions using semantic actions. In this case the semantic action is the act of identifying the grammar rules that need to include semantic actions. In general this includes all assignments, conditionals, and outputs. These instructions are then percolated to the root of the grammar using the same technique as the symbol table, but to a greater extent. The following is an example of one of the methods from the SemanticRoutine class being called in the parser.
+The process of extracting the IR from the parser is similar to what was done in the symbol table. This time assemble instructions need to passed up through the grammar.  The semantic routines was designed as a separate python class that consists of several methods that take information from the parser and use it to create IR instructions using semantic actions.\cite{book} In this case the semantic action is the act of identifying the grammar rules that need to include semantic actions. In general this includes all assignments, conditionals, and outputs. These instructions are then percolated to the root of the grammar using the same technique as the symbol table, but to a greater extent. The following is an example of one of the methods from the SemanticRoutine class being called in the parser.
 \begin{lstlisting}
 def p_assign_expr(p):
 	'assign_expr : id EQ_EQ expr'
@@ -335,10 +333,25 @@ One good design decision was to split up each section into its own file. At firs
 
 Another good decision was deciding to use git and github for version control and sharing of the code. This was extremely helpful as everyone could work on the code at the same time and it made it easier to reuse old code.
 \section{Conclusion and Future Work}
-The result of all this was a fully functional compiler. 
+The result of all this was a fully functional compiler. It successfully creates a token list from the scanner, uses a parser to decide if the program has correct grammar, creates a symbol table to show declaration and assignment, and finally uses semantic routines to convert the program into the tiny language. Even though this compiler works there are several improvements that could be made.
 
-citations
-http://www.cs.cornell.edu/courses/cs2112/2014fa/lectures/lecture.html?id=parsing
+One main limitation of this compiler is that it currently only supports one main function. Additional semantic actions will be needed to make it support multiple functions. Another limitation is the fact that errors do not give line numbers or give any information other than what type of error it is. In the future it would be nice to print the whole symbol table if there is an error with scope so one could more easily figure out what went wrong.
+
+There is still much work that could be done on this compiler project in the future. One of the many things that could be done is to run some optimizations on the intermediate code that was generated as the output of the parser and semantic routines.
+Eliminating common sub-expressions would be a good place to start since it would be a relatively simple idea to begin implementing. The result of performing common sub-expression elimination would be not only simpler code but also more efficient code because values are not needlessly recomputed but instead computed just once and then referenced every in every other location the same calculation was being made.
+
+Another area of future work would be to improve register allocation. Currently the compiler is not very limited in the required number of registers that it can use. Once a register has been used the compiler will move to the next register and never reuse a previously used one.
+
+This could be taken care or by implementing some sort of flag that would tell the compiler whether it is safe to write in a register or if it is dirty. The next step in optimizing register allocation would be to limit the number of registers to just a few and manage which values can be loaded into a register and which registers should be written to memory for further use later in the program. This would require the program to calculate the liveness of each variable and then perform an algorithm, such as bottom-up register allocation or top-down register allocation, to allocate available registers.
+
+Improving the selected instructions for each operation could be done as well which goes along with peep-hole optimizations to remove redundant instructions that do not efficiently use the computational time of a computer.
+
+
+\begin{flushleft}
+	\bibliographystyle{unsrt}
+	\bibliography{sources}
+\end{flushleft}
+
 
 
 

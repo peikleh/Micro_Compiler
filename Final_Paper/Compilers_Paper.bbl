@@ -1,0 +1,22 @@
+\begin{thebibliography}{1}
+
+\bibitem{history}
+David~M. Beazly.
+\newblock Ply (python lex-yacc.
+\newblock \url{http://www.dabeaz.com/ply/ply.html}.
+
+\bibitem{pic}
+Andrew Myers.
+\newblock Grammars and parsing, 2014.
+\newblock
+  \url{http://www.cs.cornell.edu/courses/cs2112/2014fa/lectures/lecture.html?id=parsing}.
+
+\bibitem{PLY}
+What is a compiler?, 2005.
+\newblock \url{http://www.compilers.net/paedia/compiler/index.htm}.
+
+\bibitem{book}
+LeBlanc. RJ~Jr. Fischer, C.~N.
+\newblock Crafting a compiler with c, 1991.
+
+\end{thebibliography}

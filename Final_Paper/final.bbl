@@ -1,0 +1,33 @@
+\begin{thebibliography}{1}
+
+
+
+\bibitem{test}
+Eric Fulton.
+\newblock 2015 final practicum, May 2015.
+\newblock \url{http://mthack.me/test/}.
+
+\bibitem{rfc}
+J.~Ashworth.
+\newblock The naming of hosts, April 1997.
+\newblock \url{https://www.ietf.org/rfc/rfc2100.txt}.
+
+\bibitem{Telnet}
+bmlbytes.
+\newblock How to hack telnet, 2009.
+\newblock \url{http://www.instructables.com/id/How-to-hack-via-Telnet/}.
+
+\bibitem{Tomcat}
+SecurityGeeks.
+\newblock Attacking metasploitable - apache tomcat - metasploit tutorial, 2013.
+\newblock
+  \url{http://www.securitygeeks.net/2013/05/attacking-metasploitable-apache-tomcat.html}.
+
+\bibitem{Zip}
+Shashank Sahni.
+\newblock How to crack zip file passwords on linux using fcrackzip, October
+  2010.
+\newblock
+  \url{http://linuxers.org/article/how-crack-zip-file-passwords-linux-using-fcrackzip}.
+
+\end{thebibliography}
