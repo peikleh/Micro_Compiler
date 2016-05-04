@@ -10,6 +10,9 @@
 \BOOKMARK [3][-]{subsubsection.3.2.2}{Implementation}{subsection.3.2}% 10
 \BOOKMARK [3][-]{subsubsection.3.2.3}{Difficulties}{subsection.3.2}% 11
 \BOOKMARK [2][-]{subsection.3.3}{Symbol Table}{section.3}% 12
-\BOOKMARK [2][-]{subsection.3.4}{Semantic Routines}{section.3}% 13
-\BOOKMARK [2][-]{subsection.3.5}{Full-fledged Compiler}{section.3}% 14
-\BOOKMARK [1][-]{section.4}{Conclusion and Future Work}{}% 15
+\BOOKMARK [3][-]{subsubsection.3.3.1}{Theory}{subsection.3.3}% 13
+\BOOKMARK [3][-]{subsubsection.3.3.2}{Implementation}{subsection.3.3}% 14
+\BOOKMARK [3][-]{subsubsection.3.3.3}{Difficulties}{subsection.3.3}% 15
+\BOOKMARK [2][-]{subsection.3.4}{Semantic Routines}{section.3}% 16
+\BOOKMARK [2][-]{subsection.3.5}{Full-fledged Compiler}{section.3}% 17
+\BOOKMARK [1][-]{section.4}{Conclusion and Future Work}{}% 18

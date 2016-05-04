@@ -5,11 +5,14 @@
 \contentsline {subsubsection}{\numberline {3.1.1}Tools}{5}{subsubsection.3.1.1}
 \contentsline {subsubsection}{\numberline {3.1.2}Implementation}{5}{subsubsection.3.1.2}
 \contentsline {subsubsection}{\numberline {3.1.3}Difficulties}{6}{subsubsection.3.1.3}
-\contentsline {subsection}{\numberline {3.2}Parser}{6}{subsection.3.2}
-\contentsline {subsubsection}{\numberline {3.2.1}Tools}{6}{subsubsection.3.2.1}
-\contentsline {subsubsection}{\numberline {3.2.2}Implementation}{6}{subsubsection.3.2.2}
+\contentsline {subsection}{\numberline {3.2}Parser}{7}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Tools}{7}{subsubsection.3.2.1}
+\contentsline {subsubsection}{\numberline {3.2.2}Implementation}{7}{subsubsection.3.2.2}
 \contentsline {subsubsection}{\numberline {3.2.3}Difficulties}{7}{subsubsection.3.2.3}
-\contentsline {subsection}{\numberline {3.3}Symbol Table}{7}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}Semantic Routines}{7}{subsection.3.4}
-\contentsline {subsection}{\numberline {3.5}Full-fledged Compiler}{7}{subsection.3.5}
-\contentsline {section}{\numberline {4}Conclusion and Future Work}{7}{section.4}
+\contentsline {subsection}{\numberline {3.3}Symbol Table}{8}{subsection.3.3}
+\contentsline {subsubsection}{\numberline {3.3.1}Theory}{8}{subsubsection.3.3.1}
+\contentsline {subsubsection}{\numberline {3.3.2}Implementation}{8}{subsubsection.3.3.2}
+\contentsline {subsubsection}{\numberline {3.3.3}Difficulties}{9}{subsubsection.3.3.3}
+\contentsline {subsection}{\numberline {3.4}Semantic Routines}{10}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.5}Full-fledged Compiler}{10}{subsection.3.5}
+\contentsline {section}{\numberline {4}Conclusion and Future Work}{10}{section.4}
