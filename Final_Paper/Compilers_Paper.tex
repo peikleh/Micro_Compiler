@@ -295,11 +295,47 @@ def p_s_if(p):
 	\end{figure}
 	
 \subsection{Semantic Routines}
-The semantic routines part of a compiler consists of two parts.
+\subsubsection{Implementation}
+The semantic routines part of the compiler consists of two steps. The first is to convert the source code into an intermediate representation(IR) of assembly using the parsers information. The purpose of this IR is to make converting the code easier and to make the compiler more modular. This way the IR can be converted into a number of different platform specific assembly instructions.
+
+The process of extracting the IR from the parser is similar to what was done in the symbol table. This time assemble instructions need to passed up through the grammar.  The semantic routines was designed as a separate python class that consists of several methods that take information from the parser and use it to create IR instructions using semantic actions. In this case the semantic action is the act of identifying the grammar rules that need to include semantic actions. In general this includes all assignments, conditionals, and outputs. These instructions are then percolated to the root of the grammar using the same technique as the symbol table, but to a greater extent. The following is an example of one of the methods from the SemanticRoutine class being called in the parser.
+\begin{lstlisting}
+def p_assign_expr(p):
+	'assign_expr : id EQ_EQ expr'
+	p[0] = routine.add_assign_expr(p[3], p[1])
+\end{lstlisting}
+This shows the routine taking in the id and expression and returning to p[0] to be percolated back up through the grammar. The IR code returned would be something like 
+\begin{lstlisting}
+STORE expr, id
+\end{lstlisting}
+\begin{figure}[h!]
+	\centerline{\includegraphics[width=.4\linewidth]{pics/ir}}
+	\caption{IR output}
+\end{figure}
+
+The second part consisted of converting the produced IR code into the tiny assembly language. This step was pretty simple for the most part. A class was made that takes the completed IR code in as input and steps through it line by line converting each instruction to tiny. The class has a method for each instruction and uses the respective methods to make the tiny code. 
+\begin{figure}[h!]
+	\centerline{\includegraphics[width=.4\linewidth]{pics/tiny}}
+	\caption{Final tiny output}
+\end{figure}
+\subsubsection{Difficulties}
+	One difficulty with converting the code to IR was figuring out how to make the code percolate up through the parser in a meaningful way and keeping track of registers correctly. It took in depth study of the grammar to figure out what needed to have a semantic routine in it. In addition it was hard to keep concatenating the list in the correct order to get the correct IR.
+	
+	A difficulty that was had while making the IR to tiny converter was handling registers. Since the IR was 3 address code and tiny is 2 address code some instructions had to be split into multiple instructions with a place holding register. In addition the tiny code can only have one var as input so if two vars are in an instruction it has to be further split up with a new register. To remedy this a register offset counter was made so each time a new register had to be used the offset would increment. Then for the rest of the code registers would added to tiny as its register number plus the register offset.
 
 \subsection{Full-fledged Compiler}
+	\begin{figure}[h!]
+		\centerline{\includegraphics[width=.4\linewidth]{pics/uml}}
+		\caption{Diagram of final compiler}
+	\end{figure}
+	
+The whole compiler is combined in the parser file. The parser file has an instance of the scanner, symbol table, semantic routines, and IR to tiny. This was done because all of the other parts rely heavily on the parser except for the scanner. Since methods from all of these classes were called at specific times in the parser it only made sense to have an instance in the parser.
 
+One good design decision was to split up each section into its own file. At first it seemed like it might be easier to implement the scanner and parser in the same file but it was decided to split them up. This was invaluable as sections were added because it could have gotten bloated and confusing. One difference that might of made sense was to exclude the IR to tiny class from the parser and had that be called directly from the semantic routine class.
+
+Another good decision was deciding to use git and github for version control and sharing of the code. This was extremely helpful as everyone could work on the code at the same time and it made it easier to reuse old code.
 \section{Conclusion and Future Work}
+The result of all this was a fully functional compiler. 
 
 citations
 http://www.cs.cornell.edu/courses/cs2112/2014fa/lectures/lecture.html?id=parsing

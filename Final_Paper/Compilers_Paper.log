@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.2.3)  3 MAY 2016 18:59
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2015.2.3)  3 MAY 2016 21:09
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -433,7 +433,7 @@ Missing character: There is no ‚ in font cmr12!
 Missing character: There is no Ä in font cmr12!
 Missing character: There is no ù in font cmr12!
 
-<pics/p_tree.png, id=111, 402.303pt x 201.1515pt>
+<pics/p_tree.png, id=121, 402.303pt x 201.1515pt>
 File: pics/p_tree.png Graphic file (type png)
  <use pics/p_tree.png>
 Package pdftex.def Info: pics/p_tree.png used on input line 156.
@@ -442,7 +442,7 @@ Package pdftex.def Info: pics/p_tree.png used on input line 156.
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[4] <pics/diagram.jpg, id=117, 783.67781pt x 380.92313pt>
+[4] <pics/diagram.jpg, id=127, 783.67781pt x 380.92313pt>
 File: pics/diagram.jpg Graphic file (type jpg)
 
 <use pics/diagram.jpg>
@@ -458,7 +458,7 @@ File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 200.
  [6]
-<pics/parse_tree.png, id=135, 319.1925pt x 135.50626pt>
+<pics/parse_tree.png, id=145, 319.1925pt x 135.50626pt>
 File: pics/parse_tree.png Graphic file (type png)
 
 <use pics/parse_tree.png>
@@ -469,44 +469,66 @@ Overfull \hbox (37.8441pt too wide) in paragraph at lines 276--277
 [][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
-<pics/sybol_output.png, id=157, 658.46pt x 275.0275pt>
+<pics/sybol_output.png, id=164, 658.46pt x 275.0275pt>
 File: pics/sybol_output.png Graphic file (type png)
 
 <use pics/sybol_output.png>
 Package pdftex.def Info: pics/sybol_output.png used on input line 293.
 (pdftex.def)             Requested size: 187.89914pt x 78.48016pt.
  [9 <./pics/sybol_output.png>]
-Overfull \hbox (5.9192pt too wide) in paragraph at lines 304--306
+<pics/ir.png, id=182, 658.46pt x 394.47375pt>
+File: pics/ir.png Graphic file (type png)
+ <use pics/ir.png>
+Package pdftex.def Info: pics/ir.png used on input line 312.
+(pdftex.def)             Requested size: 187.89914pt x 112.56462pt.
+
+<pics/tiny.png, id=183, 658.46pt x 548.0475pt>
+File: pics/tiny.png Graphic file (type png)
+ <use pics/tiny.png>
+Package pdftex.def Info: pics/tiny.png used on input line 318.
+(pdftex.def)             Requested size: 187.89914pt x 156.3875pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+[10 <./pics/ir.png>] <pics/uml.png, id=195, 1284.8pt x 380.42125pt>
+File: pics/uml.png Graphic file (type png)
+
+<use pics/uml.png>
+Package pdftex.def Info: pics/uml.png used on input line 328.
+(pdftex.def)             Requested size: 187.89914pt x 55.63275pt.
+ [11 <./pics/tiny.png> <./pics/uml.png>]
+Overfull \hbox (5.9192pt too wide) in paragraph at lines 339--341
 \OT1/cmr/m/n/12 citations http://www.cs.cornell.edu/courses/cs2112/2014fa/lectu
 res/lecture.html?id=parsing 
  []
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 309.
-[10]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 309.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 344.
+[12]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 344.
  (./Compilers_Paper.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 309.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 309.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 344.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 344.
 Package rerunfilecheck Info: File `Compilers_Paper.out' has not changed.
-(rerunfilecheck)             Checksum: B2243ED82C3CFADFFF1B8572F89707AB;1152.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 309.
+(rerunfilecheck)             Checksum: A736BE1B5200514E40BB4BAD02C33D5E;1298.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 344.
  ) 
 Here is how much of TeX's memory you used:
- 7664 strings out of 495028
- 110630 string characters out of 6181498
- 202157 words of memory out of 5000000
- 10740 multiletter control sequences out of 15000+600000
+ 7693 strings out of 495028
+ 111048 string characters out of 6181498
+ 204160 words of memory out of 5000000
+ 10754 multiletter control sequences out of 15000+600000
  12403 words of font info for 48 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 29i,6n,32p,767b,1103s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 29i,6n,32p,816b,1619s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texliv
 e/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on Compilers_Paper.pdf (10 pages, 157287 bytes).
+Output written on Compilers_Paper.pdf (12 pages, 496890 bytes).
 PDF statistics:
- 206 PDF objects out of 1000 (max. 8388607)
- 183 compressed objects within 2 object streams
- 58 named destinations out of 1000 (max. 500000)
- 165 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 239 PDF objects out of 1000 (max. 8388607)
+ 210 compressed objects within 3 object streams
+ 71 named destinations out of 1000 (max. 500000)
+ 196 words of extra memory for PDF output out of 10000 (max. 10000000)
 
